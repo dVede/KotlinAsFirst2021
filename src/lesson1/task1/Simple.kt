@@ -79,9 +79,9 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int =
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
-    val meters1: Double = sagenes * ((48 * 4.445) / 100)
-    val meters2: Double = arshins * ((16 * 4.445) / 100)
-    val meters3: Double = vershoks * (4.445 / 100)
+    val meters1 = sagenes * ((48 * 4.445) / 100)
+    val meters2 = arshins * ((16 * 4.445) / 100)
+    val meters3 = vershoks * (4.445 / 100)
     return meters1 + meters2 + meters3
 }
 
@@ -92,10 +92,9 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
-    val minIndeg: Int = deg + min / 60
-    val secIndeg: Int = minIndeg + sec / 3600
-    val radian: Double = secIndeg * PI / 180
-    return radian
+    val minIndeg = deg.toDouble() + min.toDouble() / 60
+    val secIndeg = minIndeg + sec.toDouble() / 3600
+    return secIndeg * PI / 180
 }
 
 
@@ -138,11 +137,11 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
 fun accountInThreeYears(initial: Int, percent: Int): Double {
-    val bet: Double = (100 + percent) / 100.0
-    val firstYear: Double = initial * bet
-    val secondYear: Double = firstYear * bet
-    val thirYear: Double = secondYear * bet
-    return thirYear
+    val bet = (100 + percent.toDouble()) / 100
+    val firstYear = initial.toDouble() * bet
+    val secondYear = firstYear * bet
+    return secondYear * bet
+
 }
 
 
@@ -153,8 +152,8 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
 fun numberRevert(number: Int): Int {
-    val num1: Int = number % 10
-    val num2: Int = (number / 10) % 10
-    val num3: Int = number / 100
+    val num1 = number % 10
+    val num2 = (number / 10) % 10
+    val num3 = number / 100
     return num1 * 100 + num2 * 10 + num3
 }
