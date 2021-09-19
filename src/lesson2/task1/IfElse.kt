@@ -3,6 +3,7 @@
 package lesson2.task1
 
 //import com.sun.org.apache.xml.internal.utils.StringToIntTable
+import kotlinx.html.Entities
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
 import java.lang.NullPointerException
@@ -75,8 +76,8 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String {
-    return when {
+fun ageDescription(age: Int): String =
+    when {
         age < 0 || age > 200 -> "Несуществующий возраст $age"
         age % 10 == 1 && age % 100 != 11 -> "$age год"
         age % 10 == 2 && age % 100 != 12 || age % 10 == 3 && age % 100 != 13 || age % 10 == 4 &&
@@ -84,7 +85,6 @@ fun ageDescription(age: Int): String {
         else -> "$age лет"
 
     }
-}
 
 
 /**
@@ -143,7 +143,7 @@ fun rookOrBishopThreatens(
     kingX != rookX && kingY != rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 0
     kingX == rookX || kingY == rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 1
     kingX != rookX && kingY != rookY && abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
-    kingX == rookX || kingY == rookY && abs(kingX - bishopX) == abs(kingY - bishopY) -> 3
+    (kingX == rookX || kingY == rookY) && abs(kingX - bishopX) == abs(kingY - bishopY) -> 3
     else -> 4
 }
 
@@ -155,24 +155,24 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun max(a: Double, b: Double, c: Double): Double =
-    if (a > b && a > c) a else if (b > a && b > c) b else c
+fun midOf(a: Double, b: Double, c: Double): Double =
+    if (a in b..c) a
+    else if (b in a..c) b
+    else c
 
-fun min(a: Double, b: Double, c: Double): Double =
-    if (a < b && a < c) a else if (b < a && b < c) b else c
-
-fun mid(a: Double, b: Double, c: Double): Double =
-    if (a > b && a < c || a > c && a < b) a else if (b > a && b < c || b < a && b > c) b else c
-
-fun triangleKind(a: Double, b: Double, c: Double): Int =
-    if (max(a, b, c) < mid(a, b, c) + min(a, b, c)) when {
-        sqr(max(a, b, c)) < sqr(min(a, b, c)) + sqr(mid(a, b, c)) -> 0
-        sqr(max(a, b, c)) == sqr(min(a, b, c)) + sqr(mid(a, b, c)) -> 1
-        sqr(max(a, b, c,)) > sqr(min(a, b, c)) + sqr(mid(a, b, c)) -> 2
-        else -> -1
-    }
-    else -1
-
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val max = maxOf(a, b, c)
+    val min = minOf(a, b, c)
+    val mid = midOf(a, b, c)
+    return if (max < min + mid) {
+        if (sqr(max) == sqr(min) + sqr(mid)
+        ) 1
+        else if (sqr(max) < sqr(min) + sqr(mid)
+        ) 0
+        else if (sqr(max) > sqr(min) + sqr(mid)
+        ) 2 else -1
+    } else -1
+}
 
 
 /**
