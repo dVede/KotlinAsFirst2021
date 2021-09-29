@@ -149,7 +149,7 @@ class Tests {
     @Test
     @Tag("3")
     fun isCoPrime() {
-        //assertTrue(isCoPrime(25, 49))
+        assertTrue(isCoPrime(25, 49))
         assertFalse(isCoPrime(6, 8))
         assertTrue(isCoPrime(17, 97))
         assertFalse(isCoPrime(37, 111))
@@ -217,8 +217,8 @@ class Tests {
     @Test
     @Tag("4")
     fun squareSequenceDigit() {
-        //assertEquals(1, squareSequenceDigit(1))
-        //assertEquals(4, squareSequenceDigit(2))
+        assertEquals(1, squareSequenceDigit(1))
+        assertEquals(4, squareSequenceDigit(2))
         assertEquals(5, squareSequenceDigit(7))
         assertEquals(6, squareSequenceDigit(12))
         assertEquals(0, squareSequenceDigit(17))
