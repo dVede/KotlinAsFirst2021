@@ -2,7 +2,10 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
+import java.lang.Math.pow
 import kotlin.math.sqrt
+import kotlin.math.pow
 
 // Урок 3: циклы
 // Максимальное количество баллов = 9
@@ -72,7 +75,15 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var count = 1
+    var num = n
+    while (num > 9) {
+        count++
+        num /= 10
+    }
+    return count
+}
 
 /**
  * Простая (2 балла)
@@ -80,21 +91,49 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var result = 0
+    val myArray = mutableListOf(0)
+    for (i in 1..n) {
+        if (i == 1 || i == 2) myArray.add(1)
+        else {
+            val a = myArray[i - 1] + myArray[i - 2]
+            myArray.add(a)
+        }
+        result = myArray[i]
+    }
+    return result
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    val myArray = mutableListOf(0)
+    for (i in 2..n) {
+        if (n % i == 0)
+            myArray.add(i)
+    }
+    myArray.sorted()
+    return myArray[1]
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    val myArray = mutableListOf(0)
+    for (i in 1 until n) {
+        if (n % i == 0)
+            myArray.add(i)
+    }
+    myArray.sortDescending()
+    return myArray[0]
+}
 
 /**
  * Простая (2 балла)
@@ -120,7 +159,15 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    val nok = m * n
+    var result = 0
+    for (i in 2..nok) {
+        if (i % n == 0 && i % m == 0) break
+        result = i + 1
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -130,6 +177,27 @@ fun lcm(m: Int, n: Int): Int = TODO()
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+/**{
+var firstArray = mutableListOf(0)
+var secondArray = mutableListOf(0)
+var a = false
+for (i in 2..m) {
+if (m % i == 0) firstArray.add(i)
+}
+for (i in 2..n) {
+if (n % i == 0) secondArray.add(i)
+}
+secondArray.remove(0)
+firstArray.remove(0)
+for (i in firstArray) {
+for (k in secondArray) {
+if (k == i) break
+else a = true
+}
+}
+return a
+}
+ */
 
 /**
  * Средняя (3 балла)
@@ -138,7 +206,27 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    val myArray = mutableListOf(0)
+    var number = n
+    var num = 0
+    var midResult = 0
+    var result = 0
+    while (number > 0) {
+        num = number % 10
+        myArray.add(num)
+        number /= 10
+    }
+    myArray.removeAt(0)
+    var dl = myArray.size
+    val dl2 = dl
+    for (i in 0 until dl2) {
+        midResult = (myArray[i] * 10.0.pow(dl - 1)).toInt()
+        result += midResult
+        dl -= 1
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -192,7 +280,34 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    val myArray = mutableListOf(0)
+    val finalArray = mutableListOf(0)
+    var midResult = 0
+    for (i in 1..30) {
+        val a = sqr(i)
+        myArray.add(a)
+    }
+    myArray.removeAt(0)
+    for (i in myArray) {
+        var a = i
+        if (a / 10 != 0) {
+            val midArray = mutableListOf(0)
+            while (a > 0) {
+                midResult = a % 10
+                midArray.add(midResult)
+                a /= 10
+            }
+            midArray.removeAt(0)
+            midArray.reverse()
+            val dl = midArray.size
+            for (b in 0 until dl) {
+                finalArray.add(midArray[b])
+            }
+        } else finalArray.add(a)
+    }
+    return finalArray[n]
+}
 
 /**
  * Сложная (5 баллов)

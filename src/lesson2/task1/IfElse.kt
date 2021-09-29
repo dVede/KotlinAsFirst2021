@@ -139,14 +139,15 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = when {
-    kingX != rookX && kingY != rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 0
-    kingX == rookX || kingY == rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 1
-    kingX != rookX && kingY != rookY && abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
-    (kingX == rookX || kingY == rookY) && abs(kingX - bishopX) == abs(kingY - bishopY) -> 3
-    else -> 4
+): Int = TODO()
+/**when {
+kingX != rookX && kingY != rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 0
+kingX == rookX || kingY == rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 1
+kingX != rookX && kingY != rookY && abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
+(kingX == rookX || kingY == rookY) && abs(kingX - bishopX) == abs(kingY - bishopY) -> 3
+else -> 4
 }
-
+ */
 /**
  * Простая (2 балла)
  *
@@ -184,12 +185,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
-    when {
-        a == c && b == d -> b - a
-        b == c || d == a -> 0
-        c < a && b < d -> b - a
-        a < c && d < b -> d - c
-        a < c && c < b && b < d && d > a -> b - c
-        c < a && a < d && d < b && b > c -> d - a
-        else -> -1
-    }
+    if (b in c..d && a !in c..d) b - c
+    else if (a in c..d && b !in c..d) d - a
+    else if (a in c..d && b in c..d) b - a
+    else if (c in a..b && d in a..b) d - c
+    else -1
+
+
