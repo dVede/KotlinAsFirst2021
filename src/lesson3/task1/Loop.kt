@@ -209,8 +209,8 @@ return a
 fun revert(n: Int): Int {
     val myArray = mutableListOf(0)
     var number = n
-    var num = 0
-    var midResult = 0
+    var num: Int
+    var midResult: Int
     var result = 0
     while (number > 0) {
         num = number % 10
@@ -283,7 +283,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun squareSequenceDigit(n: Int): Int {
     val myArray = mutableListOf(0)
     val finalArray = mutableListOf(0)
-    var midResult = 0
+    var midResult: Int
     for (i in 1..30) {
         val a = sqr(i)
         myArray.add(a)
@@ -318,4 +318,34 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    val myArray = mutableListOf(0)
+    val finalArray = mutableListOf(0)
+    for (i in 1..n) {
+        if (i == 1 || i == 2) myArray.add(1)
+        else {
+            val a = myArray[i - 1] + myArray[i - 2]
+            myArray.add(a)
+
+        }
+    }
+    var midResult: Int
+    for (i in myArray) {
+        var a = i
+        if (a / 10 != 0) {
+            val midArray = mutableListOf(0)
+            while (a > 0) {
+                midResult = a % 10
+                midArray.add(midResult)
+                a /= 10
+            }
+            midArray.removeAt(0)
+            midArray.reverse()
+            val dl = midArray.size
+            for (b in 0 until dl) {
+                finalArray.add(midArray[b])
+            }
+        } else finalArray.add(a)
+    }
+    return finalArray[n + 1]
+}
