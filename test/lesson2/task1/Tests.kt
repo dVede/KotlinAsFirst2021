@@ -71,10 +71,11 @@ class Tests {
     @Test
     @Tag("2")
     fun triangleKind() {
-        //assertEquals(-1, triangleKind(0.1, 0.1, 1.0))
-        //assertEquals(1, triangleKind(5.0, 3.0, 4.0))
+        assertEquals(-1, triangleKind(0.1, 0.1, 1.0))
+        assertEquals(1, triangleKind(5.0, 3.0, 4.0))
         assertEquals(2, triangleKind(4.0, 6.0, 8.0))
-        //assertEquals(0, triangleKind(1.0, 1.5, 1.5))
+        assertEquals(0, triangleKind(1.0, 1.5, 1.5))
+        assertEquals(0, triangleKind(6.792635304152871, 6.792635304152871, 0.1))
     }
 
     @Test

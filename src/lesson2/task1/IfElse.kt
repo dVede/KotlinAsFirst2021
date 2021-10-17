@@ -115,17 +115,10 @@ fun whichRookThreatens(
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
 ): Int = when {
-    kingX != rookX1 && kingY != rookY1 && kingX != rookX2 && kingY != rookY2 -> 0
-    (kingX == rookX1 && kingX != rookX2 && kingY != rookY2) ||
-            (kingY == rookY1 && kingX != rookX2 && kingY != rookY2)
-    -> 1
-    (kingX == rookX2 && kingX != rookX1 && kingY != rookY1) ||
-            (kingY == rookY2 && kingX != rookX1 && kingY != rookY1)
-    -> 2
-    kingX == rookX1 && kingX == rookX2 || kingY == rookY1 &&
-            kingY == rookY2 || kingX == rookX1 && kingY == rookY2 ||
-            kingY == rookY1 && kingX == rookX2 -> 3
-    else -> 4
+    (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
+    kingX == rookX1 || kingY == rookY1 -> 1
+    kingX == rookX2 || kingY == rookY2 -> 2
+    else -> 0
 }
 
 /**
@@ -142,15 +135,13 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
-/**when {
-kingX != rookX && kingY != rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 0
-kingX == rookX || kingY == rookY && abs(kingX - bishopX) != abs(kingY - bishopY) -> 1
-kingX != rookX && kingY != rookY && abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
-(kingX == rookX || kingY == rookY) && abs(kingX - bishopX) == abs(kingY - bishopY) -> 3
-else -> 4
+): Int = when {
+    (kingX == rookX || kingY == rookY) && (abs(kingX - bishopX) == abs(kingY - bishopY)) -> 3
+    kingX == rookX || kingY == rookY -> 1
+    abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
+    else -> 0
 }
- */
+
 /**
  * Простая (2 балла)
  *
@@ -159,22 +150,20 @@ else -> 4
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun midOf(a: Double, b: Double, c: Double): Double =
-    if (a in b..c) a
+fun midOf(a: Double, b: Double, c: Double): Double = // a = 6,79 b = 6,79 c = 0,1
+    if (a in c..b) a
     else if (b in a..c) b
     else c
 
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val max = maxOf(a, b, c)
-    val min = minOf(a, b, c)
     val mid = midOf(a, b, c)
+    val min = minOf(a, b, c)
     return if (max < min + mid) {
-        if (sqr(max) == sqr(min) + sqr(mid)
-        ) 1
-        else if (sqr(max) < sqr(min) + sqr(mid)
-        ) 0
-        else if (sqr(max) > sqr(min) + sqr(mid)
-        ) 2 else -1
+        if (sqr(max) == sqr(min) + sqr(mid)) 1
+        else if (sqr(max) < sqr(min) + sqr(mid)) 0
+        else if (sqr(max) > sqr(min) + sqr(mid)) 2
+        else -1
     } else -1
 }
 
