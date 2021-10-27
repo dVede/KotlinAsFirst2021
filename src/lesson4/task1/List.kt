@@ -6,6 +6,7 @@ import lesson1.task1.discriminant
 import lesson1.task1.sqr
 import kotlin.math.abs
 import kotlin.math.sqrt
+import kotlin.math.*
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -261,7 +262,24 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val map = mapOf(
+        "0" to 0, "1" to 1, "2" to 2, "3" to 3, "4" to 4, "5" to 5,
+        "6" to 6, "7" to 7, "8" to 8, "9" to 9, "a" to 10, "b" to 11,
+        "c" to 12, "d" to 13, "e" to 14, "f" to 15, "g" to 16, "h" to 17,
+        "i" to 18, "j" to 19, "k" to 20, "l" to 21, "m" to 22, "n" to 23,
+        "o" to 24, "p" to 25, "q" to 26, "r" to 27, "s" to 28, "t" to 29,
+        "u" to 30, "v" to 31, "w" to 32, "x" to 33, "y" to 34, "z" to 35
+    )
+    var result = 0
+    val count = str.length
+    val b = str.reversed()
+    for (i in 0 until count) {
+        val a = b[i]
+        result += map.getOrDefault("$a", 0) * ((base.toDouble()).pow(i)).toInt()
+    }
+    return result
+}
 
 /**
  * Сложная (5 баллов)
@@ -280,4 +298,162 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val firstMap = mapOf(
+        1 to "сто", 2 to "двести", 3 to "триста", 4 to "четыреста",
+        5 to "пятьсот", 6 to "шестьсот", 7 to "семьсот", 8 to "восемьсот",
+        9 to "девятьсот", 20 to "двадцать", 30 to "тридцать",
+        40 to "сорок", 50 to "пятьдесят", 60 to "шестьдесят",
+        70 to "семьдесят", 80 to "восемьдесят", 90 to "девяносто"
+    )
+    val secondMap = mapOf(
+        1 to "один", 2 to "два", 3 to "три", 4 to "четыре",
+        5 to "пять", 6 to "шесть", 7 to "семь", 8 to "восемь",
+        9 to "девять", 10 to "десять", 11 to "одиннадцать",
+        12 to "двенадцать", 13 to "тринадцать", 14 to "четырнадцать",
+        15 to "пятнадцать", 16 to "шестнадцать", 17 to "семнадцать",
+        18 to "восемнадцать", 19 to "девятнадцать"
+    )
+    var num = n
+    var count = 0
+    var result = ""
+    while (num > 0) {
+        count += 1
+        num /= 10
+    }
+    val counter = count
+    while (count > 0) {
+        when (count) {
+            6 -> {
+                val a = n / (10.0.pow(5)).toInt()
+                result += firstMap[a]
+                count -= 1
+            }
+            5 -> {
+                val a = (n / (10.0.pow(4)).toInt()) % 10
+                if (a == 0) {
+                    result += ""
+                    count -= 1
+                } else {
+                    if (counter == 5) {
+                        if (a == 1) {
+                            val b = (n / (10.0.pow(3)).toInt()) % 100
+                            result += secondMap[b]
+                            result += " тысяч"
+                            count -= 2
+                        } else {
+                            result += firstMap[a * 10]
+                            count -= 1
+                        }
+                    } else {
+                        result += " "
+                        if (a == 1) {
+                            val b = (n / (10.0.pow(3)).toInt()) % 100
+                            result += secondMap[b]
+                            result += " тысяч"
+                            count -= 2
+                        } else {
+                            result += firstMap[a * 10]
+                            count -= 1
+                        }
+                    }
+                }
+            }
+            4 -> {
+                val a = (n / (10.0.pow(3)).toInt()) % 10
+                if (a == 0) {
+                    result += " тысяч"
+                    count -= 1
+                } else {
+                    if (counter == 4) {
+                        result += when (a) {
+                            1 -> "одна"
+                            2 -> "две"
+                            else -> secondMap[a]
+                        }
+                        result += when (a) {
+                            1 -> " тысяча"
+                            2, 3, 4 -> " тысячи"
+                            else -> " тысяч"
+                        }
+                        count -= 1
+                    } else {
+                        result += " "
+                        result += when (a) {
+                            1 -> "одна"
+                            2 -> "две"
+                            else -> secondMap[a]
+                        }
+                        result += when (a) {
+                            1 -> " тысяча"
+                            2, 3, 4 -> " тысячи"
+                            else -> " тысяч"
+                        }
+                        count -= 1
+                    }
+                }
+            }
+            3 -> {
+                val a = (n / (10.0.pow(2)).toInt()) % 10
+                if (a == 0) {
+                    result += ""
+                    count -= 1
+                } else {
+                    if (counter == 3) {
+                        result += firstMap[a]
+                        count -= 1
+                    } else {
+                        result += " "
+                        result += firstMap[a]
+                        count -= 1
+                    }
+                }
+            }
+            2 -> {
+                val a = (n / (10)) % 10
+                if (a == 0) {
+                    result += ""
+                    count -= 1
+                } else {
+                    if (counter == 2) {
+                        if (a == 1) {
+                            val b = n % 100
+                            result += secondMap[b]
+                            count -= 2
+                        } else {
+                            result += firstMap[a * 10]
+                            count -= 1
+                        }
+                    } else {
+                        result += " "
+                        if (a == 1) {
+                            val b = n % 100
+                            result += secondMap[b]
+                            count -= 2
+                        } else {
+                            result += firstMap[a * 10]
+                            count -= 1
+                        }
+                    }
+                }
+            }
+            1 -> {
+                val a = n % 10
+                if (a == 0) {
+                    result += ""
+                    count -= 1
+                } else {
+                    if (counter == 1) {
+                        result += secondMap[a]
+                        count -= 1
+                    } else {
+                        result += " "
+                        result += secondMap[a]
+                        count -= 1
+                    }
+                }
+            }
+        }
+    }
+    return result
+}

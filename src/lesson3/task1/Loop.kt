@@ -2,8 +2,6 @@
 
 package lesson3.task1
 
-import lesson1.task1.sqr
-import java.lang.Math.pow
 import kotlin.math.sqrt
 import kotlin.math.pow
 
@@ -77,7 +75,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var count = 1
-    var num = n
+    var num = kotlin.math.abs(n)
     while (num > 9) {
         count++
         num /= 10
@@ -92,32 +90,39 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var result = 0
-    val myArray = mutableListOf(0)
-    for (i in 1..n) {
-        if (i == 1 || i == 2) myArray.add(1)
-        else {
-            val a = myArray[i - 1] + myArray[i - 2]
-            myArray.add(a)
-        }
-        result = myArray[i]
+    var result = 1
+    for (i in 3..n) {
+        result = fib(n - 1) + fib(n - 2)
     }
     return result
 }
-
+/**
+var result = 0
+val myArray = mutableListOf(0)
+for (i in 1..n) {
+if (i == 1 || i == 2) myArray.add(1)
+else {
+val a = myArray[i - 1] + myArray[i - 2]
+myArray.add(a)
+}
+result = myArray[i]
+}
+return result
+ */
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    val myArray = mutableListOf(0)
+    var a = n
     for (i in 2..n / 2) {
-        if (n % i == 0)
-            myArray.add(i)
+        if (n % i == 0) {
+            a = i
+            break
+        }
     }
-    myArray.sorted()
-    return myArray[1]
+    return a
 }
 
 /**
@@ -126,13 +131,14 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    val myArray = mutableListOf(0)
-    for (i in 1 until n) {
-        if (n % i == 0)
-            myArray.add(i)
+    var a = 1
+    for (i in n / 2 downTo 1) {
+        if (n % i == 0) {
+            a = i
+            break
+        }
     }
-    myArray.sortDescending()
-    return myArray[0]
+    return a
 }
 
 /**
@@ -159,15 +165,28 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int {
-    val nok = m * n
+fun nod(m: Int, n: Int): Int {
     var result = 0
-    for (i in 2..nok) {
-        if (i % n == 0 && i % m == 0) break
-        result = i + 1
-    }
+    var a = m
+    var b = n
+    if (m != n) {
+        if (a > b) {
+            while (a != b && a > 0) {
+                result = a - b
+                a -= b
+            }
+        } else {
+            while (b != a && b > 0) {
+                result = b - a
+                b -= a
+            }
+        }
+    } else result = m
     return result
 }
+
+fun lcm(m: Int, n: Int): Int = (m * n) / nod(m, n)
+
 
 /**
  * Средняя (3 балла)
@@ -280,34 +299,8 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int {
-    val myArray = mutableListOf(0)
-    val finalArray = mutableListOf(0)
-    var midResult: Int
-    for (i in 1..30) {
-        val a = sqr(i)
-        myArray.add(a)
-    }
-    myArray.removeAt(0)
-    for (i in myArray) {
-        var a = i
-        if (a / 10 != 0) {
-            val midArray = mutableListOf(0)
-            while (a > 0) {
-                midResult = a % 10
-                midArray.add(midResult)
-                a /= 10
-            }
-            midArray.removeAt(0)
-            midArray.reverse()
-            val dl = midArray.size
-            for (b in 0 until dl) {
-                finalArray.add(midArray[b])
-            }
-        } else finalArray.add(a)
-    }
-    return finalArray[n]
-}
+fun squareSequenceDigit(n: Int): Int = TODO()
+
 
 /**
  * Сложная (5 баллов)
