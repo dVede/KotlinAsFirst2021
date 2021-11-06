@@ -151,8 +151,8 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun midOf(a: Double, b: Double, c: Double): Double = // a = 6,79 b = 6,79 c = 0,1
-    if (a in c..b) a
-    else if (b in a..c) b
+    if ((a <= b && a >= c) || (a <= c && a >= b)) a
+    else if ((b >= a && b <= c) || (b >= c && b <= a)) b
     else c
 
 fun triangleKind(a: Double, b: Double, c: Double): Int {

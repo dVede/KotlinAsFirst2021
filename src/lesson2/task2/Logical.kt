@@ -7,6 +7,7 @@ import lesson4.task1.abs
 import sun.font.*
 import java.util.function.IntToDoubleFunction
 import kotlin.math.abs
+import kotlin.math.sqrt
 
 /**
  * Пример
@@ -60,7 +61,7 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = (r1 <= r2) && (sqr(x1 - x2) + sqr(y1 - y2) <= sqr(r1 - r2))
+): Boolean = (r1 + sqrt((sqr(x1 - x2) + sqr(y1 - y2))) <= r2)
 
 /**
  * Средняя (3 балла)

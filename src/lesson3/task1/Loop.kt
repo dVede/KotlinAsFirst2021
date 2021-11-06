@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import kotlin.math.sqrt
+import kotlin.math.abs
 import kotlin.math.pow
 
 // Урок 3: циклы
@@ -75,7 +76,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var count = 1
-    var num = kotlin.math.abs(n)
+    var num = abs(n)
     while (num > 9) {
         count++
         num /= 10
@@ -89,26 +90,10 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int {
-    var result = 1
-    for (i in 3..n) {
-        result = fib(n - 1) + fib(n - 2)
-    }
-    return result
-}
-/**
-var result = 0
-val myArray = mutableListOf(0)
-for (i in 1..n) {
-if (i == 1 || i == 2) myArray.add(1)
-else {
-val a = myArray[i - 1] + myArray[i - 2]
-myArray.add(a)
-}
-result = myArray[i]
-}
-return result
- */
+fun fib(n: Int): Int =
+    if (n < 3) 1
+    else fib(n - 1) + fib(n - 2)
+
 /**
  * Простая (2 балла)
  *
@@ -165,24 +150,15 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
+
 fun nod(m: Int, n: Int): Int {
-    var result = 0
-    var a = m
-    var b = n
-    if (m != n) {
-        if (a > b) {
-            while (a != b && a > 0) {
-                result = a - b
-                a -= b
-            }
-        } else {
-            while (b != a && b > 0) {
-                result = b - a
-                b -= a
-            }
-        }
-    } else result = m
-    return result
+    var m1 = m
+    var n1 = n
+    while (m1 != n1) {
+        if (m1 > n1) m1 -= n1
+        else n1 -= m1
+    }
+    return (m1)
 }
 
 fun lcm(m: Int, n: Int): Int = (m * n) / nod(m, n)
@@ -195,7 +171,9 @@ fun lcm(m: Int, n: Int): Int = (m * n) / nod(m, n)
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
+
 fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+
 /**{
 var firstArray = mutableListOf(0)
 var secondArray = mutableListOf(0)
@@ -312,33 +290,58 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    val myArray = mutableListOf(0)
-    val finalArray = mutableListOf(0)
-    for (i in 1..n) {
-        if (i == 1 || i == 2) myArray.add(1)
-        else {
-            val a = myArray[i - 1] + myArray[i - 2]
-            myArray.add(a)
-
+    var num = 0
+    var i = 1
+    var result = 0
+    while (num != n) {
+        val a = fib(i)
+        if (a / 10 == 0) {
+            result = a
+            num += 1
+        } else {
+            var b = a
+            b = revert(b)
+            while (b > 0) {
+                result = b % 10
+                b /= 10
+                num += 1
+                if (num == n) break
+            }
         }
+        i += 1
     }
-    var midResult: Int
-    for (i in myArray) {
-        var a = i
-        if (a / 10 != 0) {
-            val midArray = mutableListOf(0)
-            while (a > 0) {
-                midResult = a % 10
-                midArray.add(midResult)
-                a /= 10
-            }
-            midArray.removeAt(0)
-            midArray.reverse()
-            val dl = midArray.size
-            for (b in 0 until dl) {
-                finalArray.add(midArray[b])
-            }
-        } else finalArray.add(a)
-    }
-    return finalArray[n + 1]
+    return result
 }
+
+
+/**fun fibSequenceDigit(n: Int): Int {
+val myArray = mutableListOf(0)
+val finalArray = mutableListOf(0)
+for (i in 1..n) {
+if (i == 1 || i == 2) myArray.add(1)
+else {
+val a = myArray[i - 1] + myArray[i - 2]
+myArray.add(a)
+}
+}
+var midResult: Int
+for (i in myArray) {
+var a = i
+if (a / 10 != 0) {
+val midArray = mutableListOf(0)
+while (a > 0) {
+midResult = a % 10
+midArray.add(midResult)
+a /= 10
+}
+midArray.removeAt(0)
+midArray.reverse()
+val dl = midArray.size
+for (b in 0 until dl) {
+finalArray.add(midArrayb)
+}
+} else finalArray.add(a)
+}
+return finalArray[n + 1]
+}
+ */

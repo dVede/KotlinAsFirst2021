@@ -71,6 +71,7 @@ class Tests {
     @Test
     @Tag("2")
     fun triangleKind() {
+        assertEquals(-1, triangleKind(1.0, 0.1, 7.070541216611483))
         assertEquals(-1, triangleKind(0.1, 0.1, 1.0))
         assertEquals(1, triangleKind(5.0, 3.0, 4.0))
         assertEquals(2, triangleKind(4.0, 6.0, 8.0))

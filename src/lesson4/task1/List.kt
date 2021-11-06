@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
+import java.lang.StringBuilder
 import kotlin.math.abs
 import kotlin.math.sqrt
 import kotlin.math.*
@@ -153,7 +154,7 @@ fun mean(list: List<Double>): Double =
 fun center(list: MutableList<Double>): MutableList<Double> =
     if (list.size == 0) list
     else {
-        val a = list.sum() / list.size
+        val a = mean(list)
         for (i in 0 until list.size) {
             list[i] -= a
         }
@@ -315,7 +316,7 @@ fun russian(n: Int): String {
     )
     var num = n
     var count = 0
-    var result = ""
+    var builder = StringBuilder()
     while (num > 0) {
         count += 1
         num /= 10
@@ -325,34 +326,34 @@ fun russian(n: Int): String {
         when (count) {
             6 -> {
                 val a = n / (10.0.pow(5)).toInt()
-                result += firstMap[a]
+                builder.append(firstMap[a])
                 count -= 1
             }
             5 -> {
                 val a = (n / (10.0.pow(4)).toInt()) % 10
                 if (a == 0) {
-                    result += ""
+                    builder.append("")
                     count -= 1
                 } else {
                     if (counter == 5) {
                         if (a == 1) {
                             val b = (n / (10.0.pow(3)).toInt()) % 100
-                            result += secondMap[b]
-                            result += " тысяч"
+                            builder.append(secondMap[b])
+                            builder.append(" тысяч")
                             count -= 2
                         } else {
-                            result += firstMap[a * 10]
+                            builder.append(firstMap[a * 10])
                             count -= 1
                         }
                     } else {
-                        result += " "
+                        builder.append(" ")
                         if (a == 1) {
                             val b = (n / (10.0.pow(3)).toInt()) % 100
-                            result += secondMap[b]
-                            result += " тысяч"
+                            builder.append(secondMap[b])
+                            builder.append(" тысяч")
                             count -= 2
                         } else {
-                            result += firstMap[a * 10]
+                            builder.append(firstMap[a * 10])
                             count -= 1
                         }
                     }
@@ -361,32 +362,32 @@ fun russian(n: Int): String {
             4 -> {
                 val a = (n / (10.0.pow(3)).toInt()) % 10
                 if (a == 0) {
-                    result += " тысяч"
+                    builder.append(" тысяч")
                     count -= 1
                 } else {
                     if (counter == 4) {
-                        result += when (a) {
-                            1 -> "одна"
-                            2 -> "две"
-                            else -> secondMap[a]
+                        when (a) {
+                            1 -> builder.append("одна")
+                            2 -> builder.append("две")
+                            else -> builder.append(secondMap[a])
                         }
-                        result += when (a) {
-                            1 -> " тысяча"
-                            2, 3, 4 -> " тысячи"
-                            else -> " тысяч"
+                        when (a) {
+                            1 -> builder.append(" тысяча")
+                            2, 3, 4 -> builder.append(" тысячи")
+                            else -> builder.append(" тысяч")
                         }
                         count -= 1
                     } else {
-                        result += " "
-                        result += when (a) {
-                            1 -> "одна"
-                            2 -> "две"
-                            else -> secondMap[a]
+                        builder.append(" ")
+                        when (a) {
+                            1 -> builder.append("одна")
+                            2 -> builder.append("две")
+                            else -> builder.append(secondMap[a])
                         }
-                        result += when (a) {
-                            1 -> " тысяча"
-                            2, 3, 4 -> " тысячи"
-                            else -> " тысяч"
+                        when (a) {
+                            1 -> builder.append(" тысяча")
+                            2, 3, 4 -> builder.append(" тысячи")
+                            else -> builder.append(" тысяч")
                         }
                         count -= 1
                     }
@@ -395,15 +396,15 @@ fun russian(n: Int): String {
             3 -> {
                 val a = (n / (10.0.pow(2)).toInt()) % 10
                 if (a == 0) {
-                    result += ""
+                    builder.append("")
                     count -= 1
                 } else {
                     if (counter == 3) {
-                        result += firstMap[a]
+                        builder.append(firstMap[a])
                         count -= 1
                     } else {
-                        result += " "
-                        result += firstMap[a]
+                        builder.append(" ")
+                        builder.append(firstMap[a])
                         count -= 1
                     }
                 }
@@ -411,26 +412,26 @@ fun russian(n: Int): String {
             2 -> {
                 val a = (n / (10)) % 10
                 if (a == 0) {
-                    result += ""
+                    builder.append("")
                     count -= 1
                 } else {
                     if (counter == 2) {
                         if (a == 1) {
                             val b = n % 100
-                            result += secondMap[b]
+                            builder.append(secondMap[b])
                             count -= 2
                         } else {
-                            result += firstMap[a * 10]
+                            builder.append(firstMap[a * 10])
                             count -= 1
                         }
                     } else {
-                        result += " "
+                        builder.append(" ")
                         if (a == 1) {
                             val b = n % 100
-                            result += secondMap[b]
+                            builder.append(secondMap[b])
                             count -= 2
                         } else {
-                            result += firstMap[a * 10]
+                            builder.append(firstMap[a * 10])
                             count -= 1
                         }
                     }
@@ -439,20 +440,20 @@ fun russian(n: Int): String {
             1 -> {
                 val a = n % 10
                 if (a == 0) {
-                    result += ""
+                    builder.append("")
                     count -= 1
                 } else {
                     if (counter == 1) {
-                        result += secondMap[a]
+                        builder.append(secondMap[a])
                         count -= 1
                     } else {
-                        result += " "
-                        result += secondMap[a]
+                        builder.append(" ")
+                        builder.append(secondMap[a])
                         count -= 1
                     }
                 }
             }
         }
     }
-    return result
+    return builder.toString()
 }
