@@ -300,10 +300,14 @@ fun fibSequenceDigit(n: Int): Int {
             num += 1
         } else {
             var b = a
-            b = revert(b)
+            var d = 0
             while (b > 0) {
-                result = b % 10
                 b /= 10
+                d += 1
+            }
+            while (d > 0) {
+                result = (a / (10.0.pow(d - 1).toInt())) % 10
+                d -= 1
                 num += 1
                 if (num == n) break
             }
