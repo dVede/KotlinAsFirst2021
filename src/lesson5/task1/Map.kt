@@ -211,15 +211,8 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
     for (i in list.indices) {
-        var count = 1
-        val a = list[i]
-        for (j in i + 1 until list.size) {
-            val b = list[j]
-            if (a == b) count += 1
-        }
-        if (count > 1 && result[a] == null) {
-            result += Pair(a, count)
-        }
+        val count = list.count { it == list[i] }
+        if (count > 1 && result[list[i]] == null) result += Pair(list[i], count)
     }
     return result
 }
@@ -293,21 +286,27 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     var result = Pair(-1, -1)
-    for (i in list.indices) {
-        val a = list[i]
-        if (result == Pair(-1, -1)) {
-            for (j in i + 1 until list.size) {
-                val b = list[j]
-                if (number == a + b) {
-                    result = Pair(i, j)
-                    break
-                }
+    if (list.isNotEmpty()) {
+        var sum = list[0]
+        var i = 1
+        var j = 0
+        while (sum != number) {
+            val num = list[i]
+            if (sum + num == number) {
+                result = Pair(j, i)
+                break
             }
-        } else break
+            if (i == list.size - 1) {
+                j += 1
+                sum = list[j]
+                i = j
+            }
+            if (j == list.size - 1 && i == list.size - 1) break
+            i += 1
+        }
     }
     return result
 }
-
 /**
  * Очень сложная (8 баллов)
  *

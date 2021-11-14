@@ -241,6 +241,10 @@ class Tests {
     @Tag("4")
     fun extractRepeats() {
         assertEquals(
+            mapOf("a" to 4, "b" to 2),
+            extractRepeats(listOf("a", "b", "c", "a", "a", "a", "b"))
+        )
+        assertEquals(
             mapOf("a" to 4),
             extractRepeats(listOf("a", "b", "c", "a", "a", "a"))
         )
@@ -309,8 +313,12 @@ class Tests {
     @Tag("6")
     fun findSumOfTwo() {
         assertEquals(
-            Pair(0, 4),
-            findSumOfTwo(listOf(1, 2, 3, 4, 5), 6)
+            Pair(1, 4),
+            findSumOfTwo(listOf(7, 1, 3, 4, 5), 6)
+        )
+        assertEquals(
+            Pair(-1, -1),
+            findSumOfTwo(listOf(1, 2, 3), 6)
         )
         assertEquals(
             Pair(-1, -1),
@@ -321,8 +329,8 @@ class Tests {
             findSumOfTwo(listOf(1, 2, 3), 4)
         )
         assertEquals(
-            Pair(-1, -1),
-            findSumOfTwo(listOf(1, 2, 3), 6)
+            Pair(0, 4),
+            findSumOfTwo(listOf(1, 2, 3, 4, 5), 6)
         )
     }
 
