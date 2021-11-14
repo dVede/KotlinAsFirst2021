@@ -290,7 +290,8 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
         var sum = list[0]
         var i = 1
         var j = 0
-        while (sum != number) {
+        var counter = list.size * 100
+        while (counter > 0) {
             val num = list[i]
             if (sum + num == number) {
                 result = Pair(j, i)
@@ -303,6 +304,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
             }
             if (j == list.size - 1 && i == list.size - 1) break
             i += 1
+            counter -= 1
         }
     } else result = Pair(-1, -1)
     return result
