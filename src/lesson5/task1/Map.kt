@@ -210,9 +210,21 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  */
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
+    val midList = mutableListOf<String>()
     for (i in list.indices) {
-        val count = list.count { it == list[i] }
-        if (count > 1 && result[list[i]] == null) result += Pair(list[i], count)
+        if (result.containsKey(list[i])) {
+            var a = result[list[i]]
+            if (a != null) {
+                a += 1
+                result += Pair(list[i], a.toInt())
+            }
+        } else {
+            result += Pair(list[i], 1)
+        }
+        if (list[i] !in midList) midList.add(list[i])
+    }
+    for (i in midList.indices) {
+        if (result[midList[i]] == 1) result.remove(midList[i])
     }
     return result
 }
@@ -309,6 +321,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     } else result = Pair(-1, -1)
     return result
 }
+
 /**
  * Очень сложная (8 баллов)
  *
