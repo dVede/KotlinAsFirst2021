@@ -210,21 +210,21 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  */
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
-    val midList = mutableListOf<String>()
-    for (i in list.indices) {
-        if (result.containsKey(list[i])) {
-            var a = result[list[i]]
-            if (a != null) {
-                a += 1
-                result += Pair(list[i], a.toInt())
+    val names = hashSetOf<String>()
+    for (element in list) {
+        if (result.containsKey(element)) {
+            var count = result[element]
+            if (count != null) {
+                count += 1
+                result[element] = count.toInt()
             }
         } else {
-            result += Pair(list[i], 1)
+            result[element] = 1
         }
-        if (list[i] !in midList) midList.add(list[i])
+        names.add(element)
     }
-    for (i in midList.indices) {
-        if (result[midList[i]] == 1) result.remove(midList[i])
+    for (i in names.indices) {
+        if (result[names.elementAt(i)] == 1) result.remove(names.elementAt(i))
     }
     return result
 }
