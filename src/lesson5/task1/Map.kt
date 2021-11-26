@@ -2,6 +2,10 @@
 
 package lesson5.task1
 
+import kotlinx.html.ButtonFormMethod
+import kotlinx.html.FormMethod
+
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -298,27 +302,22 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     var result = Pair(-1, -1)
-    if (list.size > 1) {
-        var sum = list[0]
-        var i = 1
-        var j = 0
-        var counter = list.size * 100
-        while (counter > 0) {
-            val num = list[i]
-            if (sum + num == number) {
-                result = Pair(j, i)
-                break
+    val midRes = mutableMapOf<Int, Pair<Int, Int>>()
+    for (element in list) {
+        midRes[list.indexOf(element)] = Pair(number - element, element)
+    }
+    for (i in 0..midRes.size) {
+        if (result == Pair(-1, -1)) {
+            val rest = midRes[i]?.toList()?.get(0)
+            for (j in i + 1..midRes.size) {
+                val num = midRes[j]?.toList()?.get(1)
+                if (rest == num) {
+                    result = Pair(i, j)
+                    break
+                }
             }
-            if (i == list.size - 1) {
-                j += 1
-                sum = list[j]
-                i = j
-            }
-            if (j == list.size - 1 && i == list.size - 1) break
-            i += 1
-            counter -= 1
-        }
-    } else result = Pair(-1, -1)
+        } else break
+    }
     return result
 }
 
