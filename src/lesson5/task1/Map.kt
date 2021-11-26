@@ -227,8 +227,8 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
         }
         names.add(element)
     }
-    for (i in names.indices) {
-        if (result[names.elementAt(i)] == 1) result.remove(names.elementAt(i))
+    for (element in names) {
+        if (result[element] == 1) result.remove(element)
     }
     return result
 }
