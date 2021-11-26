@@ -306,12 +306,12 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     for (element in list) {
         midRes[list.indexOf(element)] = Pair(number - element, element)
     }
-    for (i in 0..midRes.size) {
+    for (i in midRes.keys) {
         if (result == Pair(-1, -1)) {
             val rest = midRes[i]?.toList()?.get(0)
-            for (j in i + 1..midRes.size) {
+            for (j in midRes.keys) {
                 val num = midRes[j]?.toList()?.get(1)
-                if (rest == num) {
+                if (i != j && rest == num) {
                     result = Pair(i, j)
                     break
                 }
