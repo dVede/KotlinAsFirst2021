@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import java.lang.NumberFormatException
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -127,7 +129,20 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var result = -1
+    return try {
+        for (i in parts.indices step 2) {
+            if (parts[i].toInt() > result && parts[i + 1] == "+") {
+                result = parts[i].toInt()
+            }
+        }
+        result
+    } catch (e: NumberFormatException) {
+        result
+    }
+}
 
 /**
  * Сложная (6 баллов)
@@ -162,7 +177,23 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    var result = ""
+    var max = 0.0
+    return try {
+        val goods = description.split("; ")
+        for (i in goods) {
+            val product = i.split(" ")
+            if (product[1].toDouble() > max) {
+                result = product[0]
+                max = product[1].toDouble()
+            }
+        }
+        result
+    } catch (e: NumberFormatException) {
+        result
+    }
+}
 
 /**
  * Сложная (6 баллов)
