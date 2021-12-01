@@ -220,7 +220,7 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
             var count = result[element]
             if (count != null) {
                 count += 1
-                result[element] = count.toInt()
+                result[element] = count
             }
         } else {
             result[element] = 1
@@ -301,22 +301,14 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    var result = Pair(-1, -1)
-    val midRes = mutableMapOf<Int, Pair<Int, Int>>()
-    for (element in list) {
-        midRes[list.indexOf(element)] = Pair(number - element, element)
-    }
-    for (i in midRes.keys) {
-        if (result == Pair(-1, -1)) {
-            val rest = midRes[i]?.toList()?.get(0)
-            for (j in midRes.keys) {
-                val num = midRes[j]?.toList()?.get(1)
-                if (i != j && rest == num) {
-                    result = Pair(i, j)
-                    break
-                }
-            }
-        } else break
+    var result = Pair<Int, Int>(-1, -1)
+    val midRes = mutableMapOf<Int, Int>()
+    for (i in list.indices) {
+        val rest = number - list[i]
+        if (midRes.containsKey(list[i])) {
+            result = Pair(midRes[list[i]], i) as Pair<Int, Int>
+            break
+        } else midRes[rest] = i
     }
     return result
 }
