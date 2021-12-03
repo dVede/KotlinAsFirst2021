@@ -83,6 +83,8 @@ class Tests {
     @Test
     @Tag("6")
     fun bestHighJump() {
+        assertEquals(226, bestHighJump("xx xx 226 + 220 %+ xx xx"))
+        assertEquals(226, bestHighJump("226 + 220 %+ xxxx"))
         assertEquals(226, bestHighJump("226 +"))
         assertEquals(-1, bestHighJump("???"))
         assertEquals(230, bestHighJump("220 + 224 %+ 228 %- 230 + 232 %%- 234 %"))
@@ -114,11 +116,12 @@ class Tests {
     @Test
     @Tag("6")
     fun mostExpensive() {
-        assertEquals("", mostExpensive("35.2 Bebra; Молоко 62.5; Курица 184.0; Конфеты 89.9"))
+        assertEquals("Курица", mostExpensive("35.2 Bebra; Молоко 62.5; Курица 184.0; Конфеты 89.9"))
         assertEquals("", mostExpensive(" "))
-        assertEquals("", mostExpensive(""))
         assertEquals("Курица", mostExpensive("Хлеб 39.9; Молоко 62.5; Курица 184.0; Конфеты 89.9"))
         assertEquals("Вино", mostExpensive("Вино 255.0"))
+        assertEquals("", mostExpensive(""))
+        assertEquals("a", mostExpensive("a 0.0"))
     }
 
     @Test

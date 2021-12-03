@@ -132,16 +132,19 @@ fun bestLongJump(jumps: String): Int = TODO()
 fun bestHighJump(jumps: String): Int {
     val parts = jumps.split(" ")
     var result = -1
-    return try {
-        for (i in parts.indices step 2) {
-            if (parts[i].toInt() > result && parts[i + 1] == "+") {
+    for (i in parts.indices step 2) {
+        if (parts[i].toIntOrNull() == null && i != parts.size - 2 && i != parts.size - 1) {
+            val k = i + 2
+            if (parts[k].toInt() > result && parts[k + 1] == "+") {
+                result = parts[k].toInt()
+            }
+        } else {
+            if (parts[i].toIntOrNull() != null && parts[i].toInt() > result && parts[i + 1] == "+") {
                 result = parts[i].toInt()
             }
         }
-        result
-    } catch (e: NumberFormatException) {
-        result
     }
+    return result
 }
 
 /**
@@ -180,19 +183,19 @@ fun firstDuplicateIndex(str: String): Int = TODO()
 fun mostExpensive(description: String): String {
     var result = ""
     var max = 0.0
-    return try {
+    if (description.isNotEmpty()) {
         val goods = description.split("; ")
         for (i in goods) {
             val product = i.split(" ")
-            if (product[1].toDouble() > max) {
-                result = product[0]
-                max = product[1].toDouble()
+            if (product[1].toDoubleOrNull() != null) {
+                if (product[1].toDouble() >= max) {
+                    result = product[0]
+                    max = product[1].toDouble()
+                }
             }
         }
-        result
-    } catch (e: NumberFormatException) {
-        result
     }
+    return result
 }
 
 /**
