@@ -135,11 +135,11 @@ fun bestHighJump(jumps: String): Int {
     for (i in parts.indices step 2) {
         if (parts[i].toIntOrNull() == null && i != parts.size - 2 && i != parts.size - 1) {
             val k = i + 2
-            if (parts[k].toInt() > result && parts[k + 1] == "+") {
+            if (parts[k].toInt() > result && parts[k + 1].contains("+")) {
                 result = parts[k].toInt()
             }
         } else {
-            if (parts[i].toIntOrNull() != null && parts[i].toInt() > result && parts[i + 1] == "+") {
+            if (parts[i].toIntOrNull() != null && parts[i].toInt() > result && parts[i + 1].contains("+")) {
                 result = parts[i].toInt()
             }
         }
@@ -192,7 +192,7 @@ fun mostExpensive(description: String): String {
                     result = product[0]
                     max = product[1].toDouble()
                 }
-            }
+            } else break
         }
     }
     return result
