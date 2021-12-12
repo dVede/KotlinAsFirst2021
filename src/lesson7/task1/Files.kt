@@ -434,21 +434,32 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     var rhv2 = rhv
     var firstNumOfSpace = 0
     var secondNumOfSpace = 0
-    while (rhv2 > 0) {
-        secondNumOfSpace += 1
-        nums.add(rhv2 % 10)
-        rhv2 /= 10
+    if (rhv2 == 0) {
+        secondNumOfSpace = 1
+        nums.add(rhv2)
+    } else {
+        while (rhv2 > 0) {
+            secondNumOfSpace += 1
+            nums.add(rhv2 % 10)
+            rhv2 /= 10
+        }
     }
     var lhv2 = lhv
-    while (lhv2 > 0) {
-        firstNumOfSpace += 1
-        lhv2 /= 10
+    if (lhv2 == 0) firstNumOfSpace = 1
+    else {
+        while (lhv2 > 0) {
+            firstNumOfSpace += 1
+            lhv2 /= 10
+        }
     }
     var midRes = res
     var midResSpaces = 0
-    while (midRes > 0) {
-        midResSpaces += 1
-        midRes /= 10
+    if (midRes == 0) midResSpaces = 1
+    else {
+        while (midRes > 0) {
+            midResSpaces += 1
+            midRes /= 10
+        }
     }
     val allSpaces = firstNumOfSpace + secondNumOfSpace
     writer.write(" ".repeat(allSpaces - firstNumOfSpace))
@@ -464,9 +475,12 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
         val newNum = lhv * nums[i]
         var midNum = newNum
         var midNumOfSpace = 0
-        while (midNum > 0) {
-            midNumOfSpace += 1
-            midNum /= 10
+        if (midNum == 0) midNumOfSpace = 1
+        else {
+            while (midNum > 0) {
+                midNumOfSpace += 1
+                midNum /= 10
+            }
         }
         val number = allSpaces - i
         if (i == 0) {
@@ -507,6 +521,7 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
  *
  */
+
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var res = lhv / rhv
@@ -588,7 +603,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                 }
             }
             writer.newLine()
-            if (rest == num) {
+            if (rest == num && rest != 0 && num != 0 && rest2NumOfSpace == 1 && actualNumOfSpace == 1) {
                 writer.write(" ".repeat(num2OfSpace - rest2NumOfSpace))
                 writer.write("0$rest")
             } else {
