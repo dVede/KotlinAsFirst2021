@@ -2,8 +2,10 @@
 
 package lesson7.task1
 
+import lesson5.task1.whoAreInBoth
 import java.io.File
 import java.util.*
+import kotlin.math.pow
 import kotlin.math.sign
 
 // Урок 7: работа с файлами
@@ -426,7 +428,62 @@ fun markdownToHtml(inputName: String, outputName: String) {
  *
  */
 fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    val nums = mutableListOf<Int>()
+    val res = lhv * rhv
+    var rhv2 = rhv
+    var firstNumOfSpace = 0
+    var secondNumOfSpace = 0
+    while (rhv2 > 0) {
+        secondNumOfSpace += 1
+        nums.add(rhv2 % 10)
+        rhv2 /= 10
+    }
+    var lhv2 = lhv
+    while (lhv2 > 0) {
+        firstNumOfSpace += 1
+        lhv2 /= 10
+    }
+    var midRes = res
+    var midResSpaces = 0
+    while (midRes > 0) {
+        midResSpaces += 1
+        midRes /= 10
+    }
+    val allSpaces = firstNumOfSpace + secondNumOfSpace
+    writer.write(" ".repeat(allSpaces - firstNumOfSpace))
+    writer.write("$lhv")
+    writer.newLine()
+    writer.write("*")
+    writer.write(" ".repeat(allSpaces - secondNumOfSpace - 1))
+    writer.write("$rhv")
+    writer.newLine()
+    writer.write("-".repeat(allSpaces))
+    for (i in nums.indices) {
+        writer.newLine()
+        val newNum = lhv * nums[i]
+        var midNum = newNum
+        var midNumOfSpace = 0
+        while (midNum > 0) {
+            midNumOfSpace += 1
+            midNum /= 10
+        }
+        val number = allSpaces - i
+        if (i == 0) {
+            writer.write(" ".repeat(allSpaces - midNumOfSpace))
+            writer.write("$newNum")
+        } else {
+            writer.write("+")
+            writer.write(" ".repeat(number - midNumOfSpace - 1))
+            writer.write("$newNum")
+        }
+    }
+    writer.newLine()
+    writer.write("-".repeat(allSpaces))
+    writer.newLine()
+    writer.write(" ".repeat(allSpaces - midResSpaces))
+    writer.write("$res")
+    writer.close()
 }
 
 
@@ -436,21 +493,130 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  * Вывести в выходной файл процесс деления столбиком числа lhv (> 0) на число rhv (> 0).
  *
  * Пример (для lhv == 19935, rhv == 22):
- 19935 | 22
+19935 | 22
 -198     906
 ----
-   13
-   -0
-   --
-   135
-  -132
-  ----
-     3
+13
+-0
+--
+135
+-132
+----
+3
 
  * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
  *
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    var res = lhv / rhv
+    var lhv2 = lhv
+    var rhv2 = rhv
+    var firstNumOfSpace = 0
+    var secondNumOfSpace = 0
+    var thirdNumOfSpace = 0
+    val result = mutableListOf<Int>()
+    if (lhv2 == 0) firstNumOfSpace = 1
+    else {
+        while (lhv2 > 0) {
+            firstNumOfSpace += 1
+            lhv2 /= 10
+        }
+    }
+    while (rhv2 > 0) {
+        secondNumOfSpace += 1
+        rhv2 /= 10
+    }
+    if (res == 0) {
+        thirdNumOfSpace += 1
+        result.add(res)
+    } else {
+        while (res > 0) {
+            thirdNumOfSpace += 1
+            result.add(res % 10)
+            res /= 10
+        }
+    }
+    result.reverse()
+    writer.write(" $lhv | $rhv")
+    for (i in result.indices) {
+        if (i == 0) {
+            var midNum = rhv * result[i]
+            var midNumOfSpaces = 0
+            writer.newLine()
+            writer.write("-$midNum")
+            if (midNum == 0) midNumOfSpaces = 1
+            else {
+                while (midNum > 0) {
+                    midNumOfSpaces += 1
+                    midNum /= 10
+                }
+            }
+            writer.write(" ".repeat(firstNumOfSpace + 4 - 1 - midNumOfSpaces))
+            val res2 = lhv / rhv
+            writer.write("$res2")
+            writer.newLine()
+            writer.write("-".repeat(midNumOfSpaces + 1))
+        } else {
+            val rest = ((lhv / 10.0.pow(result.size - 1 - i).toInt()) % rhv) + rhv * result[i]
+            val num = rhv * result[i]
+            var rest2 = ((lhv / 10.0.pow(result.size - 1 - i).toInt()) % rhv) + rhv * result[i]
+            var num2 = lhv / 10.0.pow(result.size - 1 - i).toInt()
+            var rest2NumOfSpace = 0
+            var num2OfSpace = 0
+            if (rest2 == 0) rest2NumOfSpace = 1
+            else {
+                while (rest2 > 0) {
+                    rest2NumOfSpace += 1
+                    rest2 /= 10
+                }
+            }
+            if (num2 == 0) num2OfSpace = 1
+            else {
+                while (num2 > 0) {
+                    num2OfSpace += 1
+                    num2 /= 10
+                }
+            }
+            var actual = rhv * result[i]
+            var actualNumOfSpace = 0
+            if (actual == 0) actualNumOfSpace = 1
+            else {
+                while (actual > 0) {
+                    actualNumOfSpace += 1
+                    actual /= 10
+                }
+            }
+            writer.newLine()
+            if (rest == num) {
+                writer.write(" ".repeat(num2OfSpace - rest2NumOfSpace))
+                writer.write("0$rest")
+            } else {
+                writer.write(" ".repeat(num2OfSpace - rest2NumOfSpace + 1))
+                writer.write("$rest")
+            }
+            writer.newLine()
+            writer.write(" ".repeat(num2OfSpace - actualNumOfSpace))
+            writer.write("-$num")
+            writer.newLine()
+            writer.write(" ".repeat(num2OfSpace - actualNumOfSpace))
+            writer.write("-".repeat(actualNumOfSpace))
+            writer.write("-")
+        }
+    }
+    var midRest = lhv % rhv
+    var restNumOfSpace = 0
+    if (midRest == 0) restNumOfSpace = 1
+    else {
+        while (midRest > 0) {
+            restNumOfSpace += 1
+            midRest /= 10
+        }
+    }
+    val finalRest = lhv % rhv
+    writer.newLine()
+    writer.write(" ".repeat(firstNumOfSpace + 1 - restNumOfSpace))
+    writer.write("$finalRest")
+    writer.close()
 }
 

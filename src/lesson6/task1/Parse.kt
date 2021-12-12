@@ -139,8 +139,11 @@ fun bestHighJump(jumps: String): Int {
                 result = parts[k].toInt()
             }
         } else {
-            if (parts[i].toIntOrNull() != null && parts[i].toInt() > result && parts[i + 1].contains("+")) {
-                result = parts[i].toInt()
+            if (parts[i].toIntOrNull() != null && parts[i].toInt() > result) {
+                if (parts[i + 1].contains("+")) result = parts[i].toInt()
+            } else {
+                result = -1
+                break
             }
         }
     }
