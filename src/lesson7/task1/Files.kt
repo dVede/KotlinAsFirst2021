@@ -609,7 +609,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                 }
             }
             writer.newLine()
-            if (rest == num && rest2NumOfSpace == 1 && actualNumOfSpace == 1) {
+            if (rest2NumOfSpace == 1 && actualNumOfSpace == 1) {
                 writer.write(" ".repeat(num2OfSpace - rest2NumOfSpace))
                 writer.write("0$rest")
             } else {
