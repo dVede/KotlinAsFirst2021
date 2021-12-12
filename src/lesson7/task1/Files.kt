@@ -620,9 +620,14 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             writer.write(" ".repeat(num2OfSpace - actualNumOfSpace))
             writer.write("-$num")
             writer.newLine()
-            writer.write(" ".repeat(num2OfSpace - actualNumOfSpace))
-            writer.write("-".repeat(actualNumOfSpace))
-            writer.write("-")
+            if (actualNumOfSpace + 1 >= rest2NumOfSpace) {
+                writer.write(" ".repeat(num2OfSpace - actualNumOfSpace))
+                writer.write("-".repeat(actualNumOfSpace))
+                writer.write("-")
+            } else {
+                writer.write(" ".repeat(num2OfSpace - rest2NumOfSpace + 1))
+                writer.write("-".repeat(rest2NumOfSpace))
+            }
         }
     }
     var midRest = lhv % rhv
