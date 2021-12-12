@@ -462,14 +462,14 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
         }
     }
     val allSpaces = firstNumOfSpace + secondNumOfSpace
-    writer.write(" ".repeat(allSpaces - firstNumOfSpace))
+    writer.write(" ".repeat(midResSpaces - firstNumOfSpace + 1))
     writer.write("$lhv")
     writer.newLine()
     writer.write("*")
-    writer.write(" ".repeat(allSpaces - secondNumOfSpace - 1))
+    writer.write(" ".repeat(midResSpaces - secondNumOfSpace))
     writer.write("$rhv")
     writer.newLine()
-    writer.write("-".repeat(allSpaces))
+    writer.write("-".repeat(midResSpaces + 1))
     for (i in nums.indices) {
         writer.newLine()
         val newNum = lhv * nums[i]
@@ -482,20 +482,26 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
                 midNum /= 10
             }
         }
-        val number = allSpaces - i
+        val number = midResSpaces - i
         if (i == 0) {
-            writer.write(" ".repeat(allSpaces - midNumOfSpace))
+            writer.write(" ".repeat(midResSpaces - midNumOfSpace + 1))
             writer.write("$newNum")
         } else {
             writer.write("+")
-            writer.write(" ".repeat(number - midNumOfSpace - 1))
+            writer.write(" ".repeat(number - midNumOfSpace))
             writer.write("$newNum")
         }
     }
     writer.newLine()
-    writer.write("-".repeat(allSpaces))
-    writer.newLine()
-    writer.write(" ".repeat(allSpaces - midResSpaces))
+    if (res == 0 || midResSpaces + 1 <= allSpaces) {
+        writer.write("-".repeat(allSpaces))
+        writer.newLine()
+        writer.write(" ".repeat(allSpaces - midResSpaces))
+    } else {
+        writer.write("-".repeat(midResSpaces + 1))
+        writer.newLine()
+        writer.write(" ".repeat(midResSpaces - allSpaces + 1))
+    }
     writer.write("$res")
     writer.close()
 }
@@ -603,7 +609,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                 }
             }
             writer.newLine()
-            if (rest == num && rest != 0 && num != 0 && rest2NumOfSpace == 1 && actualNumOfSpace == 1) {
+            if (rest == num && rest2NumOfSpace == 1 && actualNumOfSpace == 1) {
                 writer.write(" ".repeat(num2OfSpace - rest2NumOfSpace))
                 writer.write("0$rest")
             } else {
