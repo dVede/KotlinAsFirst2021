@@ -559,25 +559,41 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         }
     }
     result.reverse()
-    writer.write(" $lhv | $rhv")
     for (i in result.indices) {
         if (i == 0) {
             var midNum = rhv * result[i]
             var midNumOfSpaces = 0
-            writer.newLine()
-            writer.write("-$midNum")
-            if (midNum == 0) midNumOfSpaces = 1
-            else {
-                while (midNum > 0) {
-                    midNumOfSpaces += 1
-                    midNum /= 10
+            if (firstNumOfSpace > 1 && lhv / rhv == 0) {
+                writer.write("$lhv | $rhv")
+                writer.newLine()
+                writer.write(" ".repeat(firstNumOfSpace - 2))
+                writer.write("-$midNum")
+                if (midNum == 0) midNumOfSpaces = 1
+                else {
+                    while (midNum > 0) {
+                        midNumOfSpaces += 1
+                        midNum /= 10
+                    }
                 }
+                writer.write(" ".repeat(3))
+            } else {
+                writer.write(" $lhv | $rhv")
+                writer.newLine()
+                writer.write("-$midNum")
+                if (midNum == 0) midNumOfSpaces = 1
+                else {
+                    while (midNum > 0) {
+                        midNumOfSpaces += 1
+                        midNum /= 10
+                    }
+                }
+                writer.write(" ".repeat(firstNumOfSpace + 4 - 1 - midNumOfSpaces))
             }
-            writer.write(" ".repeat(firstNumOfSpace + 4 - 1 - midNumOfSpaces))
             val res2 = lhv / rhv
             writer.write("$res2")
             writer.newLine()
-            writer.write("-".repeat(midNumOfSpaces + 1))
+            if (firstNumOfSpace > 1 && lhv / rhv == 0) writer.write("-".repeat(firstNumOfSpace))
+            else writer.write("-".repeat(midNumOfSpaces + 1))
         } else {
             val rest = ((lhv / 10.0.pow(result.size - 1 - i).toInt()) % rhv) + rhv * result[i]
             val num = rhv * result[i]
@@ -641,8 +657,11 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     }
     val finalRest = lhv % rhv
     writer.newLine()
-    writer.write(" ".repeat(firstNumOfSpace + 1 - restNumOfSpace))
-    writer.write("$finalRest")
+    if (lhv / rhv == 0 && firstNumOfSpace > 1) writer.write("$finalRest")
+    else {
+        writer.write(" ".repeat(firstNumOfSpace + 1 - restNumOfSpace))
+        writer.write("$finalRest")
+    }
     writer.close()
 }
 
