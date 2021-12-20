@@ -132,18 +132,14 @@ fun bestLongJump(jumps: String): Int = TODO()
 fun bestHighJump(jumps: String): Int {
     val parts = jumps.split(" ")
     var result = -1
-    for (i in parts.indices step 2) {
-        if (parts[i].toIntOrNull() == null && i != parts.size - 2 && i != parts.size - 1) {
-            val k = i + 2
-            if (parts[k].toInt() > result && parts[k + 1].contains("+")) {
-                result = parts[k].toInt()
-            }
-        } else {
-            if (parts[i].toIntOrNull() != null && parts[i].toInt() > result) {
-                if (parts[i + 1].contains("+")) result = parts[i].toInt()
-            } else {
-                result = -1
-                break
+    if (jumps.contains(Regex("""[^-+%0-9\s\d]"""))) {
+        result = -1
+    } else {
+        for (i in 0..parts.size - 2) {
+            if (parts.size >= 2) {
+                if (parts[i].toIntOrNull() != null && parts[i + 1].contains(Regex("\\+"))) {
+                    if (parts[i].toInt() > result) result = parts[i].toInt()
+                }
             }
         }
     }
