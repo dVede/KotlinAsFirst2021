@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > OpenHashSet</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson12.task1</a>
+</div>
+
+<h1>Coverage Summary for Class: OpenHashSet (lesson12.task1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OpenHashSet</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson12.task1
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Класс &quot;хеш-таблица с открытой адресацией&quot;
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * Общая сложность задания -- сложная, общая ценность в баллах -- 20.
+<i class="no-highlight">9</i>&nbsp; * Объект класса хранит данные типа T в виде хеш-таблицы.
+<i class="no-highlight">10</i>&nbsp; * Хеш-таблица не может содержать равные по equals элементы.
+<i class="no-highlight">11</i>&nbsp; * Подробности по организации см. статью википедии &quot;Хеш-таблица&quot;, раздел &quot;Открытая адресация&quot;.
+<i class="no-highlight">12</i>&nbsp; * Методы: добавление элемента, проверка вхождения элемента, сравнение двух таблиц на равенство.
+<i class="no-highlight">13</i>&nbsp; * В этом задании не разрешается использовать библиотечные классы HashSet, HashMap и им подобные,
+<i class="no-highlight">14</i>&nbsp; * а также любые функции, создающие множества (mutableSetOf и пр.).
+<i class="no-highlight">15</i>&nbsp; *
+<i class="no-highlight">16</i>&nbsp; * В конструктор хеш-таблицы передаётся её вместимость (максимальное количество элементов)
+<i class="no-highlight">17</i>&nbsp; */
+<b class="nc"><i class="no-highlight">18</i>&nbsp;class OpenHashSet&lt;T&gt;(val capacity: Int) {</b>
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    /**
+<i class="no-highlight">21</i>&nbsp;     * Массив для хранения элементов хеш-таблицы
+<i class="no-highlight">22</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">23</i>&nbsp;    internal val elements = Array&lt;Any?&gt;(capacity) { null }</b>
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    /**
+<i class="no-highlight">26</i>&nbsp;     * Число элементов в хеш-таблице
+<i class="no-highlight">27</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">28</i>&nbsp;    val size: Int get() = TODO()</b>
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    /**
+<i class="no-highlight">31</i>&nbsp;     * Признак пустоты
+<i class="no-highlight">32</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">33</i>&nbsp;    fun isEmpty(): Boolean = TODO()</b>
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;    /**
+<i class="no-highlight">36</i>&nbsp;     * Добавление элемента.
+<i class="no-highlight">37</i>&nbsp;     * Вернуть true, если элемент был успешно добавлен,
+<i class="no-highlight">38</i>&nbsp;     * или false, если такой элемент уже был в таблице, или превышена вместимость таблицы.
+<i class="no-highlight">39</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">40</i>&nbsp;    fun add(element: T): Boolean = TODO()</b>
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;    /**
+<i class="no-highlight">43</i>&nbsp;     * Проверка, входит ли заданный элемент в хеш-таблицу
+<i class="no-highlight">44</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">45</i>&nbsp;    operator fun contains(element: T): Boolean = TODO()</b>
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;    /**
+<i class="no-highlight">48</i>&nbsp;     * Таблицы равны, если в них одинаковое количество элементов,
+<i class="no-highlight">49</i>&nbsp;     * и любой элемент из второй таблицы входит также и в первую
+<i class="no-highlight">50</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">51</i>&nbsp;    override fun equals(other: Any?): Boolean = TODO()</b>
+<i class="no-highlight">52</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

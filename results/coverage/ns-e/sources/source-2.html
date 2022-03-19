@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Square</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson8.task2</a>
+</div>
+
+<h1>Coverage Summary for Class: Square (lesson8.task2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Square</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson8.task2
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Клетка шахматной доски. Шахматная доска квадратная и имеет 8 х 8 клеток.
+<i class="no-highlight">7</i>&nbsp; * Поэтому, обе координаты клетки (горизонталь row, вертикаль column) могут находиться в пределах от 1 до 8.
+<i class="no-highlight">8</i>&nbsp; * Горизонтали нумеруются снизу вверх, вертикали слева направо.
+<i class="no-highlight">9</i>&nbsp; */
+<b class="nc"><i class="no-highlight">10</i>&nbsp;data class Square(val column: Int, val row: Int) {</b>
+<i class="no-highlight">11</i>&nbsp;    /**
+<i class="no-highlight">12</i>&nbsp;     * Пример
+<i class="no-highlight">13</i>&nbsp;     *
+<i class="no-highlight">14</i>&nbsp;     * Возвращает true, если клетка находится в пределах доски
+<i class="no-highlight">15</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">16</i>&nbsp;    fun inside(): Boolean = column in 1..8 &amp;&amp; row in 1..8</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    /**
+<i class="no-highlight">19</i>&nbsp;     * Простая (2 балла)
+<i class="no-highlight">20</i>&nbsp;     *
+<i class="no-highlight">21</i>&nbsp;     * Возвращает строковую нотацию для клетки.
+<i class="no-highlight">22</i>&nbsp;     * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
+<i class="no-highlight">23</i>&nbsp;     * Для клетки не в пределах доски вернуть пустую строку
+<i class="no-highlight">24</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">25</i>&nbsp;    fun notation(): String = TODO()</b>
+<i class="no-highlight">26</i>&nbsp;}
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;/**
+<i class="no-highlight">29</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">30</i>&nbsp; *
+<i class="no-highlight">31</i>&nbsp; * Создаёт клетку по строковой нотации.
+<i class="no-highlight">32</i>&nbsp; * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
+<i class="no-highlight">33</i>&nbsp; * Если нотация некорректна, бросить IllegalArgumentException
+<i class="no-highlight">34</i>&nbsp; */
+<i class="no-highlight">35</i>&nbsp;fun square(notation: String): Square = TODO()
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;/**
+<i class="no-highlight">38</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">39</i>&nbsp; *
+<i class="no-highlight">40</i>&nbsp; * Определить число ходов, за которое шахматная ладья пройдёт из клетки start в клетку end.
+<i class="no-highlight">41</i>&nbsp; * Шахматная ладья может за один ход переместиться на любую другую клетку
+<i class="no-highlight">42</i>&nbsp; * по вертикали или горизонтали.
+<i class="no-highlight">43</i>&nbsp; * Ниже точками выделены возможные ходы ладьи, а крестиками -- невозможные:
+<i class="no-highlight">44</i>&nbsp; *
+<i class="no-highlight">45</i>&nbsp; * xx.xxххх
+<i class="no-highlight">46</i>&nbsp; * xх.хxххх
+<i class="no-highlight">47</i>&nbsp; * ..Л.....
+<i class="no-highlight">48</i>&nbsp; * xх.хxххх
+<i class="no-highlight">49</i>&nbsp; * xx.xxххх
+<i class="no-highlight">50</i>&nbsp; * xx.xxххх
+<i class="no-highlight">51</i>&nbsp; * xx.xxххх
+<i class="no-highlight">52</i>&nbsp; * xx.xxххх
+<i class="no-highlight">53</i>&nbsp; *
+<i class="no-highlight">54</i>&nbsp; * Если клетки start и end совпадают, вернуть 0.
+<i class="no-highlight">55</i>&nbsp; * Если любая из клеток некорректна, бросить IllegalArgumentException().
+<i class="no-highlight">56</i>&nbsp; *
+<i class="no-highlight">57</i>&nbsp; * Пример: rookMoveNumber(Square(3, 1), Square(6, 3)) = 2
+<i class="no-highlight">58</i>&nbsp; * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
+<i class="no-highlight">59</i>&nbsp; */
+<i class="no-highlight">60</i>&nbsp;fun rookMoveNumber(start: Square, end: Square): Int = TODO()
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;/**
+<i class="no-highlight">63</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">64</i>&nbsp; *
+<i class="no-highlight">65</i>&nbsp; * Вернуть список из клеток, по которым шахматная ладья может быстрее всего попасть из клетки start в клетку end.
+<i class="no-highlight">66</i>&nbsp; * Описание ходов ладьи см. предыдущую задачу.
+<i class="no-highlight">67</i>&nbsp; * Список всегда включает в себя клетку start. Клетка end включается, если она не совпадает со start.
+<i class="no-highlight">68</i>&nbsp; * Между ними должны находиться промежуточные клетки, по порядку от start до end.
+<i class="no-highlight">69</i>&nbsp; * Примеры: rookTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
+<i class="no-highlight">70</i>&nbsp; *          (здесь возможен ещё один вариант)
+<i class="no-highlight">71</i>&nbsp; *          rookTrajectory(Square(3, 1), Square(6, 3)) = listOf(Square(3, 1), Square(3, 3), Square(6, 3))
+<i class="no-highlight">72</i>&nbsp; *          (здесь возможен единственный вариант)
+<i class="no-highlight">73</i>&nbsp; *          rookTrajectory(Square(3, 5), Square(8, 5)) = listOf(Square(3, 5), Square(8, 5))
+<i class="no-highlight">74</i>&nbsp; * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
+<i class="no-highlight">75</i>&nbsp; */
+<i class="no-highlight">76</i>&nbsp;fun rookTrajectory(start: Square, end: Square): List&lt;Square&gt; = TODO()
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;/**
+<i class="no-highlight">79</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">80</i>&nbsp; *
+<i class="no-highlight">81</i>&nbsp; * Определить число ходов, за которое шахматный слон пройдёт из клетки start в клетку end.
+<i class="no-highlight">82</i>&nbsp; * Шахматный слон может за один ход переместиться на любую другую клетку по диагонали.
+<i class="no-highlight">83</i>&nbsp; * Ниже точками выделены возможные ходы слона, а крестиками -- невозможные:
+<i class="no-highlight">84</i>&nbsp; *
+<i class="no-highlight">85</i>&nbsp; * .xxx.ххх
+<i class="no-highlight">86</i>&nbsp; * x.x.xххх
+<i class="no-highlight">87</i>&nbsp; * xxСxxxxx
+<i class="no-highlight">88</i>&nbsp; * x.x.xххх
+<i class="no-highlight">89</i>&nbsp; * .xxx.ххх
+<i class="no-highlight">90</i>&nbsp; * xxxxx.хх
+<i class="no-highlight">91</i>&nbsp; * xxxxxх.х
+<i class="no-highlight">92</i>&nbsp; * xxxxxхх.
+<i class="no-highlight">93</i>&nbsp; *
+<i class="no-highlight">94</i>&nbsp; * Если клетки start и end совпадают, вернуть 0.
+<i class="no-highlight">95</i>&nbsp; * Если клетка end недостижима для слона, вернуть -1.
+<i class="no-highlight">96</i>&nbsp; * Если любая из клеток некорректна, бросить IllegalArgumentException().
+<i class="no-highlight">97</i>&nbsp; *
+<i class="no-highlight">98</i>&nbsp; * Примеры: bishopMoveNumber(Square(3, 1), Square(6, 3)) = -1; bishopMoveNumber(Square(3, 1), Square(3, 7)) = 2.
+<i class="no-highlight">99</i>&nbsp; * Слон может пройти через клетку (6, 4) к клетке (3, 7).
+<i class="no-highlight">100</i>&nbsp; */
+<i class="no-highlight">101</i>&nbsp;fun bishopMoveNumber(start: Square, end: Square): Int = TODO()
+<i class="no-highlight">102</i>&nbsp;
+<i class="no-highlight">103</i>&nbsp;/**
+<i class="no-highlight">104</i>&nbsp; * Сложная (5 баллов)
+<i class="no-highlight">105</i>&nbsp; *
+<i class="no-highlight">106</i>&nbsp; * Вернуть список из клеток, по которым шахматный слон может быстрее всего попасть из клетки start в клетку end.
+<i class="no-highlight">107</i>&nbsp; * Описание ходов слона см. предыдущую задачу.
+<i class="no-highlight">108</i>&nbsp; *
+<i class="no-highlight">109</i>&nbsp; * Если клетка end недостижима для слона, вернуть пустой список.
+<i class="no-highlight">110</i>&nbsp; *
+<i class="no-highlight">111</i>&nbsp; * Если клетка достижима:
+<i class="no-highlight">112</i>&nbsp; * - список всегда включает в себя клетку start
+<i class="no-highlight">113</i>&nbsp; * - клетка end включается, если она не совпадает со start.
+<i class="no-highlight">114</i>&nbsp; * - между ними должны находиться промежуточные клетки, по порядку от start до end.
+<i class="no-highlight">115</i>&nbsp; *
+<i class="no-highlight">116</i>&nbsp; * Примеры: bishopTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
+<i class="no-highlight">117</i>&nbsp; *          bishopTrajectory(Square(3, 1), Square(3, 7)) = listOf(Square(3, 1), Square(6, 4), Square(3, 7))
+<i class="no-highlight">118</i>&nbsp; *          bishopTrajectory(Square(1, 3), Square(6, 8)) = listOf(Square(1, 3), Square(6, 8))
+<i class="no-highlight">119</i>&nbsp; * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
+<i class="no-highlight">120</i>&nbsp; */
+<i class="no-highlight">121</i>&nbsp;fun bishopTrajectory(start: Square, end: Square): List&lt;Square&gt; = TODO()
+<i class="no-highlight">122</i>&nbsp;
+<i class="no-highlight">123</i>&nbsp;/**
+<i class="no-highlight">124</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">125</i>&nbsp; *
+<i class="no-highlight">126</i>&nbsp; * Определить число ходов, за которое шахматный король пройдёт из клетки start в клетку end.
+<i class="no-highlight">127</i>&nbsp; * Шахматный король одним ходом может переместиться из клетки, в которой стоит,
+<i class="no-highlight">128</i>&nbsp; * на любую соседнюю по вертикали, горизонтали или диагонали.
+<i class="no-highlight">129</i>&nbsp; * Ниже точками выделены возможные ходы короля, а крестиками -- невозможные:
+<i class="no-highlight">130</i>&nbsp; *
+<i class="no-highlight">131</i>&nbsp; * xxxxx
+<i class="no-highlight">132</i>&nbsp; * x...x
+<i class="no-highlight">133</i>&nbsp; * x.K.x
+<i class="no-highlight">134</i>&nbsp; * x...x
+<i class="no-highlight">135</i>&nbsp; * xxxxx
+<i class="no-highlight">136</i>&nbsp; *
+<i class="no-highlight">137</i>&nbsp; * Если клетки start и end совпадают, вернуть 0.
+<i class="no-highlight">138</i>&nbsp; * Если любая из клеток некорректна, бросить IllegalArgumentException().
+<i class="no-highlight">139</i>&nbsp; *
+<i class="no-highlight">140</i>&nbsp; * Пример: kingMoveNumber(Square(3, 1), Square(6, 3)) = 3.
+<i class="no-highlight">141</i>&nbsp; * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
+<i class="no-highlight">142</i>&nbsp; */
+<i class="no-highlight">143</i>&nbsp;fun kingMoveNumber(start: Square, end: Square): Int = TODO()
+<i class="no-highlight">144</i>&nbsp;
+<i class="no-highlight">145</i>&nbsp;/**
+<i class="no-highlight">146</i>&nbsp; * Сложная (5 баллов)
+<i class="no-highlight">147</i>&nbsp; *
+<i class="no-highlight">148</i>&nbsp; * Вернуть список из клеток, по которым шахматный король может быстрее всего попасть из клетки start в клетку end.
+<i class="no-highlight">149</i>&nbsp; * Описание ходов короля см. предыдущую задачу.
+<i class="no-highlight">150</i>&nbsp; * Список всегда включает в себя клетку start. Клетка end включается, если она не совпадает со start.
+<i class="no-highlight">151</i>&nbsp; * Между ними должны находиться промежуточные клетки, по порядку от start до end.
+<i class="no-highlight">152</i>&nbsp; * Примеры: kingTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
+<i class="no-highlight">153</i>&nbsp; *          (здесь возможны другие варианты)
+<i class="no-highlight">154</i>&nbsp; *          kingTrajectory(Square(3, 1), Square(6, 3)) = listOf(Square(3, 1), Square(4, 2), Square(5, 2), Square(6, 3))
+<i class="no-highlight">155</i>&nbsp; *          (здесь возможен единственный вариант)
+<i class="no-highlight">156</i>&nbsp; *          kingTrajectory(Square(3, 5), Square(6, 2)) = listOf(Square(3, 5), Square(4, 4), Square(5, 3), Square(6, 2))
+<i class="no-highlight">157</i>&nbsp; * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
+<i class="no-highlight">158</i>&nbsp; */
+<i class="no-highlight">159</i>&nbsp;fun kingTrajectory(start: Square, end: Square): List&lt;Square&gt; = TODO()
+<i class="no-highlight">160</i>&nbsp;
+<i class="no-highlight">161</i>&nbsp;/**
+<i class="no-highlight">162</i>&nbsp; * Сложная (6 баллов)
+<i class="no-highlight">163</i>&nbsp; *
+<i class="no-highlight">164</i>&nbsp; * Определить число ходов, за которое шахматный конь пройдёт из клетки start в клетку end.
+<i class="no-highlight">165</i>&nbsp; * Шахматный конь одним ходом вначале передвигается ровно на 2 клетки по горизонтали или вертикали,
+<i class="no-highlight">166</i>&nbsp; * а затем ещё на 1 клетку под прямым углом, образуя букву &quot;Г&quot;.
+<i class="no-highlight">167</i>&nbsp; * Ниже точками выделены возможные ходы коня, а крестиками -- невозможные:
+<i class="no-highlight">168</i>&nbsp; *
+<i class="no-highlight">169</i>&nbsp; * .xxx.xxx
+<i class="no-highlight">170</i>&nbsp; * xxKxxxxx
+<i class="no-highlight">171</i>&nbsp; * .xxx.xxx
+<i class="no-highlight">172</i>&nbsp; * x.x.xxxx
+<i class="no-highlight">173</i>&nbsp; * xxxxxxxx
+<i class="no-highlight">174</i>&nbsp; * xxxxxxxx
+<i class="no-highlight">175</i>&nbsp; * xxxxxxxx
+<i class="no-highlight">176</i>&nbsp; * xxxxxxxx
+<i class="no-highlight">177</i>&nbsp; *
+<i class="no-highlight">178</i>&nbsp; * Если клетки start и end совпадают, вернуть 0.
+<i class="no-highlight">179</i>&nbsp; * Если любая из клеток некорректна, бросить IllegalArgumentException().
+<i class="no-highlight">180</i>&nbsp; *
+<i class="no-highlight">181</i>&nbsp; * Пример: knightMoveNumber(Square(3, 1), Square(6, 3)) = 3.
+<i class="no-highlight">182</i>&nbsp; * Конь может последовательно пройти через клетки (5, 2) и (4, 4) к клетке (6, 3).
+<i class="no-highlight">183</i>&nbsp; */
+<i class="no-highlight">184</i>&nbsp;fun knightMoveNumber(start: Square, end: Square): Int = TODO()
+<i class="no-highlight">185</i>&nbsp;
+<i class="no-highlight">186</i>&nbsp;/**
+<i class="no-highlight">187</i>&nbsp; * Очень сложная (10 баллов)
+<i class="no-highlight">188</i>&nbsp; *
+<i class="no-highlight">189</i>&nbsp; * Вернуть список из клеток, по которым шахматный конь может быстрее всего попасть из клетки start в клетку end.
+<i class="no-highlight">190</i>&nbsp; * Описание ходов коня см. предыдущую задачу.
+<i class="no-highlight">191</i>&nbsp; * Список всегда включает в себя клетку start. Клетка end включается, если она не совпадает со start.
+<i class="no-highlight">192</i>&nbsp; * Между ними должны находиться промежуточные клетки, по порядку от start до end.
+<i class="no-highlight">193</i>&nbsp; * Примеры:
+<i class="no-highlight">194</i>&nbsp; *
+<i class="no-highlight">195</i>&nbsp; * knightTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
+<i class="no-highlight">196</i>&nbsp; * здесь возможны другие варианты)
+<i class="no-highlight">197</i>&nbsp; * knightTrajectory(Square(3, 1), Square(6, 3)) = listOf(Square(3, 1), Square(5, 2), Square(4, 4), Square(6, 3))
+<i class="no-highlight">198</i>&nbsp; * (здесь возможен единственный вариант)
+<i class="no-highlight">199</i>&nbsp; * knightTrajectory(Square(3, 5), Square(5, 6)) = listOf(Square(3, 5), Square(5, 6))
+<i class="no-highlight">200</i>&nbsp; * (здесь опять возможны другие варианты)
+<i class="no-highlight">201</i>&nbsp; * knightTrajectory(Square(7, 7), Square(8, 8)) =
+<i class="no-highlight">202</i>&nbsp; *     listOf(Square(7, 7), Square(5, 8), Square(4, 6), Square(6, 7), Square(8, 8))
+<i class="no-highlight">203</i>&nbsp; *
+<i class="no-highlight">204</i>&nbsp; * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
+<i class="no-highlight">205</i>&nbsp; */
+<i class="no-highlight">206</i>&nbsp;fun knightTrajectory(start: Square, end: Square): List&lt;Square&gt; = TODO()
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

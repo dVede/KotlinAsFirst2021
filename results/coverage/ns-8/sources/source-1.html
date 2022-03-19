@@ -1,0 +1,472 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LoopKt</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson3.task1</a>
+</div>
+
+<h1>Coverage Summary for Class: LoopKt (lesson3.task1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoopKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/97)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson3.task1
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import kotlin.math.sqrt
+<i class="no-highlight">6</i>&nbsp;import kotlin.math.abs
+<i class="no-highlight">7</i>&nbsp;import kotlin.math.pow
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;// Урок 3: циклы
+<i class="no-highlight">10</i>&nbsp;// Максимальное количество баллов = 9
+<i class="no-highlight">11</i>&nbsp;// Рекомендуемое количество баллов = 7
+<i class="no-highlight">12</i>&nbsp;// Вместе с предыдущими уроками = 16/21
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;/**
+<i class="no-highlight">15</i>&nbsp; * Пример
+<i class="no-highlight">16</i>&nbsp; *
+<i class="no-highlight">17</i>&nbsp; * Вычисление факториала
+<i class="no-highlight">18</i>&nbsp; */
+<i class="no-highlight">19</i>&nbsp;fun factorial(n: Int): Double {
+<b class="nc"><i class="no-highlight">20</i>&nbsp;    var result = 1.0</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;    for (i in 1..n) {</b>
+<b class="nc"><i class="no-highlight">22</i>&nbsp;        result = result * i // Please do not fix in master</b>
+<i class="no-highlight">23</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">24</i>&nbsp;    return result</b>
+<i class="no-highlight">25</i>&nbsp;}
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;/**
+<i class="no-highlight">28</i>&nbsp; * Пример
+<i class="no-highlight">29</i>&nbsp; *
+<i class="no-highlight">30</i>&nbsp; * Проверка числа на простоту -- результат true, если число простое
+<i class="no-highlight">31</i>&nbsp; */
+<i class="no-highlight">32</i>&nbsp;fun isPrime(n: Int): Boolean {
+<b class="nc"><i class="no-highlight">33</i>&nbsp;    if (n &lt; 2) return false</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;    if (n == 2) return true</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    if (n % 2 == 0) return false</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;    for (m in 3..sqrt(n.toDouble()).toInt() step 2) {</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;        if (n % m == 0) return false</b>
+<i class="no-highlight">38</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">39</i>&nbsp;    return true</b>
+<i class="no-highlight">40</i>&nbsp;}
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;/**
+<i class="no-highlight">43</i>&nbsp; * Пример
+<i class="no-highlight">44</i>&nbsp; *
+<i class="no-highlight">45</i>&nbsp; * Проверка числа на совершенность -- результат true, если число совершенное
+<i class="no-highlight">46</i>&nbsp; */
+<i class="no-highlight">47</i>&nbsp;fun isPerfect(n: Int): Boolean {
+<b class="nc"><i class="no-highlight">48</i>&nbsp;    var sum = 1</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;    for (m in 2..n / 2) {</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        if (n % m &gt; 0) continue</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        sum += m</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        if (sum &gt; n) break</b>
+<i class="no-highlight">53</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">54</i>&nbsp;    return sum == n</b>
+<i class="no-highlight">55</i>&nbsp;}
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;/**
+<i class="no-highlight">58</i>&nbsp; * Пример
+<i class="no-highlight">59</i>&nbsp; *
+<i class="no-highlight">60</i>&nbsp; * Найти число вхождений цифры m в число n
+<i class="no-highlight">61</i>&nbsp; */
+<i class="no-highlight">62</i>&nbsp;fun digitCountInNumber(n: Int, m: Int): Int =
+<b class="nc"><i class="no-highlight">63</i>&nbsp;    when {</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;        n == m -&gt; 1</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;        n &lt; 10 -&gt; 0</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;        else -&gt; digitCountInNumber(n / 10, m) + digitCountInNumber(n % 10, m)</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;    }</b>
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;/**
+<i class="no-highlight">70</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">71</i>&nbsp; *
+<i class="no-highlight">72</i>&nbsp; * Найти количество цифр в заданном числе n.
+<i class="no-highlight">73</i>&nbsp; * Например, число 1 содержит 1 цифру, 456 -- 3 цифры, 65536 -- 5 цифр.
+<i class="no-highlight">74</i>&nbsp; *
+<i class="no-highlight">75</i>&nbsp; * Использовать операции со строками в этой задаче запрещается.
+<i class="no-highlight">76</i>&nbsp; */
+<i class="no-highlight">77</i>&nbsp;fun digitNumber(n: Int): Int {
+<b class="nc"><i class="no-highlight">78</i>&nbsp;    var count = 1</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;    var num = abs(n)</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;    while (num &gt; 9) {</b>
+<b class="nc"><i class="no-highlight">81</i>&nbsp;        count++</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;        num /= 10</b>
+<i class="no-highlight">83</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">84</i>&nbsp;    return count</b>
+<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;/**
+<i class="no-highlight">88</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">89</i>&nbsp; *
+<i class="no-highlight">90</i>&nbsp; * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
+<i class="no-highlight">91</i>&nbsp; * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
+<i class="no-highlight">92</i>&nbsp; */
+<i class="no-highlight">93</i>&nbsp;/**fun fib(n: Int): Int =
+<i class="no-highlight">94</i>&nbsp;    if (n &lt; 3) 1
+<i class="no-highlight">95</i>&nbsp;    else fib(n - 1) + fib(n - 2)
+<i class="no-highlight">96</i>&nbsp;*/
+<i class="no-highlight">97</i>&nbsp;
+<i class="no-highlight">98</i>&nbsp;fun fib(n: Int): Int {
+<b class="nc"><i class="no-highlight">99</i>&nbsp;    var fb1 = 1</b>
+<b class="nc"><i class="no-highlight">100</i>&nbsp;    var fb2 = 1</b>
+<b class="nc"><i class="no-highlight">101</i>&nbsp;    var result = 0</b>
+<b class="nc"><i class="no-highlight">102</i>&nbsp;    if (n &lt; 3) result = 1</b>
+<i class="no-highlight">103</i>&nbsp;    else {
+<b class="nc"><i class="no-highlight">104</i>&nbsp;        for (i in 3..n) {</b>
+<b class="nc"><i class="no-highlight">105</i>&nbsp;            result = fb1 + fb2</b>
+<b class="nc"><i class="no-highlight">106</i>&nbsp;            fb1 = fb2</b>
+<b class="nc"><i class="no-highlight">107</i>&nbsp;            fb2 = result</b>
+<i class="no-highlight">108</i>&nbsp;        }
+<i class="no-highlight">109</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">110</i>&nbsp;    return result</b>
+<i class="no-highlight">111</i>&nbsp;}
+<i class="no-highlight">112</i>&nbsp;
+<i class="no-highlight">113</i>&nbsp;/**
+<i class="no-highlight">114</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">115</i>&nbsp; *
+<i class="no-highlight">116</i>&nbsp; * Для заданного числа n &gt; 1 найти минимальный делитель, превышающий 1
+<i class="no-highlight">117</i>&nbsp; */
+<i class="no-highlight">118</i>&nbsp;fun minDivisor(n: Int): Int {
+<b class="nc"><i class="no-highlight">119</i>&nbsp;    var a = n</b>
+<b class="nc"><i class="no-highlight">120</i>&nbsp;    for (i in 2..n / 2) {</b>
+<b class="nc"><i class="no-highlight">121</i>&nbsp;        if (n % i == 0) {</b>
+<b class="nc"><i class="no-highlight">122</i>&nbsp;            a = i</b>
+<b class="nc"><i class="no-highlight">123</i>&nbsp;            break</b>
+<i class="no-highlight">124</i>&nbsp;        }
+<i class="no-highlight">125</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">126</i>&nbsp;    return a</b>
+<i class="no-highlight">127</i>&nbsp;}
+<i class="no-highlight">128</i>&nbsp;
+<i class="no-highlight">129</i>&nbsp;/**
+<i class="no-highlight">130</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">131</i>&nbsp; *
+<i class="no-highlight">132</i>&nbsp; * Для заданного числа n &gt; 1 найти максимальный делитель, меньший n
+<i class="no-highlight">133</i>&nbsp; */
+<i class="no-highlight">134</i>&nbsp;fun maxDivisor(n: Int): Int {
+<b class="nc"><i class="no-highlight">135</i>&nbsp;    var a = 1</b>
+<b class="nc"><i class="no-highlight">136</i>&nbsp;    for (i in n / 2 downTo 1) {</b>
+<b class="nc"><i class="no-highlight">137</i>&nbsp;        if (n % i == 0) {</b>
+<b class="nc"><i class="no-highlight">138</i>&nbsp;            a = i</b>
+<b class="nc"><i class="no-highlight">139</i>&nbsp;            break</b>
+<i class="no-highlight">140</i>&nbsp;        }
+<i class="no-highlight">141</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">142</i>&nbsp;    return a</b>
+<i class="no-highlight">143</i>&nbsp;}
+<i class="no-highlight">144</i>&nbsp;
+<i class="no-highlight">145</i>&nbsp;/**
+<i class="no-highlight">146</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">147</i>&nbsp; *
+<i class="no-highlight">148</i>&nbsp; * Гипотеза Коллатца. Рекуррентная последовательность чисел задана следующим образом:
+<i class="no-highlight">149</i>&nbsp; *
+<i class="no-highlight">150</i>&nbsp; *   ЕСЛИ (X четное)
+<i class="no-highlight">151</i>&nbsp; *     Xслед = X /2
+<i class="no-highlight">152</i>&nbsp; *   ИНАЧЕ
+<i class="no-highlight">153</i>&nbsp; *     Xслед = 3 * X + 1
+<i class="no-highlight">154</i>&nbsp; *
+<i class="no-highlight">155</i>&nbsp; * например
+<i class="no-highlight">156</i>&nbsp; *   15 46 23 70 35 106 53 160 80 40 20 10 5 16 8 4 2 1 4 2 1 4 2 1 ...
+<i class="no-highlight">157</i>&nbsp; * Данная последовательность рано или поздно встречает X == 1.
+<i class="no-highlight">158</i>&nbsp; * Написать функцию, которая находит, сколько шагов требуется для
+<i class="no-highlight">159</i>&nbsp; * этого для какого-либо начального X &gt; 0.
+<i class="no-highlight">160</i>&nbsp; */
+<b class="nc"><i class="no-highlight">161</i>&nbsp;fun collatzSteps(x: Int): Int = TODO()</b>
+<i class="no-highlight">162</i>&nbsp;
+<i class="no-highlight">163</i>&nbsp;/**
+<i class="no-highlight">164</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">165</i>&nbsp; *
+<i class="no-highlight">166</i>&nbsp; * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
+<i class="no-highlight">167</i>&nbsp; * минимальное число k, которое делится и на m и на n без остатка
+<i class="no-highlight">168</i>&nbsp; */
+<i class="no-highlight">169</i>&nbsp;
+<i class="no-highlight">170</i>&nbsp;fun nod(m: Int, n: Int): Int {
+<b class="nc"><i class="no-highlight">171</i>&nbsp;    var m1 = m</b>
+<b class="nc"><i class="no-highlight">172</i>&nbsp;    var n1 = n</b>
+<b class="nc"><i class="no-highlight">173</i>&nbsp;    while (m1 != n1) {</b>
+<b class="nc"><i class="no-highlight">174</i>&nbsp;        if (m1 &gt; n1) m1 -= n1</b>
+<b class="nc"><i class="no-highlight">175</i>&nbsp;        else n1 -= m1</b>
+<i class="no-highlight">176</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">177</i>&nbsp;    return (m1)</b>
+<i class="no-highlight">178</i>&nbsp;}
+<i class="no-highlight">179</i>&nbsp;
+<b class="nc"><i class="no-highlight">180</i>&nbsp;fun lcm(m: Int, n: Int): Int = (m * n) / nod(m, n)</b>
+<i class="no-highlight">181</i>&nbsp;
+<i class="no-highlight">182</i>&nbsp;
+<i class="no-highlight">183</i>&nbsp;/**
+<i class="no-highlight">184</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">185</i>&nbsp; *
+<i class="no-highlight">186</i>&nbsp; * Определить, являются ли два заданных числа m и n взаимно простыми.
+<i class="no-highlight">187</i>&nbsp; * Взаимно простые числа не имеют общих делителей, кроме 1.
+<i class="no-highlight">188</i>&nbsp; * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
+<i class="no-highlight">189</i>&nbsp; */
+<i class="no-highlight">190</i>&nbsp;
+<b class="nc"><i class="no-highlight">191</i>&nbsp;fun isCoPrime(m: Int, n: Int): Boolean = TODO()</b>
+<i class="no-highlight">192</i>&nbsp;
+<i class="no-highlight">193</i>&nbsp;/**{
+<i class="no-highlight">194</i>&nbsp;var firstArray = mutableListOf(0)
+<i class="no-highlight">195</i>&nbsp;var secondArray = mutableListOf(0)
+<i class="no-highlight">196</i>&nbsp;var a = false
+<i class="no-highlight">197</i>&nbsp;for (i in 2..m) {
+<i class="no-highlight">198</i>&nbsp;if (m % i == 0) firstArray.add(i)
+<i class="no-highlight">199</i>&nbsp;}
+<i class="no-highlight">200</i>&nbsp;for (i in 2..n) {
+<i class="no-highlight">201</i>&nbsp;if (n % i == 0) secondArray.add(i)
+<i class="no-highlight">202</i>&nbsp;}
+<i class="no-highlight">203</i>&nbsp;secondArray.remove(0)
+<i class="no-highlight">204</i>&nbsp;firstArray.remove(0)
+<i class="no-highlight">205</i>&nbsp;for (i in firstArray) {
+<i class="no-highlight">206</i>&nbsp;for (k in secondArray) {
+<i class="no-highlight">207</i>&nbsp;if (k == i) break
+<i class="no-highlight">208</i>&nbsp;else a = true
+<i class="no-highlight">209</i>&nbsp;}
+<i class="no-highlight">210</i>&nbsp;}
+<i class="no-highlight">211</i>&nbsp;return a
+<i class="no-highlight">212</i>&nbsp;}
+<i class="no-highlight">213</i>&nbsp; */
+<i class="no-highlight">214</i>&nbsp;
+<i class="no-highlight">215</i>&nbsp;/**
+<i class="no-highlight">216</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">217</i>&nbsp; *
+<i class="no-highlight">218</i>&nbsp; * Поменять порядок цифр заданного числа n на обратный: 13478 -&gt; 87431.
+<i class="no-highlight">219</i>&nbsp; *
+<i class="no-highlight">220</i>&nbsp; * Использовать операции со строками в этой задаче запрещается.
+<i class="no-highlight">221</i>&nbsp; */
+<i class="no-highlight">222</i>&nbsp;fun revert(n: Int): Int {
+<b class="nc"><i class="no-highlight">223</i>&nbsp;    val myArray = mutableListOf(0)</b>
+<b class="nc"><i class="no-highlight">224</i>&nbsp;    var number = n</b>
+<i class="no-highlight">225</i>&nbsp;    var num: Int
+<i class="no-highlight">226</i>&nbsp;    var midResult: Int
+<b class="nc"><i class="no-highlight">227</i>&nbsp;    var result = 0</b>
+<b class="nc"><i class="no-highlight">228</i>&nbsp;    while (number &gt; 0) {</b>
+<b class="nc"><i class="no-highlight">229</i>&nbsp;        num = number % 10</b>
+<b class="nc"><i class="no-highlight">230</i>&nbsp;        myArray.add(num)</b>
+<b class="nc"><i class="no-highlight">231</i>&nbsp;        number /= 10</b>
+<i class="no-highlight">232</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">233</i>&nbsp;    myArray.removeAt(0)</b>
+<b class="nc"><i class="no-highlight">234</i>&nbsp;    var dl = myArray.size</b>
+<b class="nc"><i class="no-highlight">235</i>&nbsp;    val dl2 = dl</b>
+<b class="nc"><i class="no-highlight">236</i>&nbsp;    for (i in 0 until dl2) {</b>
+<b class="nc"><i class="no-highlight">237</i>&nbsp;        midResult = (myArray[i] * 10.0.pow(dl - 1)).toInt()</b>
+<b class="nc"><i class="no-highlight">238</i>&nbsp;        result += midResult</b>
+<b class="nc"><i class="no-highlight">239</i>&nbsp;        dl -= 1</b>
+<i class="no-highlight">240</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">241</i>&nbsp;    return result</b>
+<i class="no-highlight">242</i>&nbsp;}
+<i class="no-highlight">243</i>&nbsp;
+<i class="no-highlight">244</i>&nbsp;/**
+<i class="no-highlight">245</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">246</i>&nbsp; *
+<i class="no-highlight">247</i>&nbsp; * Проверить, является ли заданное число n палиндромом:
+<i class="no-highlight">248</i>&nbsp; * первая цифра равна последней, вторая -- предпоследней и так далее.
+<i class="no-highlight">249</i>&nbsp; * 15751 -- палиндром, 3653 -- нет.
+<i class="no-highlight">250</i>&nbsp; *
+<i class="no-highlight">251</i>&nbsp; * Использовать операции со строками в этой задаче запрещается.
+<i class="no-highlight">252</i>&nbsp; */
+<b class="nc"><i class="no-highlight">253</i>&nbsp;fun isPalindrome(n: Int): Boolean = TODO()</b>
+<i class="no-highlight">254</i>&nbsp;
+<i class="no-highlight">255</i>&nbsp;/**
+<i class="no-highlight">256</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">257</i>&nbsp; *
+<i class="no-highlight">258</i>&nbsp; * Для заданного числа n определить, содержит ли оно различающиеся цифры.
+<i class="no-highlight">259</i>&nbsp; * Например, 54 и 323 состоят из разных цифр, а 111 и 0 из одинаковых.
+<i class="no-highlight">260</i>&nbsp; *
+<i class="no-highlight">261</i>&nbsp; * Использовать операции со строками в этой задаче запрещается.
+<i class="no-highlight">262</i>&nbsp; */
+<b class="nc"><i class="no-highlight">263</i>&nbsp;fun hasDifferentDigits(n: Int): Boolean = TODO()</b>
+<i class="no-highlight">264</i>&nbsp;
+<i class="no-highlight">265</i>&nbsp;/**
+<i class="no-highlight">266</i>&nbsp; * Средняя (4 балла)
+<i class="no-highlight">267</i>&nbsp; *
+<i class="no-highlight">268</i>&nbsp; * Для заданного x рассчитать с заданной точностью eps
+<i class="no-highlight">269</i>&nbsp; * sin(x) = x - x^3 / 3! + x^5 / 5! - x^7 / 7! + ...
+<i class="no-highlight">270</i>&nbsp; * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю.
+<i class="no-highlight">271</i>&nbsp; * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
+<i class="no-highlight">272</i>&nbsp; * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
+<i class="no-highlight">273</i>&nbsp; */
+<b class="nc"><i class="no-highlight">274</i>&nbsp;fun sin(x: Double, eps: Double): Double = TODO()</b>
+<i class="no-highlight">275</i>&nbsp;
+<i class="no-highlight">276</i>&nbsp;/**
+<i class="no-highlight">277</i>&nbsp; * Средняя (4 балла)
+<i class="no-highlight">278</i>&nbsp; *
+<i class="no-highlight">279</i>&nbsp; * Для заданного x рассчитать с заданной точностью eps
+<i class="no-highlight">280</i>&nbsp; * cos(x) = 1 - x^2 / 2! + x^4 / 4! - x^6 / 6! + ...
+<i class="no-highlight">281</i>&nbsp; * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
+<i class="no-highlight">282</i>&nbsp; * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
+<i class="no-highlight">283</i>&nbsp; * Использовать kotlin.math.cos и другие стандартные реализации функции косинуса в этой задаче запрещается.
+<i class="no-highlight">284</i>&nbsp; */
+<b class="nc"><i class="no-highlight">285</i>&nbsp;fun cos(x: Double, eps: Double): Double = TODO()</b>
+<i class="no-highlight">286</i>&nbsp;
+<i class="no-highlight">287</i>&nbsp;/**
+<i class="no-highlight">288</i>&nbsp; * Сложная (4 балла)
+<i class="no-highlight">289</i>&nbsp; *
+<i class="no-highlight">290</i>&nbsp; * Найти n-ю цифру последовательности из квадратов целых чисел:
+<i class="no-highlight">291</i>&nbsp; * 149162536496481100121144...
+<i class="no-highlight">292</i>&nbsp; * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
+<i class="no-highlight">293</i>&nbsp; *
+<i class="no-highlight">294</i>&nbsp; * Использовать операции со строками в этой задаче запрещается.
+<i class="no-highlight">295</i>&nbsp; */
+<b class="nc"><i class="no-highlight">296</i>&nbsp;fun squareSequenceDigit(n: Int): Int = TODO()</b>
+<i class="no-highlight">297</i>&nbsp;
+<i class="no-highlight">298</i>&nbsp;
+<i class="no-highlight">299</i>&nbsp;/**
+<i class="no-highlight">300</i>&nbsp; * Сложная (5 баллов)
+<i class="no-highlight">301</i>&nbsp; *
+<i class="no-highlight">302</i>&nbsp; * Найти n-ю цифру последовательности из чисел Фибоначчи (см. функцию fib выше):
+<i class="no-highlight">303</i>&nbsp; * 1123581321345589144...
+<i class="no-highlight">304</i>&nbsp; * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
+<i class="no-highlight">305</i>&nbsp; *
+<i class="no-highlight">306</i>&nbsp; * Использовать операции со строками в этой задаче запрещается.
+<i class="no-highlight">307</i>&nbsp; */
+<i class="no-highlight">308</i>&nbsp;fun fibSequenceDigit(n: Int): Int {
+<b class="nc"><i class="no-highlight">309</i>&nbsp;    var num = 0</b>
+<b class="nc"><i class="no-highlight">310</i>&nbsp;    var i = 1</b>
+<b class="nc"><i class="no-highlight">311</i>&nbsp;    var result = 0</b>
+<b class="nc"><i class="no-highlight">312</i>&nbsp;    while (num != n) {</b>
+<b class="nc"><i class="no-highlight">313</i>&nbsp;        val a = fib(i)</b>
+<b class="nc"><i class="no-highlight">314</i>&nbsp;        if (a / 10 == 0) {</b>
+<b class="nc"><i class="no-highlight">315</i>&nbsp;            result = a</b>
+<b class="nc"><i class="no-highlight">316</i>&nbsp;            num += 1</b>
+<i class="no-highlight">317</i>&nbsp;        } else {
+<b class="nc"><i class="no-highlight">318</i>&nbsp;            var b = a</b>
+<b class="nc"><i class="no-highlight">319</i>&nbsp;            var d = 0</b>
+<b class="nc"><i class="no-highlight">320</i>&nbsp;            while (b &gt; 0) {</b>
+<b class="nc"><i class="no-highlight">321</i>&nbsp;                b /= 10</b>
+<b class="nc"><i class="no-highlight">322</i>&nbsp;                d += 1</b>
+<i class="no-highlight">323</i>&nbsp;            }
+<b class="nc"><i class="no-highlight">324</i>&nbsp;            while (d &gt; 0) {</b>
+<b class="nc"><i class="no-highlight">325</i>&nbsp;                result = (a / (10.0.pow(d - 1).toInt())) % 10</b>
+<b class="nc"><i class="no-highlight">326</i>&nbsp;                d -= 1</b>
+<b class="nc"><i class="no-highlight">327</i>&nbsp;                num += 1</b>
+<b class="nc"><i class="no-highlight">328</i>&nbsp;                if (num == n) break</b>
+<i class="no-highlight">329</i>&nbsp;            }
+<i class="no-highlight">330</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">331</i>&nbsp;        i += 1</b>
+<i class="no-highlight">332</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">333</i>&nbsp;    return result</b>
+<i class="no-highlight">334</i>&nbsp;}
+<i class="no-highlight">335</i>&nbsp;
+<i class="no-highlight">336</i>&nbsp;
+<i class="no-highlight">337</i>&nbsp;/**fun fibSequenceDigit(n: Int): Int {
+<i class="no-highlight">338</i>&nbsp;val myArray = mutableListOf(0)
+<i class="no-highlight">339</i>&nbsp;val finalArray = mutableListOf(0)
+<i class="no-highlight">340</i>&nbsp;for (i in 1..n) {
+<i class="no-highlight">341</i>&nbsp;if (i == 1 || i == 2) myArray.add(1)
+<i class="no-highlight">342</i>&nbsp;else {
+<i class="no-highlight">343</i>&nbsp;val a = myArray[i - 1] + myArray[i - 2]
+<i class="no-highlight">344</i>&nbsp;myArray.add(a)
+<i class="no-highlight">345</i>&nbsp;}
+<i class="no-highlight">346</i>&nbsp;}
+<i class="no-highlight">347</i>&nbsp;var midResult: Int
+<i class="no-highlight">348</i>&nbsp;for (i in myArray) {
+<i class="no-highlight">349</i>&nbsp;var a = i
+<i class="no-highlight">350</i>&nbsp;if (a / 10 != 0) {
+<i class="no-highlight">351</i>&nbsp;val midArray = mutableListOf(0)
+<i class="no-highlight">352</i>&nbsp;while (a &gt; 0) {
+<i class="no-highlight">353</i>&nbsp;midResult = a % 10
+<i class="no-highlight">354</i>&nbsp;midArray.add(midResult)
+<i class="no-highlight">355</i>&nbsp;a /= 10
+<i class="no-highlight">356</i>&nbsp;}
+<i class="no-highlight">357</i>&nbsp;midArray.removeAt(0)
+<i class="no-highlight">358</i>&nbsp;midArray.reverse()
+<i class="no-highlight">359</i>&nbsp;val dl = midArray.size
+<i class="no-highlight">360</i>&nbsp;for (b in 0 until dl) {
+<i class="no-highlight">361</i>&nbsp;finalArray.add(midArrayb)
+<i class="no-highlight">362</i>&nbsp;}
+<i class="no-highlight">363</i>&nbsp;} else finalArray.add(a)
+<i class="no-highlight">364</i>&nbsp;}
+<i class="no-highlight">365</i>&nbsp;return finalArray[n + 1]
+<i class="no-highlight">366</i>&nbsp;}
+<i class="no-highlight">367</i>&nbsp; */
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

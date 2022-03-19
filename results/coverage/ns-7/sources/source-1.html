@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LogicalKt</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson2.task2</a>
+</div>
+
+<h1>Coverage Summary for Class: LogicalKt (lesson2.task2)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LogicalKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson2.task2
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import lesson1.task1.sqr
+<i class="no-highlight">6</i>&nbsp;import lesson4.task1.abs
+<i class="no-highlight">7</i>&nbsp;import sun.font.*
+<i class="no-highlight">8</i>&nbsp;import java.util.function.IntToDoubleFunction
+<i class="no-highlight">9</i>&nbsp;import kotlin.math.abs
+<i class="no-highlight">10</i>&nbsp;import kotlin.math.sqrt
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;/**
+<i class="no-highlight">13</i>&nbsp; * Пример
+<i class="no-highlight">14</i>&nbsp; *
+<i class="no-highlight">15</i>&nbsp; * Лежит ли точка (x, y) внутри окружности с центром в (x0, y0) и радиусом r?
+<i class="no-highlight">16</i>&nbsp; */
+<i class="no-highlight">17</i>&nbsp;fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
+<b class="nc"><i class="no-highlight">18</i>&nbsp;    sqr(x - x0) + sqr(y - y0) &lt;= sqr(r)</b>
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;/**
+<i class="no-highlight">21</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">22</i>&nbsp; *
+<i class="no-highlight">23</i>&nbsp; * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
+<i class="no-highlight">24</i>&nbsp; * Определить, счастливое ли заданное число, вернуть true, если это так.
+<i class="no-highlight">25</i>&nbsp; */
+<i class="no-highlight">26</i>&nbsp;fun isNumberHappy(number: Int): Boolean {
+<b class="nc"><i class="no-highlight">27</i>&nbsp;    val s1 = number / 100</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;    val sum1 = s1 % 10 + s1 / 10</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    val s2 = number % 100</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;    val sum2 = s2 % 10 + s2 / 10</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;    return sum1 == sum2</b>
+<i class="no-highlight">32</i>&nbsp;}
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;/**
+<i class="no-highlight">35</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">36</i>&nbsp; *
+<i class="no-highlight">37</i>&nbsp; * На шахматной доске стоят два ферзя (ферзь бьет по вертикали, горизонтали и диагоналям).
+<i class="no-highlight">38</i>&nbsp; * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
+<i class="no-highlight">39</i>&nbsp; * Считать, что ферзи не могут загораживать друг друга.
+<i class="no-highlight">40</i>&nbsp; */
+<i class="no-highlight">41</i>&nbsp;fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
+<b class="nc"><i class="no-highlight">42</i>&nbsp;    x1 == x2 || y1 == y2 || abs(x1 - x2) == abs(y1 - y2)</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;/**
+<i class="no-highlight">46</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">47</i>&nbsp; *
+<i class="no-highlight">48</i>&nbsp; * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
+<i class="no-highlight">49</i>&nbsp; * Вернуть число дней в этом месяце этого года по григорианскому календарю.
+<i class="no-highlight">50</i>&nbsp; */
+<i class="no-highlight">51</i>&nbsp;
+<b class="nc"><i class="no-highlight">52</i>&nbsp;fun daysInMonth(month: Int, year: Int): Int = TODO()</b>
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;/**
+<i class="no-highlight">55</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">56</i>&nbsp; *
+<i class="no-highlight">57</i>&nbsp; * Проверить, лежит ли окружность с центром в (x1, y1) и радиусом r1 целиком внутри
+<i class="no-highlight">58</i>&nbsp; * окружности с центром в (x2, y2) и радиусом r2.
+<i class="no-highlight">59</i>&nbsp; * Вернуть true, если утверждение верно
+<i class="no-highlight">60</i>&nbsp; */
+<i class="no-highlight">61</i>&nbsp;fun circleInside(
+<i class="no-highlight">62</i>&nbsp;    x1: Double, y1: Double, r1: Double,
+<i class="no-highlight">63</i>&nbsp;    x2: Double, y2: Double, r2: Double
+<b class="nc"><i class="no-highlight">64</i>&nbsp;): Boolean = (r1 + sqrt((sqr(x1 - x2) + sqr(y1 - y2))) &lt;= r2)</b>
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;/**
+<i class="no-highlight">67</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">68</i>&nbsp; *
+<i class="no-highlight">69</i>&nbsp; * Определить, пройдет ли кирпич со сторонами а, b, c сквозь прямоугольное отверстие в стене со сторонами r и s.
+<i class="no-highlight">70</i>&nbsp; * Стороны отверстия должны быть параллельны граням кирпича.
+<i class="no-highlight">71</i>&nbsp; * Считать, что совпадения длин сторон достаточно для прохождения кирпича, т.е., например,
+<i class="no-highlight">72</i>&nbsp; * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
+<i class="no-highlight">73</i>&nbsp; * Вернуть true, если кирпич пройдёт
+<i class="no-highlight">74</i>&nbsp; */
+<i class="no-highlight">75</i>&nbsp;fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
+<b class="nc"><i class="no-highlight">76</i>&nbsp;    (a &lt;= r &amp;&amp; b &lt;= s || a &lt;= r &amp;&amp; c &lt;= s || a &lt;= s &amp;&amp; b &lt;= r || a &lt;= s &amp;&amp; c &lt;= r</b>
+<b class="nc"><i class="no-highlight">77</i>&nbsp;            || b &lt;= r &amp;&amp; c &lt;= s || b &lt;= s &amp;&amp; c &lt;= r)</b>
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

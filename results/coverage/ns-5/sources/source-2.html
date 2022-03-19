@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PhoneBook</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson12.task1</a>
+</div>
+
+<h1>Coverage Summary for Class: PhoneBook (lesson12.task1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PhoneBook</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson12.task1
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Класс &quot;Телефонная книга&quot;.
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * Общая сложность задания -- средняя, общая ценность в баллах -- 14.
+<i class="no-highlight">9</i>&nbsp; * Объект класса хранит список людей и номеров их телефонов,
+<i class="no-highlight">10</i>&nbsp; * при чём у каждого человека может быть более одного номера телефона.
+<i class="no-highlight">11</i>&nbsp; * Человек задаётся строкой вида &quot;Фамилия Имя&quot;.
+<i class="no-highlight">12</i>&nbsp; * Телефон задаётся строкой из цифр, +, *, #, -.
+<i class="no-highlight">13</i>&nbsp; * Поддерживаемые методы: добавление / удаление человека,
+<i class="no-highlight">14</i>&nbsp; * добавление / удаление телефона для заданного человека,
+<i class="no-highlight">15</i>&nbsp; * поиск номера(ов) телефона по заданному имени человека,
+<i class="no-highlight">16</i>&nbsp; * поиск человека по заданному номеру телефона.
+<i class="no-highlight">17</i>&nbsp; *
+<i class="no-highlight">18</i>&nbsp; * Класс должен иметь конструктор по умолчанию (без параметров).
+<i class="no-highlight">19</i>&nbsp; */
+<b class="nc"><i class="no-highlight">20</i>&nbsp;class PhoneBook {</b>
+<i class="no-highlight">21</i>&nbsp;    /**
+<i class="no-highlight">22</i>&nbsp;     * Добавить человека.
+<i class="no-highlight">23</i>&nbsp;     * Возвращает true, если человек был успешно добавлен,
+<i class="no-highlight">24</i>&nbsp;     * и false, если человек с таким именем уже был в телефонной книге
+<i class="no-highlight">25</i>&nbsp;     * (во втором случае телефонная книга не должна меняться).
+<i class="no-highlight">26</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">27</i>&nbsp;    fun addHuman(name: String): Boolean = TODO()</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    /**
+<i class="no-highlight">30</i>&nbsp;     * Убрать человека.
+<i class="no-highlight">31</i>&nbsp;     * Возвращает true, если человек был успешно удалён,
+<i class="no-highlight">32</i>&nbsp;     * и false, если человек с таким именем отсутствовал в телефонной книге
+<i class="no-highlight">33</i>&nbsp;     * (во втором случае телефонная книга не должна меняться).
+<i class="no-highlight">34</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    fun removeHuman(name: String): Boolean = TODO()</b>
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    /**
+<i class="no-highlight">38</i>&nbsp;     * Добавить номер телефона.
+<i class="no-highlight">39</i>&nbsp;     * Возвращает true, если номер был успешно добавлен,
+<i class="no-highlight">40</i>&nbsp;     * и false, если человек с таким именем отсутствовал в телефонной книге,
+<i class="no-highlight">41</i>&nbsp;     * либо у него уже был такой номер телефона,
+<i class="no-highlight">42</i>&nbsp;     * либо такой номер телефона зарегистрирован за другим человеком.
+<i class="no-highlight">43</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">44</i>&nbsp;    fun addPhone(name: String, phone: String): Boolean = TODO()</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    /**
+<i class="no-highlight">47</i>&nbsp;     * Убрать номер телефона.
+<i class="no-highlight">48</i>&nbsp;     * Возвращает true, если номер был успешно удалён,
+<i class="no-highlight">49</i>&nbsp;     * и false, если человек с таким именем отсутствовал в телефонной книге
+<i class="no-highlight">50</i>&nbsp;     * либо у него не было такого номера телефона.
+<i class="no-highlight">51</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">52</i>&nbsp;    fun removePhone(name: String, phone: String): Boolean = TODO()</b>
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;    /**
+<i class="no-highlight">55</i>&nbsp;     * Вернуть все номера телефона заданного человека.
+<i class="no-highlight">56</i>&nbsp;     * Если этого человека нет в книге, вернуть пустой список
+<i class="no-highlight">57</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">58</i>&nbsp;    fun phones(name: String): Set&lt;String&gt; = TODO()</b>
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;    /**
+<i class="no-highlight">61</i>&nbsp;     * Вернуть имя человека по заданному номеру телефона.
+<i class="no-highlight">62</i>&nbsp;     * Если такого номера нет в книге, вернуть null.
+<i class="no-highlight">63</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">64</i>&nbsp;    fun humanByPhone(phone: String): String? = TODO()</b>
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;    /**
+<i class="no-highlight">67</i>&nbsp;     * Две телефонные книги равны, если в них хранится одинаковый набор людей,
+<i class="no-highlight">68</i>&nbsp;     * и каждому человеку соответствует одинаковый набор телефонов.
+<i class="no-highlight">69</i>&nbsp;     * Порядок людей / порядок телефонов в книге не должен иметь значения.
+<i class="no-highlight">70</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">71</i>&nbsp;    override fun equals(other: Any?): Boolean = TODO()</b>
+<i class="no-highlight">72</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

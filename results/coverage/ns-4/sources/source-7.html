@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Polynom</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson11.task1</a>
+</div>
+
+<h1>Coverage Summary for Class: Polynom (lesson11.task1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Polynom</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson11.task1
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Класс &quot;полином с вещественными коэффициентами&quot;.
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * Общая сложность задания -- средняя, общая ценность в баллах -- 16.
+<i class="no-highlight">9</i>&nbsp; * Объект класса -- полином от одной переменной (x) вида 7x^4+3x^3-6x^2+x-8.
+<i class="no-highlight">10</i>&nbsp; * Количество слагаемых неограничено.
+<i class="no-highlight">11</i>&nbsp; *
+<i class="no-highlight">12</i>&nbsp; * Полиномы можно складывать -- (x^2+3x+2) + (x^3-2x^2-x+4) = x^3-x^2+2x+6,
+<i class="no-highlight">13</i>&nbsp; * вычитать -- (x^3-2x^2-x+4) - (x^2+3x+2) = x^3-3x^2-4x+2,
+<i class="no-highlight">14</i>&nbsp; * умножать -- (x^2+3x+2) * (x^3-2x^2-x+4) = x^5+x^4-5x^3-3x^2+10x+8,
+<i class="no-highlight">15</i>&nbsp; * делить с остатком -- (x^3-2x^2-x+4) / (x^2+3x+2) = x-5, остаток 12x+16
+<i class="no-highlight">16</i>&nbsp; * вычислять значение при заданном x: при x=5 (x^2+3x+2) = 42.
+<i class="no-highlight">17</i>&nbsp; *
+<i class="no-highlight">18</i>&nbsp; * В конструктор полинома передаются его коэффициенты, начиная со старшего.
+<i class="no-highlight">19</i>&nbsp; * Нули в середине и в конце пропускаться не должны, например: x^3+2x+1 --&gt; Polynom(1.0, 2.0, 0.0, 1.0)
+<i class="no-highlight">20</i>&nbsp; * Старшие коэффициенты, равные нулю, игнорировать, например Polynom(0.0, 0.0, 5.0, 3.0) соответствует 5x+3
+<i class="no-highlight">21</i>&nbsp; */
+<b class="nc"><i class="no-highlight">22</i>&nbsp;class Polynom(vararg coeffs: Double) {</b>
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;    /**
+<i class="no-highlight">25</i>&nbsp;     * Геттер: вернуть значение коэффициента при x^i
+<i class="no-highlight">26</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">27</i>&nbsp;    fun coeff(i: Int): Double = TODO()</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    /**
+<i class="no-highlight">30</i>&nbsp;     * Расчёт значения при заданном x
+<i class="no-highlight">31</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">32</i>&nbsp;    fun getValue(x: Double): Double = TODO()</b>
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    /**
+<i class="no-highlight">35</i>&nbsp;     * Степень (максимальная степень x при ненулевом слагаемом, например 2 для x^2+x+1).
+<i class="no-highlight">36</i>&nbsp;     *
+<i class="no-highlight">37</i>&nbsp;     * Степень полинома с нулевыми коэффициентами считать равной 0.
+<i class="no-highlight">38</i>&nbsp;     * Слагаемые с нулевыми коэффициентами игнорировать, т.е.
+<i class="no-highlight">39</i>&nbsp;     * степень 0x^2+0x+2 также равна 0.
+<i class="no-highlight">40</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">41</i>&nbsp;    fun degree(): Int = TODO()</b>
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * Сложение
+<i class="no-highlight">45</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">46</i>&nbsp;    operator fun plus(other: Polynom): Polynom = TODO()</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    /**
+<i class="no-highlight">49</i>&nbsp;     * Смена знака (при всех слагаемых)
+<i class="no-highlight">50</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">51</i>&nbsp;    operator fun unaryMinus(): Polynom = TODO()</b>
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;    /**
+<i class="no-highlight">54</i>&nbsp;     * Вычитание
+<i class="no-highlight">55</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">56</i>&nbsp;    operator fun minus(other: Polynom): Polynom = TODO()</b>
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    /**
+<i class="no-highlight">59</i>&nbsp;     * Умножение
+<i class="no-highlight">60</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">61</i>&nbsp;    operator fun times(other: Polynom): Polynom = TODO()</b>
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;    /**
+<i class="no-highlight">64</i>&nbsp;     * Деление
+<i class="no-highlight">65</i>&nbsp;     *
+<i class="no-highlight">66</i>&nbsp;     * Про операции деления и взятия остатка см. статью Википедии
+<i class="no-highlight">67</i>&nbsp;     * &quot;Деление многочленов столбиком&quot;. Основные свойства:
+<i class="no-highlight">68</i>&nbsp;     *
+<i class="no-highlight">69</i>&nbsp;     * Если A / B = C и A % B = D, то A = B * C + D и степень D меньше степени B
+<i class="no-highlight">70</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">71</i>&nbsp;    operator fun div(other: Polynom): Polynom = TODO()</b>
+<i class="no-highlight">72</i>&nbsp;
+<i class="no-highlight">73</i>&nbsp;    /**
+<i class="no-highlight">74</i>&nbsp;     * Взятие остатка
+<i class="no-highlight">75</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">76</i>&nbsp;    operator fun rem(other: Polynom): Polynom = TODO()</b>
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;    /**
+<i class="no-highlight">79</i>&nbsp;     * Сравнение на равенство
+<i class="no-highlight">80</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">81</i>&nbsp;    override fun equals(other: Any?): Boolean = TODO()</b>
+<i class="no-highlight">82</i>&nbsp;
+<i class="no-highlight">83</i>&nbsp;    /**
+<i class="no-highlight">84</i>&nbsp;     * Получение хеш-кода
+<i class="no-highlight">85</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">86</i>&nbsp;    override fun hashCode(): Int = TODO()</b>
+<i class="no-highlight">87</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

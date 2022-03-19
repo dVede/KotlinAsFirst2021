@@ -1,0 +1,317 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Triangle</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson8.task1</a>
+</div>
+
+<h1>Coverage Summary for Class: Triangle (lesson8.task1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Triangle</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson8.task1
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import lesson1.task1.sqr
+<i class="no-highlight">6</i>&nbsp;import kotlin.math.PI
+<i class="no-highlight">7</i>&nbsp;import kotlin.math.cos
+<i class="no-highlight">8</i>&nbsp;import kotlin.math.sin
+<i class="no-highlight">9</i>&nbsp;import kotlin.math.sqrt
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;// Урок 8: простые классы
+<i class="no-highlight">12</i>&nbsp;// Максимальное количество баллов = 40 (без очень трудных задач = 11)
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;/**
+<i class="no-highlight">15</i>&nbsp; * Точка на плоскости
+<i class="no-highlight">16</i>&nbsp; */
+<i class="no-highlight">17</i>&nbsp;data class Point(val x: Double, val y: Double) {
+<i class="no-highlight">18</i>&nbsp;    /**
+<i class="no-highlight">19</i>&nbsp;     * Пример
+<i class="no-highlight">20</i>&nbsp;     *
+<i class="no-highlight">21</i>&nbsp;     * Рассчитать (по известной формуле) расстояние между двумя точками
+<i class="no-highlight">22</i>&nbsp;     */
+<i class="no-highlight">23</i>&nbsp;    fun distance(other: Point): Double = sqrt(sqr(x - other.x) + sqr(y - other.y))
+<i class="no-highlight">24</i>&nbsp;}
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;/**
+<i class="no-highlight">27</i>&nbsp; * Треугольник, заданный тремя точками (a, b, c, см. constructor ниже).
+<i class="no-highlight">28</i>&nbsp; * Эти три точки хранятся в множестве points, их порядок не имеет значения.
+<i class="no-highlight">29</i>&nbsp; */
+<b class="nc"><i class="no-highlight">30</i>&nbsp;@Suppress(&quot;MemberVisibilityCanBePrivate&quot;)</b>
+<i class="no-highlight">31</i>&nbsp;class Triangle private constructor(private val points: Set&lt;Point&gt;) {
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;    private val pointList = points.toList()</b>
+<i class="no-highlight">34</i>&nbsp;
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    val a: Point get() = pointList[0]</b>
+<i class="no-highlight">36</i>&nbsp;
+<b class="nc"><i class="no-highlight">37</i>&nbsp;    val b: Point get() = pointList[1]</b>
+<i class="no-highlight">38</i>&nbsp;
+<b class="nc"><i class="no-highlight">39</i>&nbsp;    val c: Point get() = pointList[2]</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="nc"><i class="no-highlight">41</i>&nbsp;    constructor(a: Point, b: Point, c: Point) : this(linkedSetOf(a, b, c))</b>
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * Пример: полупериметр
+<i class="no-highlight">45</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">46</i>&nbsp;    fun halfPerimeter() = (a.distance(b) + b.distance(c) + c.distance(a)) / 2.0</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    /**
+<i class="no-highlight">49</i>&nbsp;     * Пример: площадь
+<i class="no-highlight">50</i>&nbsp;     */
+<i class="no-highlight">51</i>&nbsp;    fun area(): Double {
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        val p = halfPerimeter()</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;        return sqrt(p * (p - a.distance(b)) * (p - b.distance(c)) * (p - c.distance(a)))</b>
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    /**
+<i class="no-highlight">57</i>&nbsp;     * Пример: треугольник содержит точку
+<i class="no-highlight">58</i>&nbsp;     */
+<i class="no-highlight">59</i>&nbsp;    fun contains(p: Point): Boolean {
+<b class="nc"><i class="no-highlight">60</i>&nbsp;        val abp = Triangle(a, b, p)</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;        val bcp = Triangle(b, c, p)</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;        val cap = Triangle(c, a, p)</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        return abp.area() + bcp.area() + cap.area() &lt;= area()</b>
+<i class="no-highlight">64</i>&nbsp;    }
+<i class="no-highlight">65</i>&nbsp;
+<b class="nc"><i class="no-highlight">66</i>&nbsp;    override fun equals(other: Any?) = other is Triangle &amp;&amp; points == other.points</b>
+<i class="no-highlight">67</i>&nbsp;
+<b class="nc"><i class="no-highlight">68</i>&nbsp;    override fun hashCode() = points.hashCode()</b>
+<i class="no-highlight">69</i>&nbsp;
+<b class="nc"><i class="no-highlight">70</i>&nbsp;    override fun toString() = &quot;Triangle(a = $a, b = $b, c = $c)&quot;</b>
+<i class="no-highlight">71</i>&nbsp;}
+<i class="no-highlight">72</i>&nbsp;
+<i class="no-highlight">73</i>&nbsp;/**
+<i class="no-highlight">74</i>&nbsp; * Окружность с заданным центром и радиусом
+<i class="no-highlight">75</i>&nbsp; */
+<i class="no-highlight">76</i>&nbsp;data class Circle(val center: Point, val radius: Double) {
+<i class="no-highlight">77</i>&nbsp;    /**
+<i class="no-highlight">78</i>&nbsp;     * Простая (2 балла)
+<i class="no-highlight">79</i>&nbsp;     *
+<i class="no-highlight">80</i>&nbsp;     * Рассчитать расстояние между двумя окружностями.
+<i class="no-highlight">81</i>&nbsp;     * Расстояние между непересекающимися окружностями рассчитывается как
+<i class="no-highlight">82</i>&nbsp;     * расстояние между их центрами минус сумма их радиусов.
+<i class="no-highlight">83</i>&nbsp;     * Расстояние между пересекающимися окружностями считать равным 0.0.
+<i class="no-highlight">84</i>&nbsp;     */
+<i class="no-highlight">85</i>&nbsp;    fun distance(other: Circle): Double = TODO()
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;    /**
+<i class="no-highlight">88</i>&nbsp;     * Тривиальная (1 балл)
+<i class="no-highlight">89</i>&nbsp;     *
+<i class="no-highlight">90</i>&nbsp;     * Вернуть true, если и только если окружность содержит данную точку НА себе или ВНУТРИ себя
+<i class="no-highlight">91</i>&nbsp;     */
+<i class="no-highlight">92</i>&nbsp;    fun contains(p: Point): Boolean = TODO()
+<i class="no-highlight">93</i>&nbsp;}
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;/**
+<i class="no-highlight">96</i>&nbsp; * Отрезок между двумя точками
+<i class="no-highlight">97</i>&nbsp; */
+<i class="no-highlight">98</i>&nbsp;data class Segment(val begin: Point, val end: Point) {
+<i class="no-highlight">99</i>&nbsp;    override fun equals(other: Any?) =
+<i class="no-highlight">100</i>&nbsp;        other is Segment &amp;&amp; (begin == other.begin &amp;&amp; end == other.end || end == other.begin &amp;&amp; begin == other.end)
+<i class="no-highlight">101</i>&nbsp;
+<i class="no-highlight">102</i>&nbsp;    override fun hashCode() =
+<i class="no-highlight">103</i>&nbsp;        begin.hashCode() + end.hashCode()
+<i class="no-highlight">104</i>&nbsp;}
+<i class="no-highlight">105</i>&nbsp;
+<i class="no-highlight">106</i>&nbsp;/**
+<i class="no-highlight">107</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">108</i>&nbsp; *
+<i class="no-highlight">109</i>&nbsp; * Дано множество точек. Вернуть отрезок, соединяющий две наиболее удалённые из них.
+<i class="no-highlight">110</i>&nbsp; * Если в множестве менее двух точек, бросить IllegalArgumentException
+<i class="no-highlight">111</i>&nbsp; */
+<i class="no-highlight">112</i>&nbsp;fun diameter(vararg points: Point): Segment = TODO()
+<i class="no-highlight">113</i>&nbsp;
+<i class="no-highlight">114</i>&nbsp;/**
+<i class="no-highlight">115</i>&nbsp; * Простая (2 балла)
+<i class="no-highlight">116</i>&nbsp; *
+<i class="no-highlight">117</i>&nbsp; * Построить окружность по её диаметру, заданному двумя точками
+<i class="no-highlight">118</i>&nbsp; * Центр её должен находиться посередине между точками, а радиус составлять половину расстояния между ними
+<i class="no-highlight">119</i>&nbsp; */
+<i class="no-highlight">120</i>&nbsp;fun circleByDiameter(diameter: Segment): Circle = TODO()
+<i class="no-highlight">121</i>&nbsp;
+<i class="no-highlight">122</i>&nbsp;/**
+<i class="no-highlight">123</i>&nbsp; * Прямая, заданная точкой point и углом наклона angle (в радианах) по отношению к оси X.
+<i class="no-highlight">124</i>&nbsp; * Уравнение прямой: (y - point.y) * cos(angle) = (x - point.x) * sin(angle)
+<i class="no-highlight">125</i>&nbsp; * или: y * cos(angle) = x * sin(angle) + b, где b = point.y * cos(angle) - point.x * sin(angle).
+<i class="no-highlight">126</i>&nbsp; * Угол наклона обязан находиться в диапазоне от 0 (включительно) до PI (исключительно).
+<i class="no-highlight">127</i>&nbsp; */
+<i class="no-highlight">128</i>&nbsp;class Line private constructor(val b: Double, val angle: Double) {
+<i class="no-highlight">129</i>&nbsp;    init {
+<i class="no-highlight">130</i>&nbsp;        require(angle &gt;= 0 &amp;&amp; angle &lt; PI) { &quot;Incorrect line angle: $angle&quot; }
+<i class="no-highlight">131</i>&nbsp;    }
+<i class="no-highlight">132</i>&nbsp;
+<i class="no-highlight">133</i>&nbsp;    constructor(point: Point, angle: Double) : this(point.y * cos(angle) - point.x * sin(angle), angle)
+<i class="no-highlight">134</i>&nbsp;
+<i class="no-highlight">135</i>&nbsp;    /**
+<i class="no-highlight">136</i>&nbsp;     * Средняя (3 балла)
+<i class="no-highlight">137</i>&nbsp;     *
+<i class="no-highlight">138</i>&nbsp;     * Найти точку пересечения с другой линией.
+<i class="no-highlight">139</i>&nbsp;     * Для этого необходимо составить и решить систему из двух уравнений (каждое для своей прямой)
+<i class="no-highlight">140</i>&nbsp;     */
+<i class="no-highlight">141</i>&nbsp;    fun crossPoint(other: Line): Point = TODO()
+<i class="no-highlight">142</i>&nbsp;
+<i class="no-highlight">143</i>&nbsp;    override fun equals(other: Any?) = other is Line &amp;&amp; angle == other.angle &amp;&amp; b == other.b
+<i class="no-highlight">144</i>&nbsp;
+<i class="no-highlight">145</i>&nbsp;    override fun hashCode(): Int {
+<i class="no-highlight">146</i>&nbsp;        var result = b.hashCode()
+<i class="no-highlight">147</i>&nbsp;        result = 31 * result + angle.hashCode()
+<i class="no-highlight">148</i>&nbsp;        return result
+<i class="no-highlight">149</i>&nbsp;    }
+<i class="no-highlight">150</i>&nbsp;
+<i class="no-highlight">151</i>&nbsp;    override fun toString() = &quot;Line(${cos(angle)} * y = ${sin(angle)} * x + $b)&quot;
+<i class="no-highlight">152</i>&nbsp;}
+<i class="no-highlight">153</i>&nbsp;
+<i class="no-highlight">154</i>&nbsp;/**
+<i class="no-highlight">155</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">156</i>&nbsp; *
+<i class="no-highlight">157</i>&nbsp; * Построить прямую по отрезку
+<i class="no-highlight">158</i>&nbsp; */
+<i class="no-highlight">159</i>&nbsp;fun lineBySegment(s: Segment): Line = TODO()
+<i class="no-highlight">160</i>&nbsp;
+<i class="no-highlight">161</i>&nbsp;/**
+<i class="no-highlight">162</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">163</i>&nbsp; *
+<i class="no-highlight">164</i>&nbsp; * Построить прямую по двум точкам
+<i class="no-highlight">165</i>&nbsp; */
+<i class="no-highlight">166</i>&nbsp;fun lineByPoints(a: Point, b: Point): Line = TODO()
+<i class="no-highlight">167</i>&nbsp;
+<i class="no-highlight">168</i>&nbsp;/**
+<i class="no-highlight">169</i>&nbsp; * Сложная (5 баллов)
+<i class="no-highlight">170</i>&nbsp; *
+<i class="no-highlight">171</i>&nbsp; * Построить серединный перпендикуляр по отрезку или по двум точкам
+<i class="no-highlight">172</i>&nbsp; */
+<i class="no-highlight">173</i>&nbsp;fun bisectorByPoints(a: Point, b: Point): Line = TODO()
+<i class="no-highlight">174</i>&nbsp;
+<i class="no-highlight">175</i>&nbsp;/**
+<i class="no-highlight">176</i>&nbsp; * Средняя (3 балла)
+<i class="no-highlight">177</i>&nbsp; *
+<i class="no-highlight">178</i>&nbsp; * Задан список из n окружностей на плоскости.
+<i class="no-highlight">179</i>&nbsp; * Найти пару наименее удалённых из них; расстояние между окружностями
+<i class="no-highlight">180</i>&nbsp; * рассчитывать так, как указано в Circle.distance.
+<i class="no-highlight">181</i>&nbsp; *
+<i class="no-highlight">182</i>&nbsp; * При наличии нескольких наименее удалённых пар,
+<i class="no-highlight">183</i>&nbsp; * вернуть первую из них по порядку в списке circles.
+<i class="no-highlight">184</i>&nbsp; *
+<i class="no-highlight">185</i>&nbsp; * Если в списке менее двух окружностей, бросить IllegalArgumentException
+<i class="no-highlight">186</i>&nbsp; */
+<i class="no-highlight">187</i>&nbsp;fun findNearestCirclePair(vararg circles: Circle): Pair&lt;Circle, Circle&gt; = TODO()
+<i class="no-highlight">188</i>&nbsp;
+<i class="no-highlight">189</i>&nbsp;/**
+<i class="no-highlight">190</i>&nbsp; * Сложная (5 баллов)
+<i class="no-highlight">191</i>&nbsp; *
+<i class="no-highlight">192</i>&nbsp; * Дано три различные точки. Построить окружность, проходящую через них
+<i class="no-highlight">193</i>&nbsp; * (все три точки должны лежать НА, а не ВНУТРИ, окружности).
+<i class="no-highlight">194</i>&nbsp; * Описание алгоритмов см. в Интернете
+<i class="no-highlight">195</i>&nbsp; * (построить окружность по трём точкам, или
+<i class="no-highlight">196</i>&nbsp; * построить окружность, описанную вокруг треугольника - эквивалентная задача).
+<i class="no-highlight">197</i>&nbsp; */
+<i class="no-highlight">198</i>&nbsp;fun circleByThreePoints(a: Point, b: Point, c: Point): Circle = TODO()
+<i class="no-highlight">199</i>&nbsp;
+<i class="no-highlight">200</i>&nbsp;/**
+<i class="no-highlight">201</i>&nbsp; * Очень сложная (10 баллов)
+<i class="no-highlight">202</i>&nbsp; *
+<i class="no-highlight">203</i>&nbsp; * Дано множество точек на плоскости. Найти круг минимального радиуса,
+<i class="no-highlight">204</i>&nbsp; * содержащий все эти точки. Если множество пустое, бросить IllegalArgumentException.
+<i class="no-highlight">205</i>&nbsp; * Если множество содержит одну точку, вернуть круг нулевого радиуса с центром в данной точке.
+<i class="no-highlight">206</i>&nbsp; *
+<i class="no-highlight">207</i>&nbsp; * Примечание: в зависимости от ситуации, такая окружность может либо проходить через какие-либо
+<i class="no-highlight">208</i>&nbsp; * три точки данного множества, либо иметь своим диаметром отрезок,
+<i class="no-highlight">209</i>&nbsp; * соединяющий две самые удалённые точки в данном множестве.
+<i class="no-highlight">210</i>&nbsp; */
+<i class="no-highlight">211</i>&nbsp;fun minContainingCircle(vararg points: Point): Circle = TODO()
+<i class="no-highlight">212</i>&nbsp;
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>

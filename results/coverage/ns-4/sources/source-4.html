@@ -1,0 +1,196 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DimensionPrefix</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">lesson11.task1</a>
+</div>
+
+<h1>Coverage Summary for Class: DimensionPrefix (lesson11.task1)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DimensionPrefix</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:Suppress(&quot;UNUSED_PARAMETER&quot;)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package lesson11.task1
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Класс &quot;Величина с размерностью&quot;.
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * Предназначен для представления величин вроде &quot;6 метров&quot; или &quot;3 килограмма&quot;
+<i class="no-highlight">9</i>&nbsp; * Общая сложность задания - средняя, общая ценность в баллах -- 18
+<i class="no-highlight">10</i>&nbsp; * Величины с размерностью можно складывать, вычитать, делить, менять им знак.
+<i class="no-highlight">11</i>&nbsp; * Их также можно умножать и делить на число.
+<i class="no-highlight">12</i>&nbsp; *
+<i class="no-highlight">13</i>&nbsp; * В конструктор передаётся вещественное значение и строковая размерность.
+<i class="no-highlight">14</i>&nbsp; * Строковая размерность может:
+<i class="no-highlight">15</i>&nbsp; * - либо строго соответствовать одной из abbreviation класса Dimension (m, g)
+<i class="no-highlight">16</i>&nbsp; * - либо соответствовать одной из приставок, к которой приписана сама размерность (Km, Kg, mm, mg)
+<i class="no-highlight">17</i>&nbsp; * - во всех остальных случаях следует бросить IllegalArgumentException
+<i class="no-highlight">18</i>&nbsp; */
+<i class="no-highlight">19</i>&nbsp;class DimensionalValue(value: Double, dimension: String) : Comparable&lt;DimensionalValue&gt; {
+<i class="no-highlight">20</i>&nbsp;    /**
+<i class="no-highlight">21</i>&nbsp;     * Величина с БАЗОВОЙ размерностью (например для 1.0Kg следует вернуть результат в граммах -- 1000.0)
+<i class="no-highlight">22</i>&nbsp;     */
+<i class="no-highlight">23</i>&nbsp;    val value: Double get() = TODO()
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    /**
+<i class="no-highlight">26</i>&nbsp;     * БАЗОВАЯ размерность (опять-таки для 1.0Kg следует вернуть GRAM)
+<i class="no-highlight">27</i>&nbsp;     */
+<i class="no-highlight">28</i>&nbsp;    val dimension: Dimension get() = TODO()
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    /**
+<i class="no-highlight">31</i>&nbsp;     * Конструктор из строки. Формат строки: значение пробел размерность (1 Kg, 3 mm, 100 g и так далее).
+<i class="no-highlight">32</i>&nbsp;     */
+<i class="no-highlight">33</i>&nbsp;    constructor(s: String) : this(TODO(), TODO())
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;    /**
+<i class="no-highlight">36</i>&nbsp;     * Сложение с другой величиной. Если базовая размерность разная, бросить IllegalArgumentException
+<i class="no-highlight">37</i>&nbsp;     * (нельзя складывать метры и килограммы)
+<i class="no-highlight">38</i>&nbsp;     */
+<i class="no-highlight">39</i>&nbsp;    operator fun plus(other: DimensionalValue): DimensionalValue = TODO()
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    /**
+<i class="no-highlight">42</i>&nbsp;     * Смена знака величины
+<i class="no-highlight">43</i>&nbsp;     */
+<i class="no-highlight">44</i>&nbsp;    operator fun unaryMinus(): DimensionalValue = TODO()
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    /**
+<i class="no-highlight">47</i>&nbsp;     * Вычитание другой величины. Если базовая размерность разная, бросить IllegalArgumentException
+<i class="no-highlight">48</i>&nbsp;     */
+<i class="no-highlight">49</i>&nbsp;    operator fun minus(other: DimensionalValue): DimensionalValue = TODO()
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    /**
+<i class="no-highlight">52</i>&nbsp;     * Умножение на число
+<i class="no-highlight">53</i>&nbsp;     */
+<i class="no-highlight">54</i>&nbsp;    operator fun times(other: Double): DimensionalValue = TODO()
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    /**
+<i class="no-highlight">57</i>&nbsp;     * Деление на число
+<i class="no-highlight">58</i>&nbsp;     */
+<i class="no-highlight">59</i>&nbsp;    operator fun div(other: Double): DimensionalValue = TODO()
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    /**
+<i class="no-highlight">62</i>&nbsp;     * Деление на другую величину. Если базовая размерность разная, бросить IllegalArgumentException
+<i class="no-highlight">63</i>&nbsp;     */
+<i class="no-highlight">64</i>&nbsp;    operator fun div(other: DimensionalValue): Double = TODO()
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;    /**
+<i class="no-highlight">67</i>&nbsp;     * Сравнение на равенство
+<i class="no-highlight">68</i>&nbsp;     */
+<i class="no-highlight">69</i>&nbsp;    override fun equals(other: Any?): Boolean = TODO()
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    /**
+<i class="no-highlight">72</i>&nbsp;     * Сравнение на больше/меньше. Если базовая размерность разная, бросить IllegalArgumentException
+<i class="no-highlight">73</i>&nbsp;     */
+<i class="no-highlight">74</i>&nbsp;    override fun compareTo(other: DimensionalValue): Int = TODO()
+<i class="no-highlight">75</i>&nbsp;}
+<i class="no-highlight">76</i>&nbsp;
+<i class="no-highlight">77</i>&nbsp;/**
+<i class="no-highlight">78</i>&nbsp; * Размерность. В этот класс можно добавлять новые варианты (секунды, амперы, прочие), но нельзя убирать
+<i class="no-highlight">79</i>&nbsp; */
+<i class="no-highlight">80</i>&nbsp;enum class Dimension(val abbreviation: String) {
+<i class="no-highlight">81</i>&nbsp;    METER(&quot;m&quot;),
+<i class="no-highlight">82</i>&nbsp;    GRAM(&quot;g&quot;);
+<i class="no-highlight">83</i>&nbsp;}
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;/**
+<i class="no-highlight">86</i>&nbsp; * Приставка размерности. Опять-таки можно добавить новые варианты (деци-, санти-, мега-, ...), но нельзя убирать
+<i class="no-highlight">87</i>&nbsp; */
+<b class="nc"><i class="no-highlight">88</i>&nbsp;enum class DimensionPrefix(val abbreviation: String, val multiplier: Double) {</b>
+<b class="nc"><i class="no-highlight">89</i>&nbsp;    KILO(&quot;K&quot;, 1000.0),</b>
+<b class="nc"><i class="no-highlight">90</i>&nbsp;    MILLI(&quot;m&quot;, 0.001);</b>
+<i class="no-highlight">91</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-19 23:28</div>
+</div>
+</body>
+</html>
