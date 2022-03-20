@@ -1,9 +1,19 @@
 package lesson7.task1
 
-import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.assertions.withClue
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
+import io.kotest.matchers.file.shouldBeAFile
+import io.kotest.matchers.file.shouldExist
+import io.kotest.matchers.file.shouldHaveExtension
+import io.kotest.matchers.file.shouldHaveName
+import io.kotest.matchers.paths.shouldContainFile
 import io.kotest.matchers.shouldBe
 import java.io.File
+import java.nio.file.Paths
+
 
 data class PrintMultiplicationProcess(val lhv: Int, val rhv: Int, val result: String)
 
@@ -11,18 +21,44 @@ private fun assertFileContent(name: String, expectedContent: String) {
     val file = File(name)
     val content = file.readLines().joinToString("\n")
     expectedContent shouldBe content
+}
+abstract class MySpec(
+    val fileName: String
+) : FunSpec() {
 
+    override fun afterTest(testCase: TestCase, result: TestResult) {
+        super.afterTest(testCase, result)
+        System.gc()
+        File(fileName).delete()
+    }
 }
 
-class FilesTest : FunSpec() {
+class FilesTest : MySpec(fileName = "test.txt") {
     init {
         fun test(lhv: Int, rhv: Int, res: String) {
-            printMultiplicationProcess(lhv, rhv, "temp.txt")
-            assertFileContent("temp.txt", res.trimIndent())
-            File("temp.txt").delete()
+            printMultiplicationProcess(lhv, rhv, fileName)
+            assertFileContent(fileName, res.trimIndent())
         }
-
         context("printMultiplicationProcess") {
+            test("file created") {
+                printMultiplicationProcess(111, 111, fileName)
+                val file = File(fileName)
+                withClue("is in directory") {
+                    Paths.get("").shouldContainFile(fileName)
+                }
+                withClue("is exist") {
+                    file.shouldExist()
+                }
+                withClue("is file") {
+                    file.shouldBeAFile()
+                }
+                withClue("with extesion") {
+                    file.shouldHaveExtension(".txt")
+                }
+                withClue("with name") {
+                    file.shouldHaveName(fileName)
+                }
+            }
             test("Input less or equal then zero") {
                 listOf(
                     PrintMultiplicationProcess(0, 1356, ""),
@@ -30,7 +66,7 @@ class FilesTest : FunSpec() {
                     PrintMultiplicationProcess(1356, 0, ""),
                     PrintMultiplicationProcess(1356, -1, "")
                 ).forEach { (lhv, rhv, result) ->
-                    shouldThrow<IllegalArgumentException> {
+                    shouldThrowExactly<IllegalArgumentException> {
                         test(lhv, rhv, result)
                     }
                 }

@@ -1,6 +1,7 @@
 package lesson5.task1
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.maps.shouldBeEmpty
 import io.kotest.matchers.shouldBe
 
 data class ExtractRepeats(val test: List<String>, val result: Map<String, Int>)
@@ -10,10 +11,10 @@ class MapTests : FunSpec() {
     init {
         context("extractRepeats") {
             test("Нет повторений") {
-                extractRepeats(listOf("a", "b", "c")) shouldBe emptyMap()
+                extractRepeats(listOf("a", "b", "c")).shouldBeEmpty()
             }
             test("Пустые входные данные") {
-                extractRepeats(emptyList()) shouldBe emptyMap()
+                extractRepeats(emptyList()).shouldBeEmpty()
             }
             test("Символ перевода на новую строку") {
                 extractRepeats(listOf("\n", "\n", "\r", "\r")) shouldBe mapOf("\n" to 2, "\r" to 2)

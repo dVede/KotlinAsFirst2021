@@ -3,6 +3,7 @@ package lesson6.task1
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
 
 data class BestHighJump(val jumps: String, val result: Int)
 data class MostExpensive(val description: String, val result: String)
@@ -60,22 +61,22 @@ class ParseTests : FunSpec() {
         }
         context("mostExpensive") {
             test("Blank input") {
-                mostExpensive(" ") shouldBe ""
+                mostExpensive(" ").shouldBeEmpty()
             }
             test("Empty input") {
-                mostExpensive("") shouldBe ""
+                mostExpensive("").shouldBeEmpty()
             }
             test("Equal prices") {
                 mostExpensive("Огурцы 39.9; Мандарины 39.9") shouldBe "Мандарины"
             }
             test("Symbolic price") {
-                mostExpensive("Носочки прикол; Мандарины 39.9") shouldBe ""
+                mostExpensive("Носочки прикол; Мандарины 39.9").shouldBeEmpty()
             }
             test("Plus sign front number") {
                 mostExpensive("Огурцы +39.9; Мандарины 37.9") shouldBe "Огурцы"
             }
             test("Negative numbers") {
-                mostExpensive("Огурцы -39.9; Мандарины -37.9") shouldBe ""
+                mostExpensive("Огурцы -39.9; Мандарины -37.9").shouldBeEmpty()
             }
             test("Start trailing zero") {
                 mostExpensive("Огурцы 000035.9; Мандарины 00037.9") shouldBe "Мандарины"
@@ -97,8 +98,8 @@ class ParseTests : FunSpec() {
                 }
                 mostExpensive("Огурцы 39.9; Мандарины 37.9; Помидоры ") shouldBe "Огурцы"
                 mostExpensive("Огурцы 39.9; Мандарины 37.9;") shouldBe "Огурцы"
-                mostExpensive("Огурцы  39.9") shouldBe ""
-                mostExpensive(" Огурцы 39.9") shouldBe ""
+                mostExpensive("Огурцы  39.9").shouldBeEmpty()
+                mostExpensive(" Огурцы 39.9").shouldBeEmpty()
                 mostExpensive("Огурцы 39.9 ") shouldBe "Огурцы"
             }
             test("Correct tests") {
