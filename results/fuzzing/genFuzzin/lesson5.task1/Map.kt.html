@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Map.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KotlinAsFirst2021$GenFuzzingTests.exec</a> &gt; <a href="index.source.html" class="el_package">lesson5.task1</a> &gt; <span class="el_source">Map.kt</span></div><h1>Map.kt</h1><pre class="source lang-java linenums">@file:Suppress(&quot;UNUSED_PARAMETER&quot;, &quot;ConvertCallChainIntoSequence&quot;)
+
+package lesson5.task1
+
+
+// Урок 5: ассоциативные массивы и множества
+// Максимальное количество баллов = 14
+// Рекомендуемое количество баллов = 9
+// Вместе с предыдущими уроками = 33/47
+
+/**
+ * Пример
+ *
+ * Для заданного списка покупок `shoppingList` посчитать его общую стоимость
+ * на основе цен из `costs`. В случае неизвестной цены считать, что товар
+ * игнорируется.
+ */
+fun shoppingListCost(
+    shoppingList: List&lt;String&gt;,
+    costs: Map&lt;String, Double&gt;
+): Double {
+<span class="nc" id="L22">    var totalCost = 0.0</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">    for (item in shoppingList) {</span>
+<span class="nc" id="L25">        val itemCost = costs[item]</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (itemCost != null) {</span>
+<span class="nc" id="L27">            totalCost += itemCost</span>
+        }
+    }
+
+<span class="nc" id="L31">    return totalCost</span>
+}
+
+/**
+ * Пример
+ *
+ * Для набора &quot;имя&quot;-&quot;номер телефона&quot; `phoneBook` оставить только такие пары,
+ * для которых телефон начинается с заданного кода страны `countryCode`
+ */
+fun filterByCountryCode(
+    phoneBook: MutableMap&lt;String, String&gt;,
+    countryCode: String
+) {
+<span class="nc" id="L44">    val namesToRemove = mutableListOf&lt;String&gt;()</span>
+
+<span class="nc bnc" id="L46" title="All 2 branches missed.">    for ((name, phone) in phoneBook) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (!phone.startsWith(countryCode)) {</span>
+<span class="nc" id="L48">            namesToRemove.add(name)</span>
+        }
+    }
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">    for (name in namesToRemove) {</span>
+<span class="nc" id="L53">        phoneBook.remove(name)</span>
+    }
+<span class="nc" id="L55">}</span>
+
+/**
+ * Пример
+ *
+ * Для заданного текста `text` убрать заданные слова-паразиты `fillerWords`
+ * и вернуть отфильтрованный текст
+ */
+fun removeFillerWords(
+    text: List&lt;String&gt;,
+    vararg fillerWords: String
+): List&lt;String&gt; {
+<span class="nc" id="L67">    val fillerWordSet = setOf(*fillerWords)</span>
+
+<span class="nc" id="L69">    val res = mutableListOf&lt;String&gt;()</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">    for (word in text) {</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (word !in fillerWordSet) {</span>
+<span class="nc" id="L72">            res += word</span>
+        }
+    }
+<span class="nc" id="L75">    return res</span>
+}
+
+/**
+ * Пример
+ *
+ * Для заданного текста `text` построить множество встречающихся в нем слов
+ */
+fun buildWordSet(text: List&lt;String&gt;): MutableSet&lt;String&gt; {
+<span class="nc" id="L84">    val res = mutableSetOf&lt;String&gt;()</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">    for (word in text) res.add(word)</span>
+<span class="nc" id="L86">    return res</span>
+}
+
+
+/**
+ * Простая (2 балла)
+ *
+ * По заданному ассоциативному массиву &quot;студент&quot;-&quot;оценка за экзамен&quot; построить
+ * обратный массив &quot;оценка за экзамен&quot;-&quot;список студентов с этой оценкой&quot;.
+ *
+ * Например:
+ *   buildGrades(mapOf(&quot;Марат&quot; to 3, &quot;Семён&quot; to 5, &quot;Михаил&quot; to 5))
+ *     -&gt; mapOf(5 to listOf(&quot;Семён&quot;, &quot;Михаил&quot;), 3 to listOf(&quot;Марат&quot;))
+ */
+<span class="nc" id="L100">fun buildGrades(grades: Map&lt;String, Int&gt;): Map&lt;Int, List&lt;String&gt;&gt; = TODO()</span>
+
+/**
+ * Простая (2 балла)
+ *
+ * Определить, входит ли ассоциативный массив a в ассоциативный массив b;
+ * это выполняется, если все ключи из a содержатся в b с такими же значениями.
+ *
+ * Например:
+ *   containsIn(mapOf(&quot;a&quot; to &quot;z&quot;), mapOf(&quot;a&quot; to &quot;z&quot;, &quot;b&quot; to &quot;sweet&quot;)) -&gt; true
+ *   containsIn(mapOf(&quot;a&quot; to &quot;z&quot;), mapOf(&quot;a&quot; to &quot;zee&quot;, &quot;b&quot; to &quot;sweet&quot;)) -&gt; false
+ */
+<span class="nc" id="L112">fun containsIn(a: Map&lt;String, String&gt;, b: Map&lt;String, String&gt;): Boolean = TODO()</span>
+
+/**
+ * Простая (2 балла)
+ *
+ * Удалить из изменяемого ассоциативного массива все записи,
+ * которые встречаются в заданном ассоциативном массиве.
+ * Записи считать одинаковыми, если и ключи, и значения совпадают.
+ *
+ * ВАЖНО: необходимо изменить переданный в качестве аргумента
+ *        изменяемый ассоциативный массив
+ *
+ * Например:
+ *   subtractOf(a = mutableMapOf(&quot;a&quot; to &quot;z&quot;), mapOf(&quot;a&quot; to &quot;z&quot;))
+ *     -&gt; a changes to mutableMapOf() aka becomes empty
+ */
+fun subtractOf(a: MutableMap&lt;String, String&gt;, b: Map&lt;String, String&gt;) {
+<span class="nc" id="L129">    TODO()</span>
+}
+
+/**
+ * Простая (2 балла)
+ *
+ * Для двух списков людей найти людей, встречающихся в обоих списках.
+ * В выходном списке не должно быть повторяющихся элементов,
+ * т. е. whoAreInBoth(listOf(&quot;Марат&quot;, &quot;Семён, &quot;Марат&quot;), listOf(&quot;Марат&quot;, &quot;Марат&quot;)) == listOf(&quot;Марат&quot;)
+ */
+<span class="nc" id="L139">fun whoAreInBoth(a: List&lt;String&gt;, b: List&lt;String&gt;): List&lt;String&gt; = TODO()</span>
+
+/**
+ * Средняя (3 балла)
+ *
+ * Объединить два ассоциативных массива `mapA` и `mapB` с парами
+ * &quot;имя&quot;-&quot;номер телефона&quot; в итоговый ассоциативный массив, склеивая
+ * значения для повторяющихся ключей через запятую.
+ * В случае повторяющихся *ключей* значение из mapA должно быть
+ * перед значением из mapB.
+ *
+ * Повторяющиеся *значения* следует добавлять только один раз.
+ *
+ * Например:
+ *   mergePhoneBooks(
+ *     mapOf(&quot;Emergency&quot; to &quot;112&quot;, &quot;Police&quot; to &quot;02&quot;),
+ *     mapOf(&quot;Emergency&quot; to &quot;911&quot;, &quot;Police&quot; to &quot;02&quot;)
+ *   ) -&gt; mapOf(&quot;Emergency&quot; to &quot;112, 911&quot;, &quot;Police&quot; to &quot;02&quot;)
+ */
+<span class="nc" id="L158">fun mergePhoneBooks(mapA: Map&lt;String, String&gt;, mapB: Map&lt;String, String&gt;): Map&lt;String, String&gt; = TODO()</span>
+
+/**
+ * Средняя (4 балла)
+ *
+ * Для заданного списка пар &quot;акция&quot;-&quot;стоимость&quot; вернуть ассоциативный массив,
+ * содержащий для каждой акции ее усредненную стоимость.
+ *
+ * Например:
+ *   averageStockPrice(listOf(&quot;MSFT&quot; to 100.0, &quot;MSFT&quot; to 200.0, &quot;NFLX&quot; to 40.0))
+ *     -&gt; mapOf(&quot;MSFT&quot; to 150.0, &quot;NFLX&quot; to 40.0)
+ */
+<span class="nc" id="L170">fun averageStockPrice(stockPrices: List&lt;Pair&lt;String, Double&gt;&gt;): Map&lt;String, Double&gt; = TODO()</span>
+
+/**
+ * Средняя (4 балла)
+ *
+ * Входными данными является ассоциативный массив
+ * &quot;название товара&quot;-&quot;пара (тип товара, цена товара)&quot;
+ * и тип интересующего нас товара.
+ * Необходимо вернуть название товара заданного типа с минимальной стоимостью
+ * или null в случае, если товаров такого типа нет.
+ **
+ * Например:
+ *   findCheapestStuff(
+ *     mapOf(&quot;Мария&quot; to (&quot;печенье&quot; to 20.0), &quot;Орео&quot; to (&quot;печенье&quot; to 100.0)),
+ *     &quot;печенье&quot;
+ *   ) -&gt; &quot;Мария&quot;
+ */
+<span class="nc" id="L187">fun findCheapestStuff(stuff: Map&lt;String, Pair&lt;String, Double&gt;&gt;, kind: String): String? = TODO()</span>
+
+/**
+ * Средняя (3 балла)
+ *
+ * Для заданного набора символов определить, можно ли составить из него
+ * указанное слово (регистр символов игнорируется)
+ *
+ * Например:
+ *   canBuildFrom(listOf('a', 'b', 'o'), &quot;baobab&quot;) -&gt; true
+ */
+<span class="nc" id="L198">fun canBuildFrom(chars: List&lt;Char&gt;, word: String): Boolean = TODO()</span>
+
+/**
+ * Средняя (4 балла)
+ *
+ * Найти в заданном списке повторяющиеся элементы и вернуть
+ * ассоциативный массив с информацией о числе повторений
+ * для каждого повторяющегося элемента.
+ * Если элемент встречается только один раз, включать его в результат
+ * не следует.
+ *
+ * Например:
+ *   extractRepeats(listOf(&quot;a&quot;, &quot;b&quot;, &quot;a&quot;)) -&gt; mapOf(&quot;a&quot; to 2)
+ */
+fun extractRepeats(list: List&lt;String&gt;): Map&lt;String, Int&gt; {
+<span class="fc" id="L213">    val result = mutableMapOf&lt;String, Int&gt;()</span>
+<span class="fc" id="L214">    val names = hashSetOf&lt;String&gt;()</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">    for (element in list) {</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        if (result.containsKey(element)) {</span>
+<span class="fc" id="L217">            var count = result[element]</span>
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">            if (count != null) {</span>
+<span class="fc" id="L219">                count += 1</span>
+<span class="fc" id="L220">                result[element] = count</span>
+            }
+        } else {
+<span class="fc" id="L223">            result[element] = 1</span>
+        }
+<span class="fc" id="L225">        names.add(element)</span>
+    }
+<span class="fc bfc" id="L227" title="All 2 branches covered.">    for (element in names) {</span>
+<span class="pc bpc" id="L228" title="1 of 4 branches missed.">        if (result[element] == 1) result.remove(element)</span>
+    }
+<span class="fc" id="L230">    return result</span>
+}
+
+/**
+ * Средняя (3 балла)
+ *
+ * Для заданного списка слов определить, содержит ли он анаграммы.
+ * Два слова здесь считаются анаграммами, если они имеют одинаковую длину
+ * и одно можно составить из второго перестановкой его букв.
+ * Скажем, тор и рот или роза и азор это анаграммы,
+ * а поле и полено -- нет.
+ *
+ * Например:
+ *   hasAnagrams(listOf(&quot;тор&quot;, &quot;свет&quot;, &quot;рот&quot;)) -&gt; true
+ */
+<span class="nc" id="L245">fun hasAnagrams(words: List&lt;String&gt;): Boolean = TODO()</span>
+
+/**
+ * Сложная (5 баллов)
+ *
+ * Для заданного ассоциативного массива знакомых через одно рукопожатие `friends`
+ * необходимо построить его максимальное расширение по рукопожатиям, то есть,
+ * для каждого человека найти всех людей, с которыми он знаком через любое
+ * количество рукопожатий.
+ *
+ * Считать, что все имена людей являются уникальными, а также что рукопожатия
+ * являются направленными, то есть, если Марат знает Свету, то это не означает,
+ * что Света знает Марата.
+ *
+ * Оставлять пустой список знакомых для людей, которые их не имеют (см. EvilGnome ниже),
+ * в том числе для случая, когда данного человека нет в ключах, но он есть в значениях
+ * (см. GoodGnome ниже).
+ *
+ * Например:
+ *   propagateHandshakes(
+ *     mapOf(
+ *       &quot;Marat&quot; to setOf(&quot;Mikhail&quot;, &quot;Sveta&quot;),
+ *       &quot;Sveta&quot; to setOf(&quot;Marat&quot;),
+ *       &quot;Mikhail&quot; to setOf(&quot;Sveta&quot;),
+ *       &quot;Friend&quot; to setOf(&quot;GoodGnome&quot;),
+ *       &quot;EvilGnome&quot; to setOf()
+ *     )
+ *   ) -&gt; mapOf(
+ *          &quot;Marat&quot; to setOf(&quot;Mikhail&quot;, &quot;Sveta&quot;),
+ *          &quot;Sveta&quot; to setOf(&quot;Marat&quot;, &quot;Mikhail&quot;),
+ *          &quot;Mikhail&quot; to setOf(&quot;Sveta&quot;, &quot;Marat&quot;),
+ *          &quot;Friend&quot; to setOf(&quot;GoodGnome&quot;),
+ *          &quot;EvilGnome&quot; to setOf(),
+ *          &quot;GoodGnome&quot; to setOf()
+ *        )
+ */
+<span class="nc" id="L281">fun propagateHandshakes(friends: Map&lt;String, Set&lt;String&gt;&gt;): Map&lt;String, Set&lt;String&gt;&gt; = TODO()</span>
+
+/**
+ * Сложная (6 баллов)
+ *
+ * Для заданного списка неотрицательных чисел и числа определить,
+ * есть ли в списке пара чисел таких, что их сумма равна заданному числу.
+ * Если да, верните их индексы в виде Pair&lt;Int, Int&gt;;
+ * если нет, верните пару Pair(-1, -1).
+ *
+ * Индексы в результате должны следовать в порядке (меньший, больший).
+ *
+ * Постарайтесь сделать ваше решение как можно более эффективным,
+ * используя то, что вы узнали в данном уроке.
+ *
+ * Например:
+ *   findSumOfTwo(listOf(1, 2, 3), 4) -&gt; Pair(0, 2)
+ *   findSumOfTwo(listOf(1, 2, 3), 6) -&gt; Pair(-1, -1)
+ */
+fun findSumOfTwo(list: List&lt;Int&gt;, number: Int): Pair&lt;Int, Int&gt; {
+<span class="fc" id="L301">    var result = Pair(-1, -1)</span>
+<span class="fc" id="L302">    val midRes = mutableMapOf&lt;Int, Int&gt;()</span>
+<span class="fc bfc" id="L303" title="All 2 branches covered.">    for (i in list.indices) {</span>
+<span class="fc" id="L304">        val rest = number - list[i]</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">        if (midRes.containsKey(list[i])) {</span>
+<span class="fc" id="L306">            result = Pair(midRes[list[i]], i) as Pair&lt;Int, Int&gt;</span>
+<span class="fc" id="L307">            break</span>
+<span class="fc" id="L308">        } else midRes[rest] = i</span>
+    }
+<span class="fc" id="L310">    return result</span>
+}
+
+/**
+ * Очень сложная (8 баллов)
+ *
+ * Входными данными является ассоциативный массив
+ * &quot;название сокровища&quot;-&quot;пара (вес сокровища, цена сокровища)&quot;
+ * и вместимость вашего рюкзака.
+ * Необходимо вернуть множество сокровищ с максимальной суммарной стоимостью,
+ * которые вы можете унести в рюкзаке.
+ *
+ * Перед решением этой задачи лучше прочитать статью Википедии &quot;Динамическое программирование&quot;.
+ *
+ * Например:
+ *   bagPacking(
+ *     mapOf(&quot;Кубок&quot; to (500 to 2000), &quot;Слиток&quot; to (1000 to 5000)),
+ *     850
+ *   ) -&gt; setOf(&quot;Кубок&quot;)
+ *   bagPacking(
+ *     mapOf(&quot;Кубок&quot; to (500 to 2000), &quot;Слиток&quot; to (1000 to 5000)),
+ *     450
+ *   ) -&gt; emptySet()
+ */
+<span class="nc" id="L334">fun bagPacking(treasures: Map&lt;String, Pair&lt;Int, Int&gt;&gt;, capacity: Int): Set&lt;String&gt; = TODO()</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

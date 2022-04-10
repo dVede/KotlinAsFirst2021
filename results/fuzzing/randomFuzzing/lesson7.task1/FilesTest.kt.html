@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FilesTest.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KotlinAsFirst2021$FuzzingTests.exec</a> &gt; <a href="index.source.html" class="el_package">lesson7.task1</a> &gt; <span class="el_source">FilesTest.kt</span></div><h1>FilesTest.kt</h1><pre class="source lang-java linenums">package lesson7.task1
+
+import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.assertions.withClue
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
+import io.kotest.matchers.file.shouldBeAFile
+import io.kotest.matchers.file.shouldExist
+import io.kotest.matchers.file.shouldHaveExtension
+import io.kotest.matchers.file.shouldHaveName
+import io.kotest.matchers.paths.shouldContainFile
+import io.kotest.matchers.shouldBe
+import java.io.File
+import java.nio.file.Paths
+
+
+<span class="nc" id="L18">data class PrintMultiplicationProcess(val lhv: Int, val rhv: Int, val result: String)</span>
+
+private fun assertFileContent(name: String, expectedContent: String) {
+<span class="nc" id="L21">    val file = File(name)</span>
+<span class="nc" id="L22">    val content = file.readLines().joinToString(&quot;\n&quot;)</span>
+<span class="nc" id="L23">    expectedContent shouldBe content</span>
+<span class="nc" id="L24">}</span>
+<span class="nc" id="L25">abstract class MySpec(</span>
+<span class="nc" id="L26">    val fileName: String</span>
+<span class="nc" id="L27">) : FunSpec() {</span>
+
+    override fun afterTest(testCase: TestCase, result: TestResult) {
+<span class="nc" id="L30">        super.afterTest(testCase, result)</span>
+<span class="nc" id="L31">        System.gc()</span>
+<span class="nc" id="L32">        File(fileName).delete()</span>
+<span class="nc" id="L33">    }</span>
+}
+
+<span class="nc" id="L36">class FilesTest : MySpec(fileName = &quot;test.txt&quot;) {</span>
+<span class="nc" id="L37">    init {</span>
+        fun test(lhv: Int, rhv: Int, res: String) {
+<span class="nc" id="L39">            printMultiplicationProcess(lhv, rhv, fileName)</span>
+<span class="nc" id="L40">            assertFileContent(fileName, res.trimIndent())</span>
+<span class="nc" id="L41">        }</span>
+<span class="nc bnc" id="L42" title="All 5 branches missed.">        context(&quot;printMultiplicationProcess&quot;) {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            test(&quot;file created&quot;) {</span>
+                printMultiplicationProcess(111, 111, fileName)
+                val file = File(fileName)
+                withClue(&quot;is in directory&quot;) {
+                    Paths.get(&quot;&quot;).shouldContainFile(fileName)
+                }
+                withClue(&quot;is exist&quot;) {
+                    file.shouldExist()
+                }
+                withClue(&quot;is file&quot;) {
+                    file.shouldBeAFile()
+                }
+                withClue(&quot;with extesion&quot;) {
+                    file.shouldHaveExtension(&quot;.txt&quot;)
+                }
+                withClue(&quot;with name&quot;) {
+                    file.shouldHaveName(fileName)
+                }
+            }
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            test(&quot;Input less or equal then zero&quot;) {</span>
+                listOf(
+                    PrintMultiplicationProcess(0, 1356, &quot;&quot;),
+                    PrintMultiplicationProcess(-1, 1356, &quot;&quot;),
+                    PrintMultiplicationProcess(1356, 0, &quot;&quot;),
+                    PrintMultiplicationProcess(1356, -1, &quot;&quot;)
+                ).forEach { (lhv, rhv, result) -&gt;
+                    shouldThrowExactly&lt;IllegalArgumentException&gt; {
+                        test(lhv, rhv, result)
+                    }
+                }
+            }
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            test(&quot;Correct tests&quot;) {</span>
+                listOf(
+                    PrintMultiplicationProcess(
+                        84736, 111, &quot;&quot;&quot;
+                           84736
+                        *    111
+                        --------
+                           84736
+                        + 84736
+                        +84736
+                        --------
+                         9405696&quot;&quot;&quot;
+                    ),
+                    PrintMultiplicationProcess(
+                        87643, 1, &quot;&quot;&quot;
+                         87643
+                        *    1
+                        ------
+                         87643
+                        ------
+                         87643&quot;&quot;&quot;
+                    ),
+                    PrintMultiplicationProcess(
+                        1, 97642, &quot;&quot;&quot;
+                             1
+                        *97642
+                        ------
+                             2
+                        +   4
+                        +  6
+                        + 7
+                        +9
+                        ------
+                         97642&quot;&quot;&quot;
+                    ),
+                    PrintMultiplicationProcess(
+                        84736, 4769, &quot;&quot;&quot;
+                                  84736
+                             *     4769
+                             ----------
+                                 762624
+                             +  508416
+                             + 593152
+                             +338944
+                             ----------
+                              404105984&quot;&quot;&quot;
+                    )
+                ).forEach { (lhv, rhv, result) -&gt;
+                    test(lhv, rhv, result)
+                }
+            }
+<span class="nc" id="L125">        }</span>
+<span class="nc" id="L126">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

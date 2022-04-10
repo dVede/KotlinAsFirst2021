@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParseTests.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KotlinAsFirst2021$GenFuzzingTests.exec</a> &gt; <a href="index.source.html" class="el_package">lesson6.task1</a> &gt; <span class="el_source">ParseTests.kt</span></div><h1>ParseTests.kt</h1><pre class="source lang-java linenums">package lesson6.task1
+
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
+
+<span class="nc" id="L8">data class BestHighJump(val jumps: String, val result: Int)</span>
+<span class="nc" id="L9">data class MostExpensive(val description: String, val result: String)</span>
+
+<span class="nc" id="L11">class ParseTests : FunSpec() {</span>
+<span class="nc" id="L12">    init {</span>
+<span class="nc bnc" id="L13" title="All 14 branches missed.">        context(&quot;bestHighJump&quot;) {</span>
+<span class="nc bnc" id="L14" title="All 4 branches missed.">            test(&quot;Empty string&quot;) {</span>
+<span class="nc" id="L15">                bestHighJump(&quot;&quot;) shouldBe -1</span>
+<span class="nc" id="L16">            }</span>
+<span class="nc bnc" id="L17" title="All 4 branches missed.">            test(&quot;Blank string&quot;) {</span>
+<span class="nc" id="L18">                bestHighJump(&quot; &quot;) shouldBe -1</span>
+<span class="nc" id="L19">            }</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">            test(&quot;Incorrect format&quot;) {</span>
+                listOf(
+                    BestHighJump(&quot;abc&quot;, -1),
+                    BestHighJump(&quot;225 *** 247 +&quot;, -1),
+                    BestHighJump(&quot;220 ++ 230 +- abc&quot;, -1),
+                    BestHighJump(&quot;abc +%- 220 ++ 230 +&quot;, -1),
+                    BestHighJump(&quot;-210 %-+ -220 +&quot;, -1),
+                    BestHighJump(&quot;-210 %-+ -220 +&quot;, -1),
+                ).forEach { (jumps, result) -&gt;
+                    bestHighJump(jumps) shouldBe result
+                }
+            }
+<span class="nc bnc" id="L32" title="All 4 branches missed.">            test(&quot;Plus sign front number&quot;) {</span>
+<span class="nc" id="L33">                bestHighJump(&quot;+230 %- +220 +&quot;) shouldBe 220</span>
+<span class="nc" id="L34">            }</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">            test(&quot;Unicode numbers&quot;) {</span>
+<span class="nc" id="L36">                bestHighJump(&quot;220 + \u0035\u0036\u0036 +&quot;) shouldBe 566</span>
+<span class="nc" id="L37">            }</span>
+<span class="nc bnc" id="L38" title="All 4 branches missed.">            test(&quot;No successful jumps&quot;) {</span>
+<span class="nc" id="L39">                bestHighJump(&quot;225 -%- 247 -%% &quot;) shouldBe -1</span>
+<span class="nc" id="L40">            }</span>
+<span class="nc bnc" id="L41" title="All 4 branches missed.">            test(&quot;Start trailing zero&quot;) {</span>
+<span class="nc" id="L42">                bestHighJump(&quot;00234 %-- 00223 +&quot;) shouldBe 223</span>
+<span class="nc" id="L43">            }</span>
+<span class="nc bnc" id="L44" title="All 4 branches missed.">            test(&quot;Newline characters&quot;) {</span>
+<span class="nc" id="L45">                bestHighJump(&quot;257 %----- 223 -+% 244\n --%+&quot;) shouldBe 223</span>
+<span class="nc" id="L46">                bestHighJump(&quot;257 %----- 223 -+% 244\r --%+&quot;) shouldBe 223</span>
+<span class="nc" id="L47">            }</span>
+<span class="nc bnc" id="L48" title="All 4 branches missed.">            test(&quot;Gap between attempts&quot;) {</span>
+<span class="nc" id="L49">                bestHighJump(&quot;257 % - + 223 - + % 244 --%+&quot;) shouldBe 244</span>
+<span class="nc" id="L50">            }</span>
+<span class="nc bnc" id="L51" title="All 4 branches missed.">            test(&quot;Starts with space character&quot;) {</span>
+<span class="nc" id="L52">                bestHighJump(&quot; 225 %-+ 236 -+% 227 --%+&quot;) shouldBe 236</span>
+<span class="nc" id="L53">            }</span>
+<span class="nc bnc" id="L54" title="All 4 branches missed.">            test(&quot;Ends with space character&quot;) {</span>
+<span class="nc" id="L55">                bestHighJump(&quot;243 %-+ 223 -+% 244 --%+ &quot;) shouldBe 244</span>
+<span class="nc" id="L56">            }</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">            test(&quot;Correct tests&quot;) {</span>
+<span class="nc" id="L58">                bestHighJump(&quot;257 %----- 223 -+% 244 --%+&quot;) shouldBe 244</span>
+<span class="nc" id="L59">                bestHighJump(&quot;257 %-+ 223 -+% 244 --%+&quot;) shouldBe 257</span>
+<span class="nc" id="L60">            }</span>
+<span class="nc" id="L61">        }</span>
+<span class="nc bnc" id="L62" title="All 13 branches missed.">        context(&quot;mostExpensive&quot;) {</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">            test(&quot;Blank input&quot;) {</span>
+<span class="nc" id="L64">                mostExpensive(&quot; &quot;).shouldBeEmpty()</span>
+<span class="nc" id="L65">            }</span>
+<span class="nc bnc" id="L66" title="All 4 branches missed.">            test(&quot;Empty input&quot;) {</span>
+<span class="nc" id="L67">                mostExpensive(&quot;&quot;).shouldBeEmpty()</span>
+<span class="nc" id="L68">            }</span>
+<span class="nc bnc" id="L69" title="All 4 branches missed.">            test(&quot;Equal prices&quot;) {</span>
+<span class="nc" id="L70">                mostExpensive(&quot;Огурцы 39.9; Мандарины 39.9&quot;) shouldBe &quot;Мандарины&quot;</span>
+<span class="nc" id="L71">            }</span>
+<span class="nc bnc" id="L72" title="All 4 branches missed.">            test(&quot;Symbolic price&quot;) {</span>
+<span class="nc" id="L73">                mostExpensive(&quot;Носочки прикол; Мандарины 39.9&quot;).shouldBeEmpty()</span>
+<span class="nc" id="L74">            }</span>
+<span class="nc bnc" id="L75" title="All 4 branches missed.">            test(&quot;Plus sign front number&quot;) {</span>
+<span class="nc" id="L76">                mostExpensive(&quot;Огурцы +39.9; Мандарины 37.9&quot;) shouldBe &quot;Огурцы&quot;</span>
+<span class="nc" id="L77">            }</span>
+<span class="nc bnc" id="L78" title="All 4 branches missed.">            test(&quot;Negative numbers&quot;) {</span>
+<span class="nc" id="L79">                mostExpensive(&quot;Огурцы -39.9; Мандарины -37.9&quot;).shouldBeEmpty()</span>
+<span class="nc" id="L80">            }</span>
+<span class="nc bnc" id="L81" title="All 4 branches missed.">            test(&quot;Start trailing zero&quot;) {</span>
+<span class="nc" id="L82">                mostExpensive(&quot;Огурцы 000035.9; Мандарины 00037.9&quot;) shouldBe &quot;Мандарины&quot;</span>
+<span class="nc" id="L83">            }</span>
+<span class="nc bnc" id="L84" title="All 4 branches missed.">            test(&quot;Unicode price&quot;) {</span>
+<span class="nc" id="L85">                mostExpensive(&quot;Кокосы \u0035\u0036.\u0036; Апельсины \u0035\u0035.\u0036&quot;) shouldBe &quot;Кокосы&quot;</span>
+<span class="nc" id="L86">            }</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">            test(&quot;Double max and min value&quot;) {</span>
+<span class="nc" id="L88">                mostExpensive(&quot;Кокосы ${Double.MIN_VALUE}; Апельсины ${Double.MAX_VALUE}&quot;) shouldBe &quot;Апельсины&quot;</span>
+<span class="nc" id="L89">            }</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            test(&quot;Incorrect input&quot;) {</span>
+                listOf(
+                    MostExpensive(&quot;Огурцы 39.9; Мандарины 37.9; &quot;, &quot;Огурцы&quot;),
+                    MostExpensive(&quot;Огурцы 39.9; Мандарины 37.9; Помидоры&quot;, &quot;Огурцы&quot;)
+                ).forEach { (description, result) -&gt;
+                    shouldThrow&lt;IndexOutOfBoundsException&gt; {
+                        mostExpensive(description) shouldBe result
+                    }
+                }
+                mostExpensive(&quot;Огурцы 39.9; Мандарины 37.9; Помидоры &quot;) shouldBe &quot;Огурцы&quot;
+                mostExpensive(&quot;Огурцы 39.9; Мандарины 37.9;&quot;) shouldBe &quot;Огурцы&quot;
+                mostExpensive(&quot;Огурцы  39.9&quot;).shouldBeEmpty()
+                mostExpensive(&quot; Огурцы 39.9&quot;).shouldBeEmpty()
+                mostExpensive(&quot;Огурцы 39.9 &quot;) shouldBe &quot;Огурцы&quot;
+            }
+<span class="nc bnc" id="L105" title="All 2 branches missed.">            test(&quot;Correct tests&quot;) {</span>
+                listOf(
+                    MostExpensive(&quot;Палочка 41.3; Клавиша 33.7; Рука 44.7; Мышь 46.7&quot;, &quot;Мышь&quot;),
+                    MostExpensive(&quot;Палочка 46.8; Клавиша 33.7; Рука 46.8; Мышь 46.7&quot;, &quot;Рука&quot;)
+                ).forEach { (description, result) -&gt;
+                    mostExpensive(description) shouldBe result
+                }
+            }
+<span class="nc" id="L113">        }</span>
+<span class="nc" id="L114">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

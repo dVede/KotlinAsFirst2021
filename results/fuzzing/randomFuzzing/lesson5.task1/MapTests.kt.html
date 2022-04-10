@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MapTests.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KotlinAsFirst2021$FuzzingTests.exec</a> &gt; <a href="index.source.html" class="el_package">lesson5.task1</a> &gt; <span class="el_source">MapTests.kt</span></div><h1>MapTests.kt</h1><pre class="source lang-java linenums">package lesson5.task1
+
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.maps.shouldBeEmpty
+import io.kotest.matchers.shouldBe
+
+<span class="nc" id="L7">data class ExtractRepeats(val test: List&lt;String&gt;, val result: Map&lt;String, Int&gt;)</span>
+<span class="nc" id="L8">data class FindSumOfTwo(val test: List&lt;Int&gt;, val number: Int, val result: Pair&lt;Int, Int&gt;)</span>
+
+<span class="nc" id="L10">class MapTests : FunSpec() {</span>
+<span class="nc" id="L11">    init {</span>
+<span class="nc bnc" id="L12" title="All 6 branches missed.">        context(&quot;extractRepeats&quot;) {</span>
+<span class="nc bnc" id="L13" title="All 4 branches missed.">            test(&quot;Нет повторений&quot;) {</span>
+<span class="nc" id="L14">                extractRepeats(listOf(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)).shouldBeEmpty()</span>
+<span class="nc" id="L15">            }</span>
+<span class="nc bnc" id="L16" title="All 4 branches missed.">            test(&quot;Пустые входные данные&quot;) {</span>
+<span class="nc" id="L17">                extractRepeats(emptyList()).shouldBeEmpty()</span>
+<span class="nc" id="L18">            }</span>
+<span class="nc bnc" id="L19" title="All 4 branches missed.">            test(&quot;Символ перевода на новую строку&quot;) {</span>
+<span class="nc" id="L20">                extractRepeats(listOf(&quot;\n&quot;, &quot;\n&quot;, &quot;\r&quot;, &quot;\r&quot;)) shouldBe mapOf(&quot;\n&quot; to 2, &quot;\r&quot; to 2)</span>
+<span class="nc" id="L21">            }</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            test(&quot;Корректные тесты&quot;) {</span>
+                listOf(
+                    ExtractRepeats(
+                        listOf(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot; &quot;, &quot; &quot;),
+                        mapOf(&quot;&quot; to 3, &quot; &quot; to 2)
+                    ),
+                    ExtractRepeats(
+                        listOf(&quot;a&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;, &quot;B&quot;, &quot;b&quot;, &quot;A&quot;),
+                        mapOf(&quot;a&quot; to 3, &quot;b&quot; to 2)
+                    ),
+                    ExtractRepeats(
+                        listOf(&quot;ABC&quot;, &quot;ABC&quot;, &quot;abc&quot;, &quot;ABC&quot;, &quot;abc&quot;, &quot;CBA&quot;, &quot;aBc&quot;),
+                        mapOf(&quot;ABC&quot; to 3, &quot;abc&quot; to 2)
+                    )
+                ).forEach { (test, result) -&gt;
+                    extractRepeats(test) shouldBe result
+                }
+            }
+<span class="nc" id="L40">        }</span>
+<span class="nc bnc" id="L41" title="All 7 branches missed.">        context(&quot;findSumOfTwo&quot;) {</span>
+<span class="nc bnc" id="L42" title="All 4 branches missed.">            test(&quot;Пустой входной список&quot;) {</span>
+<span class="nc" id="L43">                findSumOfTwo(emptyList(), 7) shouldBe Pair(-1, -1)</span>
+<span class="nc" id="L44">            }</span>
+<span class="nc bnc" id="L45" title="All 4 branches missed.">            test(&quot;Нет суммы чисел&quot;) {</span>
+<span class="nc" id="L46">                findSumOfTwo(listOf(4, 5, 6, 8), 7) shouldBe Pair(-1, -1)</span>
+<span class="nc" id="L47">            }</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            test(&quot;Взаимодействие с нулем&quot;) {</span>
+                listOf(
+                    FindSumOfTwo(listOf(7, 0), 7, Pair(0, 1)),
+                    FindSumOfTwo(listOf(0, 7), 7, Pair(0, 1)),
+                ).forEach { (test, number, result) -&gt;
+                    findSumOfTwo(test, number) shouldBe result
+                }
+            }
+<span class="nc bnc" id="L56" title="All 4 branches missed.">            test(&quot;Переполнение&quot;) {</span>
+<span class="nc" id="L57">                findSumOfTwo(listOf(Int.MAX_VALUE, 1), -2147483648) shouldBe Pair(0, 1)</span>
+<span class="nc" id="L58">            }</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            test(&quot;Корректные тесты&quot;) {</span>
+                listOf(
+                    FindSumOfTwo(listOf(-1, 5), 4, Pair(0, 1)),
+                    FindSumOfTwo(listOf(1, 2, 2, 3), 4, Pair(1, 2)),
+                    FindSumOfTwo(listOf(1, 2, 3, 4, 5, 6, 7, 8, 9), 15, Pair(6, 7))
+                ).forEach { (test, number, result) -&gt;
+                    findSumOfTwo(test, number) shouldBe result
+                }
+            }
+<span class="nc" id="L68">        }</span>
+<span class="nc" id="L69">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

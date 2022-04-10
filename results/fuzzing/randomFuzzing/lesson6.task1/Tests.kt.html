@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tests.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KotlinAsFirst2021$FuzzingTests.exec</a> &gt; <a href="index.source.html" class="el_package">lesson6.task1</a> &gt; <span class="el_source">Tests.kt</span></div><h1>Tests.kt</h1><pre class="source lang-java linenums">package lesson6.task1
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
+//
+<span class="nc" id="L8">class Tests {</span>
+    @Test
+    @Tag(&quot;Example&quot;)
+    fun timeStrToSeconds() {
+<span class="nc" id="L12">        assertEquals(36000, timeStrToSeconds(&quot;10:00:00&quot;))</span>
+<span class="nc" id="L13">        assertEquals(41685, timeStrToSeconds(&quot;11:34:45&quot;))</span>
+<span class="nc" id="L14">        assertEquals(86399, timeStrToSeconds(&quot;23:59:59&quot;))</span>
+<span class="nc" id="L15">    }</span>
+
+    @Test
+    @Tag(&quot;Example&quot;)
+    fun twoDigitStr() {
+<span class="nc" id="L20">        assertEquals(&quot;00&quot;, twoDigitStr(0))</span>
+<span class="nc" id="L21">        assertEquals(&quot;09&quot;, twoDigitStr(9))</span>
+<span class="nc" id="L22">        assertEquals(&quot;10&quot;, twoDigitStr(10))</span>
+<span class="nc" id="L23">        assertEquals(&quot;99&quot;, twoDigitStr(99))</span>
+<span class="nc" id="L24">    }</span>
+
+    @Test
+    @Tag(&quot;Example&quot;)
+    fun timeSecondsToStr() {
+<span class="nc" id="L29">        assertEquals(&quot;10:00:00&quot;, timeSecondsToStr(36000))</span>
+<span class="nc" id="L30">        assertEquals(&quot;11:34:45&quot;, timeSecondsToStr(41685))</span>
+<span class="nc" id="L31">        assertEquals(&quot;23:59:59&quot;, timeSecondsToStr(86399))</span>
+<span class="nc" id="L32">    }</span>
+
+    @Test
+    @Tag(&quot;4&quot;)
+    fun dateStrToDigit() {
+<span class="nc" id="L37">        assertEquals(&quot;29.02.4&quot;, dateStrToDigit(&quot;29 февраля 4&quot;))</span>
+<span class="nc" id="L38">        assertEquals(&quot;30.11.1&quot;, dateStrToDigit(&quot;30 ноября 1&quot;))</span>
+<span class="nc" id="L39">        assertEquals(&quot;15.07.2016&quot;, dateStrToDigit(&quot;15 июля 2016&quot;))</span>
+<span class="nc" id="L40">        assertEquals(&quot;&quot;, dateStrToDigit(&quot;3 мартобря 1918&quot;))</span>
+<span class="nc" id="L41">        assertEquals(&quot;18.11.2018&quot;, dateStrToDigit(&quot;18 ноября 2018&quot;))</span>
+<span class="nc" id="L42">        assertEquals(&quot;&quot;, dateStrToDigit(&quot;23&quot;))</span>
+<span class="nc" id="L43">        assertEquals(&quot;03.04.2011&quot;, dateStrToDigit(&quot;3 апреля 2011&quot;))</span>
+<span class="nc" id="L44">        assertEquals(&quot;&quot;, dateStrToDigit(&quot;32 сентября 2011&quot;))</span>
+<span class="nc" id="L45">        assertEquals(&quot;&quot;, dateStrToDigit(&quot;29 февраля 1993&quot;))</span>
+<span class="nc" id="L46">    }</span>
+
+    @Test
+    @Tag(&quot;4&quot;)
+    fun dateDigitToStr() {
+<span class="nc" id="L51">        assertEquals(&quot;15 июля 2016&quot;, dateDigitToStr(&quot;15.07.2016&quot;))</span>
+<span class="nc" id="L52">        assertEquals(&quot;&quot;, dateDigitToStr(&quot;01.02.20.19&quot;))</span>
+<span class="nc" id="L53">        assertEquals(&quot;&quot;, dateDigitToStr(&quot;28.00.2000&quot;))</span>
+<span class="nc" id="L54">        assertEquals(&quot;3 апреля 2011&quot;, dateDigitToStr(&quot;03.04.2011&quot;))</span>
+<span class="nc" id="L55">        assertEquals(&quot;&quot;, dateDigitToStr(&quot;ab.cd.ef&quot;))</span>
+<span class="nc" id="L56">        assertEquals(&quot;&quot;, dateDigitToStr(&quot;32.09.2011&quot;))</span>
+<span class="nc" id="L57">        assertEquals(&quot;&quot;, dateDigitToStr(&quot;29.02.1993&quot;))</span>
+<span class="nc" id="L58">    }</span>
+
+    @Test
+    @Tag(&quot;4&quot;)
+    fun flattenPhoneNumber() {
+<span class="nc" id="L63">        assertEquals(&quot;+79211234567&quot;, flattenPhoneNumber(&quot;+7 (921) 123-45-67&quot;))</span>
+<span class="nc" id="L64">        assertEquals(&quot;123456798&quot;, flattenPhoneNumber(&quot;12 --  34- 5 -- 67 -98&quot;))</span>
+<span class="nc" id="L65">        assertEquals(&quot;+12345&quot;, flattenPhoneNumber(&quot;+12 (3) 4-5&quot;))</span>
+<span class="nc" id="L66">        assertEquals(&quot;&quot;, flattenPhoneNumber(&quot;+12 () 4-5&quot;))</span>
+<span class="nc" id="L67">        assertEquals(&quot;+425667&quot;, flattenPhoneNumber(&quot;+42 56 -- 67&quot;))</span>
+<span class="nc" id="L68">        assertEquals(&quot;+42566789&quot;, flattenPhoneNumber(&quot;+42(56 -- 67)89&quot;))</span>
+<span class="nc" id="L69">        assertEquals(&quot;&quot;, flattenPhoneNumber(&quot;ab-123&quot;))</span>
+<span class="nc" id="L70">        assertEquals(&quot;&quot;, flattenPhoneNumber(&quot;134_+874&quot;))</span>
+<span class="nc" id="L71">    }</span>
+
+    @Test
+    @Tag(&quot;5&quot;)
+    fun bestLongJump() {
+<span class="nc" id="L76">        assertEquals(717, bestLongJump(&quot;706 % - 717 - 703&quot;))</span>
+<span class="nc" id="L77">        assertEquals(-1, bestLongJump(&quot;% - - % -&quot;))</span>
+<span class="nc" id="L78">        assertEquals(754, bestLongJump(&quot;700 717 707 % 754&quot;))</span>
+<span class="nc" id="L79">        assertEquals(-1, bestLongJump(&quot;700 + 700&quot;))</span>
+
+<span class="nc" id="L81">    }</span>
+
+    @Test
+    @Tag(&quot;6&quot;)
+    fun bestHighJump() {
+<span class="nc" id="L86">        assertEquals(254, bestHighJump(&quot;220 + 254 %+ 228 %- 230 + 232 %%- 234 %&quot;))</span>
+<span class="nc" id="L87">        assertEquals(230, bestHighJump(&quot;220 + 224 %+ 228 %- 230 + 232 %%- 234 %&quot;))</span>
+<span class="nc" id="L88">        assertEquals(-1, bestHighJump(&quot;226 + 230 %+ xxxx&quot;))</span>
+<span class="nc" id="L89">        assertEquals(-1, bestHighJump(&quot;xx xx 226 + 220 %+&quot;))</span>
+<span class="nc" id="L90">        assertEquals(226, bestHighJump(&quot;226 +&quot;))</span>
+<span class="nc" id="L91">        assertEquals(-1, bestHighJump(&quot;???&quot;))</span>
+<span class="nc" id="L92">    }</span>
+
+    @Test
+    @Tag(&quot;6&quot;)
+    fun plusMinus() {
+<span class="nc" id="L97">        assertEquals(0, plusMinus(&quot;0&quot;))</span>
+<span class="nc" id="L98">        assertEquals(4, plusMinus(&quot;2 + 2&quot;))</span>
+<span class="nc" id="L99">        assertEquals(6, plusMinus(&quot;2 + 31 - 40 + 13&quot;))</span>
+<span class="nc" id="L100">        assertEquals(-1, plusMinus(&quot;0 - 1&quot;))</span>
+<span class="nc" id="L101">        assertThrows(IllegalArgumentException::class.java) { plusMinus(&quot;+2&quot;) }</span>
+<span class="nc" id="L102">        assertThrows(IllegalArgumentException::class.java) { plusMinus(&quot;+ 4&quot;) }</span>
+<span class="nc" id="L103">        assertThrows(IllegalArgumentException::class.java) { plusMinus(&quot;4 - -2&quot;) }</span>
+<span class="nc" id="L104">        assertThrows(IllegalArgumentException::class.java) { plusMinus(&quot;44 - - 12&quot;) }</span>
+<span class="nc" id="L105">        assertThrows(IllegalArgumentException::class.java) { plusMinus(&quot;4 - + 12&quot;) }</span>
+<span class="nc" id="L106">    }</span>
+
+    @Test
+    @Tag(&quot;6&quot;)
+    fun firstDuplicateIndex() {
+<span class="nc" id="L111">        assertEquals(-1, firstDuplicateIndex(&quot;Привет&quot;))</span>
+<span class="nc" id="L112">        assertEquals(9, firstDuplicateIndex(&quot;Он пошёл в в школу&quot;))</span>
+<span class="nc" id="L113">        assertEquals(40, firstDuplicateIndex(&quot;Яблоко упало на ветку с ветки оно упало на на землю&quot;))</span>
+<span class="nc" id="L114">        assertEquals(9, firstDuplicateIndex(&quot;Мы пошли прямо Прямо располагался магазин&quot;))</span>
+<span class="nc" id="L115">    }</span>
+
+    @Test
+    @Tag(&quot;6&quot;)
+    fun mostExpensive() {
+<span class="nc" id="L120">        assertEquals(&quot;&quot;, mostExpensive(&quot;35.2 Bebra; Молоко 62.5; Курица 184.0; Конфеты 89.9&quot;))</span>
+<span class="nc" id="L121">        assertEquals(&quot;&quot;, mostExpensive(&quot; &quot;))</span>
+<span class="nc" id="L122">        assertEquals(&quot;Курица&quot;, mostExpensive(&quot;Хлеб 39.9; Молоко 62.5; Курица 184.0; Конфеты 89.9&quot;))</span>
+<span class="nc" id="L123">        assertEquals(&quot;Вино&quot;, mostExpensive(&quot;Вино 255.0&quot;))</span>
+<span class="nc" id="L124">        assertEquals(&quot;&quot;, mostExpensive(&quot;&quot;))</span>
+<span class="nc" id="L125">        assertEquals(&quot;a&quot;, mostExpensive(&quot;a 0.0&quot;))</span>
+<span class="nc" id="L126">    }</span>
+
+    @Test
+    @Tag(&quot;6&quot;)
+    fun fromRoman() {
+<span class="nc" id="L131">        assertEquals(1, fromRoman(&quot;I&quot;))</span>
+<span class="nc" id="L132">        assertEquals(3000, fromRoman(&quot;MMM&quot;))</span>
+<span class="nc" id="L133">        assertEquals(1978, fromRoman(&quot;MCMLXXVIII&quot;))</span>
+<span class="nc" id="L134">        assertEquals(694, fromRoman(&quot;DCXCIV&quot;))</span>
+<span class="nc" id="L135">        assertEquals(49, fromRoman(&quot;XLIX&quot;))</span>
+<span class="nc" id="L136">        assertEquals(-1, fromRoman(&quot;Z&quot;))</span>
+<span class="nc" id="L137">    }</span>
+
+    @Test
+    @Tag(&quot;7&quot;)
+    fun computeDeviceCells() {
+<span class="nc" id="L142">        assertEquals(listOf(0, 0, 0, 0, 0, 1, 1, 1, 1, 1), computeDeviceCells(10, &quot;+&gt;+&gt;+&gt;+&gt;+&quot;, 10000))</span>
+<span class="nc" id="L143">        assertEquals(listOf(-1, -1, -1, -1, -1, 0, 0, 0, 0, 0), computeDeviceCells(10, &quot;&lt;-&lt;-&lt;-&lt;-&lt;-&quot;, 10000))</span>
+<span class="nc" id="L144">        assertEquals(listOf(1, 1, 1, 1, 1, 0, 0, 0, 0, 0), computeDeviceCells(10, &quot;- &lt;&lt;&lt;&lt;&lt; +[&gt;+]&quot;, 10000))</span>
+<span class="nc" id="L145">        assertEquals(</span>
+<span class="nc" id="L146">            listOf(0, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0),</span>
+<span class="nc" id="L147">            computeDeviceCells(11, &quot;&lt;&lt;&lt;&lt;&lt; + &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; --[&lt;-] &gt;+[&gt;+] &gt;++[--&lt; &lt;[&lt;] &gt;+[&gt;+] &gt;++]&quot;, 10000)</span>
+        )
+
+<span class="nc" id="L150">        assertEquals(listOf(0, 0, 0, 0, 0, 1, 1, 0, 0, 0), computeDeviceCells(10, &quot;+&gt;+&gt;+&gt;+&gt;+&quot;, 4))</span>
+<span class="nc" id="L151">        assertEquals(listOf(0, 0, -1, -1, -1, 0, 0, 0, 0, 0), computeDeviceCells(10, &quot;&lt;-&lt;-&lt;-&lt;-&lt;-&quot;, 6))</span>
+<span class="nc" id="L152">        assertEquals(listOf(1, 1, 1, 0, 0, -1, 0, 0, 0, 0), computeDeviceCells(10, &quot;- &lt;&lt;&lt;&lt;&lt; +[&gt;+]&quot;, 17))</span>
+<span class="nc" id="L153">        assertEquals(</span>
+<span class="nc" id="L154">            listOf(0, 6, 5, 4, 3, 2, 1, 0, -1, -1, -2),</span>
+<span class="nc" id="L155">            computeDeviceCells(11, &quot;&lt;&lt;&lt;&lt;&lt; + &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; --[&lt;-] &gt;+[&gt;+] &gt;++[--&lt; &lt;[&lt;] &gt;+[&gt;+] &gt;++]&quot;, 256)</span>
+        )
+<span class="nc" id="L157">        assertThrows(IllegalArgumentException::class.java) { computeDeviceCells(10, &quot;===&quot;, 3) }</span>
+<span class="nc" id="L158">        assertThrows(IllegalArgumentException::class.java) { computeDeviceCells(10, &quot;+&gt;+&gt;[+&gt;&quot;, 3) }</span>
+<span class="nc" id="L159">        assertThrows(IllegalStateException::class.java) { computeDeviceCells(20, &quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;, 12) }</span>
+<span class="nc" id="L160">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
