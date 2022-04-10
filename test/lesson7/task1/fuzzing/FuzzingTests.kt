@@ -18,8 +18,8 @@ class FuzzingTests {
         try {
             printMultiplicationProcess(lhv, rhv, OUTPUT)
         } catch (ex: IllegalArgumentException) {
-            File(OUTPUT).delete()
+            ex.printStackTrace()
         }
+        File(OUTPUT).delete()
     }
-
 }
